@@ -1,0 +1,15 @@
+.profile {
+    &-header {
+        background-color: white !important;
+
+        &__logo {
+
+        }
+    }
+
+    &-main {
+        max-width: 1600px;
+        width: 100%;
+        margin: 64px auto 0 auto;
+    }
+}
