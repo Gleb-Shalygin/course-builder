@@ -1,13 +1,54 @@
 .profile {
     &-header {
+        display: grid;
+        grid-template-columns: 1600px;
+        justify-content: center;
         background-color: white !important;
 
         &__logo {
+            svg {
+                width: 205px;
+                height: 45px;
+            }
+        }
+    }
 
+    &-sidebar {
+        border-right: 1px solid #e7e7e7;
+        display: flex;
+        justify-content: center;
+        width: 300px;
+
+        &__user {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 12px;
+            box-shadow: 0px 1px 19px rgb(0 0 0 / 15%);
+            border-radius: 9px;
+            padding: 18px 10px;
+            max-width: 200px;
+
+            &--info {
+                p {
+                    font-size: 18px;
+                    font-weight: 500;
+                    margin: 0;
+                }
+
+                button {
+                    cursor: pointer;
+                    font-size: 14px;
+                    color: #005792;
+                    text-decoration: underline;
+                }
+            }
         }
     }
 
     &-main {
+        border-radius: 30px;
+        overflow: hidden;
         max-width: 1600px;
         width: 100%;
         margin: 64px auto 0 auto;
