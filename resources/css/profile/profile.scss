@@ -7,9 +7,20 @@
         &__logo {
             height: 64px;
 
+            //p {
+            //    letter-spacing: 3px;
+            //    color: $main-color;
+            //    font-weight: 400;
+            //    font-size: 38px;
+            //}
+
             svg {
-                width: 205px;
+                width: 235px;
                 height: 100%;
+
+                path {
+                    fill: $main-color;
+                }
             }
         }
 
@@ -43,8 +54,9 @@
             justify-content: center;
             align-items: center;
             gap: 12px;
-            box-shadow: 0px 1px 19px rgb(0 0 0 / 15%);
-            border-radius: 9px;
+            box-shadow: rgba(0, 0, 0, 0.06) 0 2px 8px;
+            border: 1px solid #f0f0f0;
+            border-radius: 8px;
             padding: 18px 10px;
             max-width: 200px;
 
@@ -59,7 +71,8 @@
                     cursor: pointer;
                     font-size: 14px;
                     color: $main-color;
-                    text-decoration: underline;
+                    margin-top: 3px;
+                    //text-decoration: underline;
                 }
             }
         }
@@ -71,9 +84,41 @@
         max-width: 1600px;
         width: 100%;
         margin: 64px auto 0 auto;
+
+        h1 {
+            font-size: 28px;
+        }
     }
 
     &-tests {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 24px;
+
+        &__buttons {
+            margin-bottom: 24px;
+            display: flex;
+            justify-content: space-between;
+
+            &--create {
+                h1 {
+                    margin: 0 0 0 5px;
+                }
+
+                display: flex;
+                gap: 6px;
+            }
+
+            &--filters {
+                width: 18px;
+                cursor: pointer;
+
+                svg path {
+                    fill: #c3c3c3;
+                }
+            }
+        }
+
         &__item {
             border: 1px solid #f0f0f0;
             box-shadow: rgba(0, 0, 0, 0.06) 0 2px 8px;
@@ -111,19 +156,18 @@
 
                 &-users {
                     border-radius: 30px;
-                    background-color: #00ef00;
+                    background-color: $green;
                     color: white;
                     font-weight: 600;
-                    padding: 2px;
-                    width: 20px;
+                    padding: 2px 4px;
                     font-size: 14px;
-                    height: 20px;
                     display: flex;
                     justify-content: center;
                     align-items: center;
                     position: absolute;
-                    top: 0;
-                    left: 0;
+                    top: -5px;
+                    left: -5px;
+                    border: 1px solid white;
                 }
 
                 &-img {

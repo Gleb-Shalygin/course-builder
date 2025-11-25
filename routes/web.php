@@ -10,3 +10,5 @@ Route::prefix('profile')->group(function () {
     Route::get('/', [ProfileController::class, 'index']);
 })->name('profile.');
 
+//Route::get('login',)
+
