@@ -3,14 +3,12 @@
 namespace App\Http\Controllers\Profile;
 
 use App\Http\Controllers\Controller;
-use Inertia\Response;
-use Inertia\ResponseFactory;
+use Illuminate\Contracts\View\View;
 
 class ProfileController extends Controller
 {
-    public static function index(): Response|ResponseFactory
+    public static function index(): View
     {
-        return inertia("profile/ProfilePage");
+        return view('app');
     }
 }
-
