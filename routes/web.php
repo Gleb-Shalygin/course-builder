@@ -1,17 +1,15 @@
 <?php
 
-use App\Http\Controllers\HomeController;
-use App\Http\Controllers\Profile\ProfileController;
+use App\Http\Controllers\Auth\AuthController;
 use Illuminate\Support\Facades\Route;
 
-//Route::get('/', [HomeController::class, 'index'])->name('home');
-//
-//Route::prefix('profile')->group(function () {
-//    Route::get('/', [ProfileController::class, 'index']);
-//})->name('profile.');
+// API routes для аутентификации
+Route::post('/login', [AuthController::class, 'login']);
+Route::post('/register', [AuthController::class, 'register']);
+Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth:sanctum');
+
+// SPA routes - должны быть последними
 Route::get('{any?}', function () {
     return view('app');
 })->where('any', '.*');
-
-//Route::get('login',)
 

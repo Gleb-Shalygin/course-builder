@@ -1,5 +1,5 @@
 <template>
-    <button class="profile-header__exit">
+    <button class="profile-header__exit" @click="handleLogout">
         <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 512 512">
             <path
                 d="M320 176v-40a40 40 0 0 0-40-40H88a40 40 0 0 0-40 40v240a40 40 0 0 0 40 40h192a40 40 0 0 0 40-40v-40"
@@ -13,6 +13,12 @@
     </button>
 </template>
 
-<script setup>
+<script setup lang="ts">
+import { useAuth } from '@/composables/useAuth';
 
+const { logout } = useAuth();
+
+const handleLogout = async () => {
+    await logout();
+};
 </script>
