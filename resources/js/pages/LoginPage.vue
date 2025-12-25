@@ -125,20 +125,20 @@ const handleSubmit = async () => {
     errors.value = {};
     errorMessage.value = '';
 
-    const result = await login({
-        email: form.email,
-        password: form.password,
-        remember: form.remember,
-    });
-
-    if (!result.success) {
-        if (result.errors) {
-            errors.value = result.errors;
-        }
-        if (result.message) {
-            errorMessage.value = result.message;
-        }
-    }
+    // const result = await login({
+    //     email: form.email,
+    //     password: form.password,
+    //     remember: form.remember,
+    // });
+    //
+    // if (!result.success) {
+    //     if (result.errors) {
+    //         errors.value = result.errors;
+    //     }
+    //     if (result.message) {
+    //         errorMessage.value = result.message;
+    //     }
+    // }
 };
 </script>
 

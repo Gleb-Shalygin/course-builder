@@ -17,27 +17,30 @@ class AuthController extends Controller
      */
     public function login(Request $request)
     {
-        $request->validate([
-            'email' => ['required', 'email'],
-            'password' => ['required', 'string'],
-            'remember' => ['boolean'],
-        ]);
+        if (Auth::attempt($request->validated())) {
+            $request->session()->regenerate();
 
-        $credentials = $request->only('email', 'password');
-        $remember = $request->boolean('remember');
-
-        if (!Auth::attempt($credentials, $remember)) {
-            throw ValidationException::withMessages([
-                'email' => ['Неверный email или пароль.'],
+            return response()->json([
+                'user' => Auth::user(),
             ]);
         }
 
-        $request->session()->regenerate();
+        return response()->json([
+            'message' => 'Invalid credentials',
+        ], 401);
+    }
+
+    public function logout(Request $request)
+    {
+        Auth::guard('web')->logout();
+
+        $request->session()->invalidate();
+
+        $request->session()->regenerateToken();
 
         return response()->json([
-            'message' => 'Успешная авторизация',
-            'user' => Auth::user(),
-        ]);
+            'message' => 'Logged out'
+        ], 200);
     }
 
     /**
@@ -82,16 +85,16 @@ class AuthController extends Controller
     /**
      * Выход из системы
      */
-    public function logout(Request $request)
-    {
-        Auth::guard('web')->logout();
-
-        $request->session()->invalidate();
-        $request->session()->regenerateToken();
-
-        return response()->json([
-            'message' => 'Выход выполнен успешно',
-        ]);
-    }
+//    public function logout(Request $request)
+//    {
+//        Auth::guard('web')->logout();
+//
+//        $request->session()->invalidate();
+//        $request->session()->regenerateToken();
+//
+//        return response()->json([
+//            'message' => 'Выход выполнен успешно',
+//        ]);
+//    }
 }
 

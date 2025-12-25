@@ -15,14 +15,14 @@ export function useAuth() {
     async function init(): Promise<void> {
         if (initialized.value) return;
 
-        try {
-            const currentUser = await authService.getUser();
-            user.value = currentUser;
-        } catch (error) {
-            user.value = null;
-        } finally {
-            initialized.value = true;
-        }
+        // try {
+        //     // const currentUser = await authService.getUser();
+        //     // user.value = currentUser;
+        // } catch (error) {
+        //     user.value = null;
+        // } finally {
+        //     initialized.value = true;
+        // }
     }
 
     /**

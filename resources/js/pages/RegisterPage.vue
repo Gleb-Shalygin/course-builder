@@ -156,7 +156,7 @@ import { ref, reactive, computed, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
 import { useAuth } from '@/composables/useAuth';
 import type { Rule } from 'ant-design-vue/es/form';
-import dayjs from 'dayjs';
+// import dayjs from 'dayjs';
 import type { Dayjs } from 'dayjs';
 
 const router = useRouter();
