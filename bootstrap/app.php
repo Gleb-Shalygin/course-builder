@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
@@ -13,6 +14,12 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware): void {
+//        RateLimiter::for('api', function (Request $request) {
+//            return Limit::perMinute(60)->by(
+//                $request->user()?->id ?? $request->ip()
+//            );
+//        });
+
         $middleware->statefulApi();
 
         $middleware->web(append: [

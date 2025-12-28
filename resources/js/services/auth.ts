@@ -37,22 +37,18 @@ export const authService = {
      */
     async login(credentials: LoginCredentials): Promise<void> {
         await this.getCsrfCookie();
-        await api.post('/login', credentials);
+        await api.post('/api/login', credentials);
     },
 
-    /**
-     * Регистрация пользователя
-     */
-    async register(data: RegisterData): Promise<void> {
-        await this.getCsrfCookie();
-        await api.post('/register', data);
+    register(data: RegisterData) {
+        return api.post('/api/register', data);
     },
 
     /**
      * Выход из системы
      */
     async logout(): Promise<void> {
-        await api.post('/logout');
+        await api.post('/api/logout');
     },
 
     /**

@@ -295,7 +295,7 @@ const handleSubmit = async () => {
         name: form.name,
         password: form.password,
         password_confirmation: form.password_confirmation,
-        date_of_birth: form.date_of_birth ? form.date_of_birth.format('YYYY-MM-DD') : '',
+        date_of_birth: '',
         gender: form.gender!,
     });
 
