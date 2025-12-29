@@ -1,0 +1,106 @@
+.auth-page {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f5f5f5;
+    padding: 24px;
+}
+
+.auth-container {
+    width: 100%;
+    max-width: 500px;
+    background: white;
+    padding: 40px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.auth-title {
+    font-size: 28px;
+    font-weight: 600;
+    text-align: center;
+    margin-bottom: 32px;
+    color: #1677ff;
+}
+
+.auth-form {
+    :deep(.ant-form-item-label > label) {
+        font-weight: 500;
+    }
+}
+
+.password-requirements {
+    margin-top: 8px;
+    padding: 12px;
+    background: #f5f5f5;
+    border-radius: 4px;
+    font-size: 12px;
+}
+
+.requirement {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 4px;
+    color: #8c8c8c;
+
+    &:last-child {
+        margin-bottom: 0;
+    }
+
+    span {
+        font-weight: bold;
+    }
+
+    &-met {
+        color: #52c41a;
+
+        span {
+            color: #52c41a;
+        }
+    }
+}
+
+.auth-divider {
+    text-align: center;
+    margin: 24px 0;
+    position: relative;
+
+    &::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 50%;
+        height: 1px;
+        background: #e7e7e7;
+    }
+
+    span {
+        position: relative;
+        background: white;
+        padding: 0 16px;
+        color: #8c8c8c;
+    }
+}
+
+.auth-register-link {
+    text-align: center;
+    margin-top: 16px;
+
+    span {
+        color: #8c8c8c;
+        margin-right: 8px;
+    }
+
+    a {
+        color: #1677ff;
+        font-weight: 500;
+        text-decoration: none;
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+}
