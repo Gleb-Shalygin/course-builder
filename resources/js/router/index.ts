@@ -42,7 +42,7 @@ router.beforeEach(async (to, from, next) => {
     // Инициализация useAuth должна быть внутри функции, но мы используем singleton pattern
     // через ref в composable, поэтому вызываем init только один раз
     const auth = useAuth();
-    
+
     // Инициализация при первом переходе
     if (!auth.initialized.value) {
         await auth.init();
