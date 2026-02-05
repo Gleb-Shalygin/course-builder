@@ -1,43 +1,38 @@
-import { ref, computed } from 'vue';
+import { computed } from 'vue';
 import { useRouter } from 'vue-router';
-import { authService, type User, type LoginCredentials, type RegisterData, extractValidationErrors, extractErrorMessage, type ApiError } from '@/services/auth';
+import User from './../types/User';
+import LoginCredentials from './../types/LoginCredentials';
+import RegisterData from './../types/RegisterData';
+import { authService, extractValidationErrors, extractErrorMessage, type ApiError } from '@/api/auth';
+import { useUserStore } from '@/store/userStore';
 
-const user = ref<User | null>(null);
-const loading = ref(false);
-const initialized = ref(false);
 
 export function useAuth() {
     const router = useRouter();
 
-    /**
-     * Инициализация - проверка текущего пользователя
-     */
-    async function init(): Promise<void> {
-        if (initialized.value) return;
+    const userStore = useUserStore();
 
-        // try {
-        //     // const currentUser = await authService.getUser();
-        //     // user.value = currentUser;
-        // } catch (error) {
-        //     user.value = null;
-        // } finally {
-        //     initialized.value = true;
-        // }
-    }
+    const initialized = computed(() => userStore.initialized);
+    const loading = computed(() => userStore.loading);
+    const isAuthenticated = computed(() => userStore.isAuthenticated);
+    const user = computed(() => userStore.user);
 
-    /**
-     * Авторизация
-     */
     async function login(credentials: LoginCredentials): Promise<{
         success: boolean;
         errors?: Record<string, string[]>;
         message?: string;
     }> {
-        loading.value = true;
+        userStore.loading = true;
         try {
             await authService.login(credentials);
             const currentUser = await authService.getUser();
-            user.value = currentUser;
+
+            if (currentUser) {
+                userStore.user = currentUser;
+            } else {
+                userStore.setEmptyUser();
+            }
+
             await router.push('/profile');
             return { success: true };
         } catch (error) {
@@ -48,24 +43,27 @@ export function useAuth() {
                 message: extractErrorMessage(apiError),
             };
         } finally {
-            loading.value = false;
+            userStore.loading = false;
         }
     }
 
-    /**
-     * Регистрация
-     */
     async function register(data: RegisterData): Promise<{
         success: boolean;
         errors?: Record<string, string[]>;
         message?: string;
     }> {
-        loading.value = true;
+        userStore.loading = true;
         try {
             await authService.register(data);
             // После регистрации автоматически авторизуем
             const currentUser = await authService.getUser();
-            user.value = currentUser;
+
+            if (currentUser) {
+                userStore.user = currentUser;
+            } else {
+                userStore.setEmptyUser();
+            }
+
             await router.push('/profile');
             return { success: true };
         } catch (error) {
@@ -76,50 +74,31 @@ export function useAuth() {
                 message: extractErrorMessage(apiError),
             };
         } finally {
-            loading.value = false;
+            userStore.loading = false;
         }
     }
 
-    /**
-     * Выход
-     */
     async function logout(): Promise<void> {
-        loading.value = true;
+        userStore.loading = true;
         try {
             await authService.logout();
         } catch (error) {
             console.error('Logout error:', error);
         } finally {
-            user.value = null;
-            loading.value = false;
+            userStore.setEmptyUser();
+            userStore.loading = false;
             await router.push('/login');
         }
     }
 
-    /**
-     * Проверка авторизации
-     */
-    async function checkAuth(): Promise<boolean> {
-        try {
-            const currentUser = await authService.getUser();
-            user.value = currentUser;
-            return !!currentUser;
-        } catch (error) {
-            user.value = null;
-            return false;
-        }
-    }
-
     return {
-        user: computed(() => user.value),
-        isAuthenticated: computed(() => !!user.value),
-        loading: computed(() => loading.value),
-        initialized: computed(() => initialized.value),
-        init,
+        user,
+        isAuthenticated,
+        loading,
+        initialized,
         login,
         register,
         logout,
-        checkAuth,
     };
 }
 

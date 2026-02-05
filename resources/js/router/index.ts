@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory, type RouteRecordRaw } from 'vue-router';
 import { useAuth } from '@/composables/useAuth';
+import { useUserStore } from '@/store/userStore';
 
 import LoginPage from '@/pages/LoginPage.vue';
 import ProfilePage from '@/pages/profile/ProfilePage.vue';
@@ -41,11 +42,11 @@ const router = createRouter({
 router.beforeEach(async (to, from, next) => {
     // Инициализация useAuth должна быть внутри функции, но мы используем singleton pattern
     // через ref в composable, поэтому вызываем init только один раз
-    const auth = useAuth();
+    const userStore = useUserStore();
 
     // Инициализация при первом переходе
-    if (!auth.initialized.value) {
-        await auth.init();
+    if (!userStore.initialized) {
+        await userStore.init();
     }
 
     const requiresAuth = to.matched.some((record) => record.meta.requiresAuth);
@@ -53,7 +54,7 @@ router.beforeEach(async (to, from, next) => {
 
     // Проверка авторизации для защищенных маршрутов
     if (requiresAuth) {
-        const authenticated = await auth.checkAuth();
+        const authenticated = await userStore.checkAuth();
         if (!authenticated) {
             next({ name: 'login', query: { redirect: to.fullPath } });
             return;
@@ -61,7 +62,7 @@ router.beforeEach(async (to, from, next) => {
     }
 
     // Редирект авторизованных пользователей со страниц login/register
-    if (requiresGuest && auth.isAuthenticated.value) {
+    if (requiresGuest && userStore.isAuthenticated) {
         next({ name: 'profile' });
         return;
     }

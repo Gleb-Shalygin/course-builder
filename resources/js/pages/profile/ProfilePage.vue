@@ -19,14 +19,12 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, defineOptions } from 'vue';
+import { defineOptions } from 'vue';
 import ProfileLayout from '@/layout/profile/ProfileLayout.vue';
 import TableTests from '@/components/profile/TableTests.vue';
 
 defineOptions({
     layout: ProfileLayout
 });
-
-// const activeKey = ref('1');
 </script>
 

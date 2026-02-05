@@ -6,7 +6,6 @@
             <a-form
                 :model="form"
                 :rules="rules"
-                @finish="handleSubmit"
                 layout="vertical"
                 class="auth-form"
             >
@@ -18,7 +17,7 @@
                         <span>Email</span>
                     </template>
                     <a-input
-                        v-model="form.email"
+                        v-model:value="form.email"
                         type="email"
                         placeholder="Введите email"
                         size="large"
@@ -128,10 +127,10 @@
                 <a-form-item>
                     <a-button
                         type="primary"
-                        html-type="submit"
                         size="large"
                         :loading="loading"
                         block
+                        @click="handleSubmit"
                     >
                         Зарегистрироваться
                     </a-button>

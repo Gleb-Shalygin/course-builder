@@ -1,40 +1,15 @@
 import api, { type ApiError } from './api';
 import { csrfCookie } from '@/routes/sanctum';
+import { LoginCredentials } from '@/types/LoginCredentials';
+import { RegisterData } from '@/types/RegisterData';
+import { User } from '@/types/User';
 
-export interface LoginCredentials {
-    email: string;
-    password: string;
-    remember?: boolean;
-}
-
-export interface RegisterData {
-    email: string;
-    name: string;
-    password: string;
-    password_confirmation: string;
-    date_of_birth: string;
-    gender: 'male' | 'female';
-}
-
-export interface User {
-    id: number;
-    name: string;
-    email: string;
-    date_of_birth?: string;
-    gender?: 'male' | 'female';
-}
 
 export const authService = {
-    /**
-     * Получить CSRF cookie перед запросами
-     */
     async getCsrfCookie(): Promise<void> {
         await api.get(csrfCookie.url());
     },
 
-    /**
-     * Авторизация пользователя
-     */
     async login(credentials: LoginCredentials): Promise<void> {
         await this.getCsrfCookie();
         await api.post('/api/login', credentials);
@@ -44,16 +19,10 @@ export const authService = {
         return api.post('/api/register', data);
     },
 
-    /**
-     * Выход из системы
-     */
     async logout(): Promise<void> {
         await api.post('/api/logout');
     },
 
-    /**
-     * Получить текущего пользователя
-     */
     async getUser(): Promise<User | null> {
         try {
             const response = await api.get('/api/user');
