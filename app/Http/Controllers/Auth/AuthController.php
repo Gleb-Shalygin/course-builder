@@ -2,60 +2,61 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Data\UserAuthData;
+use App\Exceptions\InvalidCredentialsException;
 use App\Http\Controllers\Controller;
-use App\Models\User;
+use App\Http\Requests\UserLoginRequest;
+use App\Http\Requests\UserRegisterRequest;
+use App\Http\Resources\UserResource;
+use App\Service\AuthService;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
-    // Регистрация
-    public function register(Request $request)
+    public function register(UserRegisterRequest $request): JsonResponse
     {
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|email|unique:users,email',
-            'password' => 'required|string|min:6',
+        $data = UserAuthData::from([
+            'name' => $request->validated('name'),
+            'email' => $request->validated('email'),
+            'password' => $request->validated('password'),
+            'password_confirmation' => $request->validated('password_confirmation'),
+            'gender' => $request->validated('gender'),
+            'date_of_birth' => $request->validated('date_of_birth'),
         ]);
 
-        $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => bcrypt($request->password),
+        return response()->json(UserResource::make(AuthService::register($data)));
+    }
+
+    /**
+     * @throws InvalidCredentialsException
+     */
+    public function login(UserLoginRequest $request)
+    {
+        $data = UserAuthData::from([
+            'email' => $request->validated('email'),
+            'password' => $request->validated('password'),
         ]);
 
-        Auth::login($user);
+        $user = AuthService::login($data);
 
-        return response()->json(['user' => $user]);
+        $request->session()->regenerate();
+
+        return response()->json(UserResource::make($user));
     }
-
-    // Логин
-    public function login(Request $request)
-    {
-        $credentials = $request->only('email', 'password');
-
-        if (!Auth::attempt($credentials)) {
-            return response()->json(['message' => 'Invalid credentials'], 401);
-        }
-
-        $request->session()->regenerate(); // CSRF-safe
-        return response()->json(['user' => Auth::user()]);
-    }
-
-    // Logout
     public function logout(Request $request)
     {
         Auth::guard('web')->logout(); // guard = web
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        return response()->json(['message' => 'Logged out']);
+        return response()->json(['message' => 'Вы вышли из аккаунта']);
     }
 
-    // Получить текущего пользователя
     public function user(Request $request)
     {
-        return response()->json($request->user());
+        return response()->json(UserResource::make($request->user()));
     }
 }
 
