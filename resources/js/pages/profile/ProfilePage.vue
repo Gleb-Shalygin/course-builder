@@ -3,7 +3,7 @@
         <div class="profile-tests__buttons">
             <div class="profile-tests__buttons--create">
                 <h1>Ваши тесты</h1>
-                <a-button type="primary">Создать</a-button>
+                <a-button type="primary" @click="goToCreateTest">Создать</a-button>
             </div>
             <div class="profile-tests__buttons--filters">
                 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 512 512">
@@ -20,11 +20,18 @@
 
 <script lang="ts" setup>
 import { defineOptions } from 'vue';
+import { useRouter } from 'vue-router';
 import ProfileLayout from '@/layout/profile/ProfileLayout.vue';
 import TableTests from '@/components/profile/TableTests.vue';
 
 defineOptions({
     layout: ProfileLayout
 });
+
+const router = useRouter();
+
+const goToCreateTest = () => {
+    router.push({ name: 'tests-create' });
+};
 </script>
 
