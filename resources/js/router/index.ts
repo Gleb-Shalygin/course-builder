@@ -6,6 +6,7 @@ import LoginPage from '@/pages/LoginPage.vue';
 import ProfilePage from '@/pages/profile/ProfilePage.vue';
 import RegisterPage from '@/pages/RegisterPage.vue';
 import Welcome from '@/pages/Welcome.vue';
+import TestCreatePage from '@/pages/tests/TestCreatePage.vue';
 
 const routes: RouteRecordRaw[] = [
     {
@@ -29,6 +30,12 @@ const routes: RouteRecordRaw[] = [
         path: '/profile',
         name: 'profile',
         component: ProfilePage,
+        meta: { requiresAuth: true },
+    },
+    {
+        path: '/profile/test-create',
+        name: 'test-create',
+        component: TestCreatePage,
         meta: { requiresAuth: true },
     },
 ];

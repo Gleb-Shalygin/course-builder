@@ -5,7 +5,7 @@
         <a-layout-content class="profile-main">
             <a-layout style="padding: 24px 0; background: #fff">
                 <ProfileSideBar />
-                <a-layout-content :style="{ padding: '0 24px', height: '100vh' }">
+                <a-layout-content :style="{ padding: '0 24px', minHeight: '100vh' }">
                     <slot />
                 </a-layout-content>
             </a-layout>
