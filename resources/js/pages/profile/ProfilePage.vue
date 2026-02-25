@@ -31,7 +31,7 @@ defineOptions({
 const router = useRouter();
 
 const goToCreateTest = () => {
-    router.push({ name: 'tests-create' });
+    router.push({ name: 'test-create' });
 };
 </script>
 

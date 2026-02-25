@@ -33,8 +33,8 @@ const routes: RouteRecordRaw[] = [
         meta: { requiresAuth: true },
     },
     {
-        path: '/tests/create',
-        name: 'tests-create',
+        path: '/profile/test-create',
+        name: 'test-create',
         component: TestCreatePage,
         meta: { requiresAuth: true },
     },
