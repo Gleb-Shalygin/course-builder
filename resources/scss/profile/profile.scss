@@ -76,6 +76,35 @@
             }
         }
 
+        &__nav {
+            margin-top: 24px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        &__nav-link {
+            display: block;
+            padding: 10px 14px;
+            border-radius: 8px;
+            font-size: 15px;
+            color: rgba(0, 0, 0, 0.65);
+            text-decoration: none;
+            transition: all 0.2s ease;
+
+            &:hover {
+                background-color: rgba(22, 119, 255, 0.06);
+                color: $main-color;
+            }
+
+            &--active {
+                background: linear-gradient(90deg, rgba(22, 119, 255, 0.16), rgba(22, 119, 255, 0.08));
+                color: $main-color;
+                font-weight: 600;
+                box-shadow: 0 2px 8px rgba(22, 119, 255, 0.15);
+            }
+        }
+
         &__user {
             display: flex;
             justify-content: center;
