@@ -1,0 +1,37 @@
+<template>
+    <ProfileLayout>
+        <div class="profile-tests__buttons">
+            <div class="profile-tests__buttons--create">
+                <h1>Ваши тесты</h1>
+                <a-button type="primary" @click="goToCreateTest">Создать</a-button>
+            </div>
+            <div class="profile-tests__buttons--filters">
+                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 512 512">
+                    <path
+                        d="M487.976 0H24.028C2.71 0-8.047 25.866 7.058 40.971L192 225.941V432c0 7.831 3.821 15.17 10.237 19.662l80 55.98C298.02 518.69 320 507.493 320 487.98V225.941l184.947-184.97C520.021 25.896 509.338 0 487.976 0z"
+                        fill="currentColor"></path>
+                </svg>
+            </div>
+        </div>
+
+        <TableTests />
+    </ProfileLayout>
+</template>
+
+<script lang="ts" setup>
+import { defineOptions } from 'vue';
+import { useRouter } from 'vue-router';
+import ProfileLayout from '@/layout/profile/ProfileLayout.vue';
+import TableTests from '@/components/profile/TableTests.vue';
+
+defineOptions({
+    layout: ProfileLayout
+});
+
+const router = useRouter();
+
+const goToCreateTest = () => {
+    router.push({ name: 'test-create' });
+};
+</script>
+
