@@ -1,5 +1,4 @@
 import { createRouter, createWebHistory, type RouteRecordRaw } from 'vue-router';
-import { useAuth } from '@/composables/useAuth';
 import { useUserStore } from '@/store/userStore';
 
 import LoginPage from '@/pages/LoginPage.vue';
@@ -57,12 +56,6 @@ router.beforeEach(async (to, from, next) => {
     // Инициализация useAuth должна быть внутри функции, но мы используем singleton pattern
     // через ref в composable, поэтому вызываем init только один раз
     const userStore = useUserStore();
-
-    // Инициализация при первом переходе
-    if (!userStore.initialized) {
-        await userStore.init();
-    }
-
     const requiresAuth = to.matched.some((record) => record.meta.requiresAuth);
     const requiresGuest = to.matched.some((record) => record.meta.requiresGuest);
 

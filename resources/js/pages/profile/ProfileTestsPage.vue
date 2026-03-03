@@ -22,7 +22,7 @@
 import { defineOptions } from 'vue';
 import { useRouter } from 'vue-router';
 import ProfileLayout from '@/layout/profile/ProfileLayout.vue';
-import TableTests from '@/components/profile/TableTests.vue';
+import TableTests from '@/components/profile/test/TableTests.vue';
 
 defineOptions({
     layout: ProfileLayout
