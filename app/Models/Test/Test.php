@@ -2,10 +2,13 @@
 
 namespace App\Models\Test;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Test extends Model
 {
+    use HasFactory;
+
     protected $table = 'tests';
 
     protected $fillable = [
@@ -14,4 +17,8 @@ class Test extends Model
         'description',
         'is_public'
     ];
+
+    public function testAttempt() {
+        return $this->hasMany(TestAttempt::class);
+    }
 }
