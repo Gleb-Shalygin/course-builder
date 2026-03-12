@@ -1,5 +1,4 @@
 import { createRouter, createWebHistory, type RouteRecordRaw } from 'vue-router';
-import { useAuth } from '@/composables/useAuth';
 import { useUserStore } from '@/store/userStore';
 
 import LoginPage from '@/pages/LoginPage.vue';
@@ -7,6 +6,7 @@ import ProfilePage from '@/pages/profile/ProfilePage.vue';
 import RegisterPage from '@/pages/RegisterPage.vue';
 import Welcome from '@/pages/Welcome.vue';
 import TestCreatePage from '@/pages/tests/TestCreatePage.vue';
+import ProfileTestsPage from '@/pages/profile/ProfileTestsPage.vue';
 
 const routes: RouteRecordRaw[] = [
     {
@@ -33,6 +33,12 @@ const routes: RouteRecordRaw[] = [
         meta: { requiresAuth: true },
     },
     {
+        path: '/profile/tests',
+        name: 'profile-tests',
+        component: ProfileTestsPage,
+        meta: { requiresAuth: true },
+    },
+    {
         path: '/profile/test-create',
         name: 'test-create',
         component: TestCreatePage,
@@ -50,12 +56,6 @@ router.beforeEach(async (to, from, next) => {
     // Инициализация useAuth должна быть внутри функции, но мы используем singleton pattern
     // через ref в composable, поэтому вызываем init только один раз
     const userStore = useUserStore();
-
-    // Инициализация при первом переходе
-    if (!userStore.initialized) {
-        await userStore.init();
-    }
-
     const requiresAuth = to.matched.some((record) => record.meta.requiresAuth);
     const requiresGuest = to.matched.some((record) => record.meta.requiresGuest);
 
