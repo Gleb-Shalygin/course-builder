@@ -15,7 +15,8 @@ class TestsResource extends JsonResource
             'id' => $this['id'],
             'title' => $this['title'],
             'description' => $this['description'],
-            'is_public' => $this['is_public']
+            'is_public' => $this['is_public'],
+            'count_finished' => $this['count_finished']
         ];
     }
 }

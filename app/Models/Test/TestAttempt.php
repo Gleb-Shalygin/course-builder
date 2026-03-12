@@ -4,6 +4,7 @@ namespace App\Models\Test;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class TestAttempt extends Model
 {
@@ -18,4 +19,9 @@ class TestAttempt extends Model
         'started_at',
         'finished_at',
     ];
+
+    public function test(): BelongsTo
+    {
+        return $this->belongsTo(Test::class);
+    }
 }

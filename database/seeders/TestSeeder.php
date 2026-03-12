@@ -16,8 +16,18 @@ class TestSeeder extends Seeder
     public function run(): void
     {
         Test::factory()
-            ->has(TestAttempt::factory()->count(random_int(1,5)))
             ->count(10)
+            ->afterCreating(function (Test $test) {
+                $attemptsCount = random_int(1, 5);
+
+                TestAttempt::factory()
+                    ->count($attemptsCount)
+                    ->for($test)
+                    ->sequence(fn() => [
+                        'finished_at' => rand(0, 1) ? now() : null, // 50% тестов завершены
+                    ])
+                    ->create();
+            })
             ->create();
     }
 }

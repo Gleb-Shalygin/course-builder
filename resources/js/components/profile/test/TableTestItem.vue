@@ -7,7 +7,12 @@
         <div class="profile-tests__item--content">
             <div class="profile-tests__item--content-img">
                 <img src="https://api.dicebear.com/7.x/miniavs/svg?seed=1" alt="" />
-                <div class="profile-tests__item--content-users">10</div>
+                <div
+                    v-if="isCountFinished"
+                    class="profile-tests__item--content-users"
+                >
+                    {{ countFinished }}
+                </div>
             </div>
             <div class="profile-tests__item--content-title">{{ title }}</div>
             <div class="profile-tests__item--content-desc">{{ description }}</div>
@@ -53,5 +58,10 @@ const props = defineProps<{
 }>();
 const { test } = toRefs(props);
 
-const { title, description } = useTestItem(test);
+const {
+    title,
+    description,
+    countFinished,
+    isCountFinished
+} = useTestItem(test);
 </script>
