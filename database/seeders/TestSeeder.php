@@ -11,7 +11,6 @@ class TestSeeder extends Seeder
 {
     /**
      * Run the database seeds.
-     * @throws RandomException
      */
     public function run(): void
     {
