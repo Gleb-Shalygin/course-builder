@@ -6,94 +6,41 @@
                     <h1>Создание теста</h1>
                     <span class="test-create__subtitle">Соберите структуру теста и настройте доступ</span>
                 </div>
-                <a-button type="default" shape="circle" class="test-create__settings-btn" @click="isSettingsOpen = true">
-                    ⚙
-                </a-button>
+                <a-button type="default" shape="circle" class="test-create__settings-btn" @click="isSettingsOpen = true"> ⚙ </a-button>
             </header>
 
             <section class="test-create__content">
-                <TestSettings
-                    v-model:open="isSettingsOpen"
-                    :settings="settings"
-                    @update:settings="onUpdateSettings"
-                />
+                <TestSettings v-model:open="isSettingsOpen" :settings="settings" @update:settings="onUpdateSettings" />
 
                 <div class="test-create__questions">
                     <div class="test-create__questions-header">
                         <h2>Вопросы теста</h2>
-                        <span class="test-create__questions-count">
-                            {{ questions.length }} вопрос(ов)
-                        </span>
+                        <span class="test-create__questions-count"> {{ questions.length }} вопрос(ов) </span>
                     </div>
 
                     <div v-if="questions.length === 0" class="test-create__empty">
                         <p>Пока нет ни одного вопроса.</p>
-                        <a-button type="primary" @click="addQuestion">
-                            ➕ Добавить вопрос
-                        </a-button>
+                        <a-button type="primary" @click="addQuestion"> ➕ Добавить вопрос </a-button>
                     </div>
 
-                    <div v-else class="test-create__questions-list">
-                        <QuestionCard
-                            v-for="(question, index) in questions"
-                            :key="question.id"
-                            :question="question"
-                            :index="index"
-                            :individual-checking="settings.individualChecking"
-                            @update:question="onUpdateQuestion"
-                            @save="onSaveQuestion"
-                            @remove="onRemoveQuestion"
-                        />
-
-                        <div class="test-create__add-next">
-                            <a-button type="dashed" @click="addQuestion">
-                                ➕ Добавить следующий вопрос
-                            </a-button>
-                        </div>
-                    </div>
+                    <question-card-list v-else />
                 </div>
 
-                <DraftManager
-                    class="test-create__drafts"
-                    :drafts="drafts"
-                    :max-drafts="maxDrafts"
-                    @clear="onClearDrafts"
-                    @manage="onManageDrafts"
-                />
+                <DraftManager class="test-create__drafts" :drafts="drafts" :max-drafts="maxDrafts" @clear="onClearDrafts" @manage="onManageDrafts" />
             </section>
 
             <footer class="test-create__footer">
                 <div class="test-create__footer-left">
-                    <a-typography-text type="secondary">
-                        Перед сохранением убедитесь, что все обязательные поля заполнены.
-                    </a-typography-text>
+                    <a-typography-text type="secondary"> Перед сохранением убедитесь, что все обязательные поля заполнены. </a-typography-text>
                     <a-typography-text v-if="saveError" type="danger">
                         {{ saveError }}
                     </a-typography-text>
                 </div>
                 <div class="test-create__footer-actions">
-                    <a-button
-                        v-if="copied"
-                        type="default"
-                        size="large"
-                        :disabled="!canCopyLink"
-                        @click="copyLink"
-                    >
-                        Ссылка скопирована
-                    </a-button>
-                    <a-button
-                        v-else
-                        type="default"
-                        size="large"
-                        :disabled="!canCopyLink"
-                        @click="copyLink"
-                    >
-                        Скопировать ссылку на тест
-                    </a-button>
+                    <a-button v-if="copied" type="default" size="large" :disabled="!canCopyLink" @click="copyLink"> Ссылка скопирована </a-button>
+                    <a-button v-else type="default" size="large" :disabled="!canCopyLink" @click="copyLink"> Скопировать ссылку на тест </a-button>
 
-                    <a-button type="primary" size="large" @click="handleSaveTest" :loading="isSaving">
-                        💾 Сохранить тест
-                    </a-button>
+                    <a-button type="primary" size="large" @click="handleSaveTest" :loading="isSaving"> 💾 Сохранить тест </a-button>
                 </div>
             </footer>
         </div>
@@ -101,16 +48,16 @@
 </template>
 
 <script setup lang="ts">
-import { computed, onBeforeUnmount, onMounted, ref } from 'vue';
+import { computed, onBeforeUnmount, onMounted, provide, ref } from 'vue';
 import { onBeforeRouteLeave } from 'vue-router';
 import ProfileLayout from '@/layout/profile/ProfileLayout.vue';
 import TestSettings from '@/components/tests/TestSettings.vue';
-import QuestionCard from '@/components/tests/QuestionCard.vue';
 import DraftManager from '@/components/tests/DraftManager.vue';
 import { useTestBuilder } from '@/composables/tests/useTestBuilder';
 import { useDraftTests } from '@/composables/tests/useDraftTests';
 import { useValidation } from '@/composables/tests/useValidation';
 import type { TestQuestion, TestSettings as TestSettingsType } from '@/types/Test';
+import QuestionCardList from '@/components/tests/QuestionCardList.vue';
 
 const isSettingsOpen = ref(false);
 const isSaving = ref(false);
@@ -208,6 +155,12 @@ onBeforeUnmount(() => {
 onBeforeRouteLeave(() => {
     onAutoSaveDraft();
 });
+
+// Подключение состояния и
+provide('question-list', questions);
+provide('settings', settings);
+provide('on-update-question', onUpdateQuestion);
+provide('on-save-question', onSaveQuestion);
+provide('on-remove-question', onRemoveQuestion);
+provide('add-question', addQuestion);
 </script>
-
-
