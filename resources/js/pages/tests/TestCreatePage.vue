@@ -57,13 +57,16 @@ import { useTestBuilder } from '@/composables/tests/useTestBuilder';
 import { useDraftTests } from '@/composables/tests/useDraftTests';
 import { useValidation } from '@/composables/tests/useValidation';
 import type { TestQuestion, TestSettings as TestSettingsType } from '@/types/Test';
-import QuestionCardList from '@/components/tests/QuestionCardList.vue';
+import { useTestCreatePage } from '@/composables/pages/useTestCreatePage';
 
 const isSettingsOpen = ref(false);
 const isSaving = ref(false);
 const saveError = ref<string | null>(null);
 const copied = ref(false);
 
+const {
+
+} = useTestCreatePage();
 const { settings, questions, addQuestion, updateQuestion, removeQuestion, buildTestPayload } = useTestBuilder();
 const { drafts, maxDrafts, saveDraft, loadDrafts, clearDrafts } = useDraftTests();
 const { validateTestBeforeSave } = useValidation();
