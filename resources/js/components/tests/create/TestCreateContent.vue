@@ -1,6 +1,11 @@
 <template>
     <section class="test-create__content">
-        <TestSettings :open="isSettingsOpen" :settings="settings" @update:open="$emit('update:is-settings-open', $event)" @update:settings="$emit('update:settings', $event)" />
+        <TestSettings
+            :open="isSettingsOpen"
+            :settings="settings"
+            @update:open="$emit('update:is-settings-open', $event)"
+            @update:settings="$emit('update:settings', $event)"
+        />
 
         <div class="test-create__questions">
             <div class="test-create__questions-header">
@@ -16,7 +21,7 @@
             <question-card-list v-else />
         </div>
 
-        <DraftManager class="test-create__drafts" :drafts="drafts" :max-drafts="maxDrafts" @clear="$emit('clear-drafts')" @manage="$emit('manage-drafts')" />
+<!--        <DraftManager class="test-create__drafts" :drafts="drafts" :max-drafts="maxDrafts" @clear="$emit('clear-drafts')" @manage="$emit('manage-drafts')" />-->
     </section>
 </template>
 
