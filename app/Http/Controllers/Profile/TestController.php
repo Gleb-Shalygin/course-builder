@@ -14,4 +14,9 @@ class TestController extends Controller
     {
        return TestsResource::collection(TestService::tests());
     }
+
+    public static function create()
+    {
+        dd('тест запрос');
+    }
 }
