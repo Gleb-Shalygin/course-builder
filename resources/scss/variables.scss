@@ -1,3 +1,27 @@
 $main-color: #1677ff;
+$main-color-hover: #4096ff;
+$main-color-soft: rgba(22, 119, 255, 0.08);
+$brand-gradient: linear-gradient(135deg, #1677ff, #4096ff);
 $green: #00b500;
 
+$layout-bg: #f5f7fa;
+$surface-color: #ffffff;
+$border-color: #f0f0f0;
+$divider-color: #e7e7e7;
+
+$text-color: rgba(0, 0, 0, 0.88);
+$text-secondary: rgba(0, 0, 0, 0.45);
+
+$card-shadow: rgba(0, 0, 0, 0.06) 0 2px 8px;
+$card-shadow-hover: rgba(0, 0, 0, 0.1) 0 6px 16px;
+
+$radius-sm: 8px;
+$radius-md: 10px;
+$radius-lg: 14px;
+
+$header-height: 64px;
+$sidebar-width: 260px;
+
+$screen-sm: 576px;
+$screen-md: 768px;
+$screen-lg: 1024px;

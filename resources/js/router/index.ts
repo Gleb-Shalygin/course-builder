@@ -30,19 +30,19 @@ const routes: RouteRecordRaw[] = [
         path: '/profile',
         name: 'profile',
         component: ProfilePage,
-        meta: { requiresAuth: true },
+        meta: { requiresAuth: true, title: 'Профиль' },
     },
     {
         path: '/profile/tests',
         name: 'profile-tests',
         component: ProfileTestsPage,
-        meta: { requiresAuth: true },
+        meta: { requiresAuth: true, title: 'Тесты' },
     },
     {
         path: '/profile/test-create',
         name: 'test-create',
         component: TestCreatePage,
-        meta: { requiresAuth: true },
+        meta: { requiresAuth: true, title: 'Создание теста' },
     },
 ];
 

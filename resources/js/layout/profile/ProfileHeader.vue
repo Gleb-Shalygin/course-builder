@@ -1,22 +1,27 @@
 <template>
     <a-layout-header class="profile-header">
-        <div class="profile-header__custom">
-            <div class="profile-header__burger" @click="openMenu">
+        <div class="profile-header__left">
+            <button
+                class="profile-header__burger"
+                type="button"
+                @click="openMobileMenu"
+            >
                 <MenuOutlined />
-            </div>
+            </button>
 
-            <Logo />
-
-            <ExitButton />
+            <h1 class="profile-header__title">{{ pageTitle }}</h1>
         </div>
 
+        <ProfileUserMenu />
+
         <a-drawer
-            :open="isMenuOpen"
+            :open="isMobileMenuOpen"
             placement="left"
-            :width="280"
+            :width="260"
             :closable="false"
-            root-class-name="profile-sidebar-drawer"
-            @close="closeMenu"
+            :body-style="{ padding: 0 }"
+            root-class-name="profile-drawer"
+            @close="closeMobileMenu"
         >
             <ProfileSidebarContent />
         </a-drawer>
@@ -24,20 +29,10 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
 import { MenuOutlined } from '@ant-design/icons-vue';
-import Logo from '@/layout/profile/Logo.vue';
-import ExitButton from '@/components/profile/ExitButton.vue';
+import ProfileUserMenu from '@/layout/profile/ProfileUserMenu.vue';
 import ProfileSidebarContent from '@/layout/profile/ProfileSidebarContent.vue';
+import { useProfileLayout } from '@/composables/components/useProfileLayout';
 
-const isMenuOpen = ref(false);
-
-const openMenu = () => {
-    isMenuOpen.value = true;
-};
-
-const closeMenu = () => {
-    isMenuOpen.value = false;
-};
+const { isMobileMenuOpen, pageTitle, openMobileMenu, closeMobileMenu } = useProfileLayout();
 </script>
-

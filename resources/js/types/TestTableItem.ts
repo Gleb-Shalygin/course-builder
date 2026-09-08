@@ -3,4 +3,5 @@ export interface TestTableItem {
     title: string;
     description: string;
     is_public: boolean;
+    count_finished: number;
 }

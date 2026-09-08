@@ -1,33 +1,30 @@
 <template>
     <div class="profile-sidebar__content">
-        <Logo />
-
-        <ProfileUserCard />
-
-        <div class="profile-sidebar__nav">
-            <router-link
-                to="/profile"
-                class="profile-sidebar__nav-link"
-                active-class="profile-sidebar__nav-link--active"
-                exact
-            >
-                Профиль
-            </router-link>
-            <router-link
-                to="/profile/tests"
-                class="profile-sidebar__nav-link"
-                active-class="profile-sidebar__nav-link--active"
-            >
-                Тесты
-            </router-link>
+        <div class="profile-sidebar__logo">
+            <Logo />
         </div>
 
-        <slot />
+        <a-menu
+            class="profile-sidebar__menu"
+            mode="inline"
+            theme="light"
+            :selected-keys="selectedKeys"
+        >
+            <a-menu-item
+                v-for="item in menuItems"
+                :key="item.key"
+                @click="handleSelect(item.key)"
+            >
+                <component :is="item.icon" />
+                <span>{{ item.label }}</span>
+            </a-menu-item>
+        </a-menu>
     </div>
 </template>
 
 <script setup lang="ts">
-import ProfileUserCard from '@/layout/profile/ProfileUserCard.vue';
 import Logo from '@/layout/profile/Logo.vue';
-</script>
+import { useProfileNavigation } from '@/composables/components/useProfileNavigation';
 
+const { menuItems, selectedKeys, handleSelect } = useProfileNavigation();
+</script>
