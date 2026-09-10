@@ -6,9 +6,16 @@
 
     &__header {
         display: flex;
-        align-items: center;
-        justify-content: space-between;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 12px;
         margin-bottom: 8px;
+
+        @media (min-width: $screen-md) {
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+        }
     }
 
     &__title {
@@ -16,21 +23,29 @@
         flex-direction: column;
         gap: 4px;
 
-        h1 {
+        h2 {
             margin: 0;
-            font-size: 24px;
+            font-size: 20px;
             font-weight: 600;
+
+            @media (min-width: $screen-md) {
+                font-size: 22px;
+            }
         }
     }
 
     &__subtitle {
-        font-size: 14px;
-        color: #7a7a7a;
+        font-size: 13px;
+        color: $text-secondary;
+
+        @media (min-width: $screen-md) {
+            font-size: 14px;
+        }
     }
 
     &__settings-btn {
-        box-shadow: 0 4px 12px rgba(15, 23, 42, 0.08);
         border-radius: 999px;
+        box-shadow: 0 4px 12px rgba(15, 23, 42, 0.08);
     }
 
     &__content {
@@ -40,10 +55,14 @@
     }
 
     &__questions {
-        background: #ffffff;
-        border-radius: 16px;
-        //padding: 20px;
-        //box-shadow: 0 10px 30px rgba(15, 23, 42, 0.06);
+        padding: 16px;
+        background: $surface-color;
+        border-radius: $radius-lg;
+        box-shadow: $card-shadow;
+
+        @media (min-width: $screen-md) {
+            padding: 24px;
+        }
     }
 
     &__questions-header {
@@ -92,28 +111,45 @@
     }
 
     &__drafts {
-        align-self: flex-start;
+        align-self: stretch;
+
+        @media (min-width: $screen-md) {
+            align-self: flex-start;
+        }
     }
 
     &__footer {
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 16px;
         margin-top: auto;
         padding: 16px 0;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 16px;
         border-top: 1px solid #e5e7eb;
+
+        @media (min-width: $screen-md) {
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+        }
     }
 
     &__footer-left {
         display: flex;
         flex-direction: column;
         gap: 4px;
+        min-width: 0;
     }
 
     &__footer-actions {
         display: flex;
+        flex-direction: column;
         gap: 12px;
-        align-items: center;
+
+        @media (min-width: $screen-sm) {
+            flex-direction: row;
+            align-items: center;
+            justify-content: flex-end;
+        }
     }
 }

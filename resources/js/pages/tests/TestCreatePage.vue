@@ -3,11 +3,14 @@
         <div class="test-create">
             <header class="test-create__header">
                 <div class="test-create__title">
-                    <h1>Создание теста</h1>
+                    <h2>Новый тест</h2>
                     <span class="test-create__subtitle">Соберите структуру теста и настройте доступ</span>
                 </div>
-                <a-button type="default" shape="circle" class="test-create__settings-btn" @click="isSettingsOpen = true">
-                    ⚙
+                <a-button class="test-create__settings-btn" size="large" @click="isSettingsOpen = true">
+                    <template #icon>
+                        <SettingOutlined />
+                    </template>
+                    Настройки
                 </a-button>
             </header>
 
@@ -28,8 +31,11 @@
 
                     <div v-if="questions.length === 0" class="test-create__empty">
                         <p>Пока нет ни одного вопроса.</p>
-                        <a-button type="primary" @click="addQuestion">
-                            ➕ Добавить вопрос
+                        <a-button type="primary" size="large" @click="addQuestion">
+                            <template #icon>
+                                <PlusOutlined />
+                            </template>
+                            Добавить вопрос
                         </a-button>
                     </div>
 
@@ -46,8 +52,11 @@
                         />
 
                         <div class="test-create__add-next">
-                            <a-button type="dashed" @click="addQuestion">
-                                ➕ Добавить следующий вопрос
+                            <a-button type="dashed" size="large" block @click="addQuestion">
+                                <template #icon>
+                                    <PlusOutlined />
+                                </template>
+                                Добавить следующий вопрос
                             </a-button>
                         </div>
                     </div>
@@ -91,8 +100,11 @@
                         Скопировать ссылку на тест
                     </a-button>
 
-                    <a-button type="primary" size="large" @click="handleSaveTest" :loading="isSaving">
-                        💾 Сохранить тест
+                    <a-button type="primary" size="large" :loading="isSaving" @click="handleSaveTest">
+                        <template #icon>
+                            <SaveOutlined />
+                        </template>
+                        Сохранить тест
                     </a-button>
                 </div>
             </footer>
@@ -103,6 +115,7 @@
 <script setup lang="ts">
 import { computed, onBeforeUnmount, onMounted, ref } from 'vue';
 import { onBeforeRouteLeave } from 'vue-router';
+import { PlusOutlined, SaveOutlined, SettingOutlined } from '@ant-design/icons-vue';
 import ProfileLayout from '@/layout/profile/ProfileLayout.vue';
 import TestSettings from '@/components/tests/TestSettings.vue';
 import QuestionCard from '@/components/tests/QuestionCard.vue';
