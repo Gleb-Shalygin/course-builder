@@ -1,0 +1,9 @@
+node_modules/*
+!node_modules/ant-design-vue/
+!node_modules/axios/
+
+build/
+vendor/
+
+*.log
+storage/logs/
