@@ -73,6 +73,12 @@
         .ant-menu-item-selected {
             font-weight: 600;
         }
+
+        .ant-menu-title-content {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
     }
 }
 

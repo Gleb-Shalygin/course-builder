@@ -1,0 +1,16 @@
+.anticon {
+    display: inline-flex;
+    align-items: center;
+    line-height: 0;
+    vertical-align: -0.125em;
+
+    svg {
+        display: inline-block;
+    }
+}
+
+.ant-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
