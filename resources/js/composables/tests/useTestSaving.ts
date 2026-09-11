@@ -10,7 +10,7 @@ export function useTestSaving() {
 
     const isSaving = ref(false);
     const errorMessage = ref('');
-    const savedTestId: Ref<string | null> = ref(null);
+    const savedTestId: Ref<number | null> = ref(null);
 
     const isError = computed((): boolean => errorMessage.value !== '');
     const isSaved = computed((): boolean => savedTestId.value !== null);
@@ -28,9 +28,9 @@ export function useTestSaving() {
 
         try {
             const { data } = await createTestRequest(payload);
-            const createdId = data.data.id;
+            const createdId = data.id;
 
-            if (typeof createdId !== 'string') {
+            if (typeof createdId !== 'number') {
                 errorMessage.value = 'Сервер вернул некорректный ответ при сохранении теста.';
                 return;
             }

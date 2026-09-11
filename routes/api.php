@@ -12,7 +12,10 @@ Route::middleware('web')->name('web.')->group(function () {
     Route::middleware('auth:sanctum')->group(function () {
         Route::post('logout', [AuthController::class, 'logout']);
         Route::get('user', [AuthController::class, 'user']);
-        Route::get('tests', [TestController::class, 'tests'])->name('tests');
+        Route::prefix('tests')->name('tests.')->group(function () {
+            Route::get('/', [TestController::class, 'tests'])->name('index');
+            Route::post('/', [TestController::class, 'create'])->name('create');
+        });
     });
 });
 

@@ -28,6 +28,10 @@ export function useValidation() {
         return { valid: true };
     }
     function validateTest(payload: TestPayload): ValidationResult {
+        if (payload.title.trim() === '') {
+            return { valid: false, message: 'Введите название теста.' };
+        }
+
         if (payload.questions.length === 0) {
             return { valid: false, message: 'Добавьте минимум один вопрос в тест.' };
         }

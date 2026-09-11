@@ -1,10 +1,29 @@
 import api from '@/api/api';
-import type { CreatedTest, TestPayload } from '@/types/Test';
+import type { CreatedTest, TestCreateRequest, TestPayload, TestQuestionRequest } from '@/types/Test';
+
+function toQuestionsRequest(payload: TestPayload): TestQuestionRequest[] {
+    return payload.questions.map((question) => ({
+        type: question.type,
+        text: question.text.trim(),
+        answers: question.answers
+            .filter((answer) => answer.text.trim() !== '')
+            .map((answer) => ({
+                text: answer.text.trim(),
+                is_correct: answer.isCorrect,
+            })),
+    }));
+}
 
 export function getTestsRequest() {
     return api.get('/api/tests');
 }
 
 export function createTestRequest(payload: TestPayload) {
-    return api.post<{ data: CreatedTest }>('/api/tests', payload);
+    const body: TestCreateRequest = {
+        title: payload.title.trim(),
+        attempts: payload.attempts,
+        questions: toQuestionsRequest(payload),
+    };
+
+    return api.post<CreatedTest>('/api/tests', body);
 }

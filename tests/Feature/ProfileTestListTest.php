@@ -35,7 +35,7 @@ class ProfileTestListTest extends TestCase
             ];
         }
 
-        $response = $this->getJson(route('web.tests'));
+        $response = $this->getJson(route('web.tests.index'));
 
         $response->assertExactJson($testFakeResponse);
         $response->assertStatus(200);

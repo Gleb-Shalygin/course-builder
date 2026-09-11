@@ -6,6 +6,8 @@
                 <a-tag class="test-create__counter" color="blue">{{ savedCountLabel }}</a-tag>
             </a-flex>
 
+            <TestTitleField :title="title" @update:title="handleTitle" />
+
             <TestToolbar
                 :attempts="attempts"
                 :test-id="savedTestId"
@@ -77,11 +79,13 @@ import ProfileLayout from '@/layout/profile/ProfileLayout.vue';
 import TestAddQuestion from '@/components/tests/TestAddQuestion.vue';
 import TestQuestionEditor from '@/components/tests/TestQuestionEditor.vue';
 import TestQuestionItem from '@/components/tests/TestQuestionItem.vue';
+import TestTitleField from '@/components/tests/TestTitleField.vue';
 import TestToolbar from '@/components/tests/TestToolbar.vue';
 import { useTestBuilder } from '@/composables/tests/useTestBuilder';
 import { useTestSaving } from '@/composables/tests/useTestSaving';
 
 const {
+    title,
     attempts,
     savedQuestions,
     editingQuestion,
@@ -99,6 +103,10 @@ const {
 const { isSaving, isError, errorMessage, savedTestId, saveTest } = useTestSaving();
 
 const listClass = computed((): string => (isEditing.value ? 'test-create__list--locked' : ''));
+
+const handleTitle = (value: string): void => {
+    title.value = value;
+};
 
 const handleAttempts = (value: number): void => {
     attempts.value = value;

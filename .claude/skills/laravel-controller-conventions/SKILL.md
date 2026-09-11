@@ -31,6 +31,12 @@ Request (валидация) → Data (DTO) → Service (бизнес-логик
 - Метод сервиса **не может вернуть ресурс**. Только конкретный тип (`array`, `int`, `bool`, модель, коллекция), `void` — или исключение.
 - Бросающий метод помечается `@throws` в PHPDoc.
 
+## Статические методы
+
+- Методы контроллеров и методы сервисов — **статические** (`public static function`).
+- Вызов из контроллера в сервис идёт напрямую по имени класса: `TestService::create($data)`, без создания экземпляра сервиса и без DI через конструктор.
+- Это не мешает контроллеру наследовать `Controller` и не требует статических свойств — статик только у самих методов действий/бизнес-логики.
+
 ## Именование
 
 - Классы: UpperCamelCase (`TestController`, `TestService`, `UserAuthData`).
@@ -89,7 +95,7 @@ class TestCreateData extends Data
 /**
  * @throws TestNotCreatedException
  */
-public function create(TestCreateRequest $request): TestsResource
+public static function create(TestCreateRequest $request): TestsResource
 {
     $data = TestCreateData::from([
         'title' => $request->validated('title'),
@@ -148,3 +154,4 @@ class TestNotCreatedException extends ApiException
 - Не ловить доменные исключения в контроллере, чтобы «переупаковать» ответ — у них есть `render()`.
 - Не оставлять метод без типов параметров и без типа возврата.
 - Не использовать snake_case в именах методов и переменных.
+- Не объявлять методы контроллеров и сервисов как обычные (нестатические).

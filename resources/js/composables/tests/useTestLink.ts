@@ -3,7 +3,7 @@ import type { Ref } from 'vue';
 
 const COPIED_RESET_TIMEOUT = 2000;
 
-export function useTestLink(testId: Ref<string | null>) {
+export function useTestLink(testId: Ref<number | null>) {
     const isCopied = ref(false);
     const errorMessage = ref('');
 

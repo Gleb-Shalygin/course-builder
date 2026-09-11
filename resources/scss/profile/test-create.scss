@@ -85,6 +85,30 @@
     }
 }
 
+.test-title {
+    border-radius: $radius-lg;
+    box-shadow: $card-shadow;
+    animation: test-create-fade 0.4s ease both;
+
+    .ant-card-body {
+        padding: 16px;
+
+        @media (min-width: $screen-md) {
+            padding: 20px 24px;
+        }
+    }
+
+    &__label {
+        font-size: 13px;
+        color: $text-secondary;
+    }
+
+    &__input {
+        border-radius: $radius-sm;
+        font-weight: 500;
+    }
+}
+
 .test-toolbar {
     border-radius: $radius-lg;
     box-shadow: $card-shadow;

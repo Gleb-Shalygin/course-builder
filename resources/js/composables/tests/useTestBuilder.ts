@@ -20,6 +20,7 @@ function questionWord(count: number): string {
 export function useTestBuilder() {
     const { createQuestion, cloneQuestion } = useQuestionFactory();
 
+    const title = ref('');
     const attempts = ref(DEFAULT_ATTEMPTS);
     const questions: Ref<TestQuestion[]> = ref([]);
     const editingSnapshot: Ref<TestQuestion | null> = ref(null);
@@ -77,12 +78,14 @@ export function useTestBuilder() {
     }
     function buildTestPayload(): TestPayload {
         return {
+            title: title.value,
             attempts: attempts.value,
             questions: savedQuestions.value.map((question) => cloneQuestion(question)),
         };
     }
 
     return {
+        title,
         attempts,
         savedQuestions,
         editingQuestion,

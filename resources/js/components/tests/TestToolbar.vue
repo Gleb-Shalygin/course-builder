@@ -50,7 +50,7 @@ import { useTestLink } from '@/composables/tests/useTestLink';
 
 interface TestToolbarProps {
     attempts: number;
-    testId: string | null;
+    testId: number | null;
 }
 
 const props = defineProps<TestToolbarProps>();

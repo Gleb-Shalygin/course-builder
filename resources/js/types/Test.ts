@@ -23,8 +23,26 @@ export interface QuestionTypeOption {
 }
 
 export interface TestPayload {
+    title: string;
     attempts: number;
     questions: TestQuestion[];
+}
+
+export interface TestAnswerRequest {
+    text: string;
+    is_correct: boolean;
+}
+
+export interface TestQuestionRequest {
+    type: QuestionType;
+    text: string;
+    answers: TestAnswerRequest[];
+}
+
+export interface TestCreateRequest {
+    title: string;
+    attempts: number;
+    questions: TestQuestionRequest[];
 }
 
 export interface ValidationResult {
@@ -33,5 +51,5 @@ export interface ValidationResult {
 }
 
 export interface CreatedTest {
-    id: string;
+    id: number;
 }
