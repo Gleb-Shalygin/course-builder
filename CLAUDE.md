@@ -8,11 +8,12 @@ Laravel 12 (PHP 8.2) backend + Vue 3 SPA frontend (Composition API, `<script set
 
 ## Скиллы проекта — обязательно к прочтению
 
-Перед любой работой с Vue-кодом или запуском окружения **обязательно** проверяй и применяй соответствующие скиллы из [`.claude/skills/`](.claude/skills/):
+Перед любой работой с Vue-кодом, backend-контроллерами или запуском окружения **обязательно** проверяй и применяй соответствующие скиллы из [`.claude/skills/`](.claude/skills/):
 
 - [`.claude/skills/vue-component-conventions/SKILL.md`](.claude/skills/vue-component-conventions/SKILL.md) — правила для файлов `resources/js/components/**/*.vue` (структура, порядок `template`/`script`, именование, пропсы, что нельзя делать).
 - [`.claude/skills/vue-composable-conventions/SKILL.md`](.claude/skills/vue-composable-conventions/SKILL.md) — правила для файлов `resources/js/composables/**/*.ts` (структура, порядок `computed`/`watch`/функций, работа со store).
 - [`.claude/skills/vue-core/SKILL.md`](.claude/skills/vue-core/SKILL.md) — общие best practices по Vue 3 (реактивность, SFC, composables, производительность). Применяется, когда вопрос не покрыт проектными конвенциями выше — они имеют приоритет при конфликте.
+- [`.claude/skills/laravel-controller-conventions/SKILL.md`](.claude/skills/laravel-controller-conventions/SKILL.md) — правила для контроллеров `app/Http/Controllers/**/*.php` и связанных слоёв (`app/Service`, `app/Data`, `app/Http/Requests`, `app/Http/Resources`, `app/Exceptions`): поток данных, типизация, именование.
 - [`.claude/skills/start-project/SKILL.md`](.claude/skills/start-project/SKILL.md) — как поднять локальное окружение (Docker Compose + Sail + Vite).
 
 Эти правила специфичны для проекта и не выводятся из кода автоматически — их нужно читать явно перед началом задачи в соответствующей области.
