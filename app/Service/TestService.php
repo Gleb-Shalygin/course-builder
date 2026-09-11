@@ -20,6 +20,7 @@ class TestService
             ->withCount(['testAttempt as count_finished' => function ($query) {
                 $query->whereNotNull('finished_at');
             }])
+            ->orderByDesc('id')
             ->get(['id', 'title', 'description', 'is_public']);
 
         return $tests->map(fn ($test) => [

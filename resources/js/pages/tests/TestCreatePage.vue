@@ -74,6 +74,7 @@
 
 <script setup lang="ts">
 import { computed } from 'vue';
+import { useRouter } from 'vue-router';
 import { SaveOutlined } from '@ant-design/icons-vue';
 import ProfileLayout from '@/layout/profile/ProfileLayout.vue';
 import TestAddQuestion from '@/components/tests/TestAddQuestion.vue';
@@ -100,7 +101,9 @@ const {
     buildTestPayload,
 } = useTestBuilder();
 
-const { isSaving, isError, errorMessage, savedTestId, saveTest } = useTestSaving();
+const { isSaving, isSaved, isError, errorMessage, savedTestId, saveTest } = useTestSaving();
+
+const router = useRouter();
 
 const listClass = computed((): string => (isEditing.value ? 'test-create__list--locked' : ''));
 
@@ -114,5 +117,9 @@ const handleAttempts = (value: number): void => {
 
 const handleSaveTest = async (): Promise<void> => {
     await saveTest(buildTestPayload());
+
+    if (isSaved.value) {
+        await router.push({ name: 'profile-tests' });
+    }
 };
 </script>

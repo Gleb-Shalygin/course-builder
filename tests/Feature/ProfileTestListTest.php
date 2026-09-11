@@ -21,7 +21,9 @@ class ProfileTestListTest extends TestCase
         $tests = Test::query()->where('user_id', $user->id)
             ->withCount(['testAttempt as count_finished' => function ($query) {
                 $query->whereNotNull('finished_at');
-            }])->get(['id', 'title', 'description', 'is_public']);
+            }])
+            ->orderByDesc('id')
+            ->get(['id', 'title', 'description', 'is_public']);
 
         $testFakeResponse = ['data' => []];
 
