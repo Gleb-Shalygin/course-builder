@@ -21,14 +21,15 @@ class TestService
                 $query->whereNotNull('finished_at');
             }])
             ->orderByDesc('id')
-            ->get(['id', 'title', 'description', 'is_public']);
+            ->get(['id', 'title', 'description', 'is_public', 'attempts']);
 
         return $tests->map(fn ($test) => [
             'id' => $test->id,
             'title' => $test->title,
             'description' => $test->description,
             'is_public' => $test->is_public,
-            'count_finished' => $test->count_finished
+            'attempts' => $test->attempts,
+            'count_finished' => $test->count_finished,
         ])->toArray();
     }
 

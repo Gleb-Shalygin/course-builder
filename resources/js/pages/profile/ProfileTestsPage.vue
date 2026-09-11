@@ -2,11 +2,6 @@
     <ProfileLayout>
         <div class="profile-page">
             <div class="profile-page__toolbar">
-                <div class="profile-page__toolbar-info">
-                    <h2 class="profile-page__toolbar-title">Ваши тесты</h2>
-                    <span class="profile-page__toolbar-subtitle">Управляйте тестами и смотрите статистику прохождений</span>
-                </div>
-
                 <a-button type="primary" size="large" @click="goToCreateTest">
                     <template #icon>
                         <PlusOutlined />
