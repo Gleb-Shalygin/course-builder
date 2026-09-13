@@ -4,12 +4,13 @@ import { useTestBuilder } from '@/composables/tests/useTestBuilder';
 import { useTestLoading } from '@/composables/tests/useTestLoading';
 import { useTestSaving } from '@/composables/tests/useTestSaving';
 import { useTestsNavigation } from '@/composables/tests/useTestsNavigation';
-import type { TestPayload } from '@/types/Test';
+import type { TestFormFooterState, TestPayload } from '@/types/Test.ts';
 
 export function useTestForm(testId: Ref<number | null>) {
     const { goToTests } = useTestsNavigation();
     const {
         title,
+        description,
         attempts,
         savedQuestions,
         editingQuestion,
@@ -43,10 +44,15 @@ export function useTestForm(testId: Ref<number | null>) {
     const isEdit = computed((): boolean => testId.value !== null);
     const currentTestId = computed((): number | null => testId.value ?? savedTestId.value);
     const listClass = computed((): string => (isEditing.value ? 'test-form__list--locked' : ''));
-    const submitLabel = computed((): string => (isEdit.value ? 'Сохранить изменения' : 'Сохранить тест'));
+    const submitLabel = computed((): string => (isEdit.value ? 'Сохранить' : 'Сохранить тест'));
     const isError = computed((): boolean => isLoadError.value || isSaveError.value);
     const errorMessage = computed((): string => (isLoadError.value ? loadErrorMessage.value : saveErrorMessage.value));
     const isSubmitDisabled = computed((): boolean => isLoading.value || isLoadError.value);
+    const footer = computed((): TestFormFooterState => ({
+        label: submitLabel.value,
+        isSaving: isSaving.value,
+        isDisabled: isSubmitDisabled.value,
+    }));
 
     watch(loadedTest, (payload: TestPayload | null): void => {
         if (payload === null) return;
@@ -56,6 +62,9 @@ export function useTestForm(testId: Ref<number | null>) {
 
     function handleTitle(value: string): void {
         title.value = value;
+    }
+    function handleDescription(value: string): void {
+        description.value = value.trim() === '' ? null : value;
     }
     function handleAttempts(value: number): void {
         attempts.value = value;
@@ -70,6 +79,7 @@ export function useTestForm(testId: Ref<number | null>) {
 
     return {
         title,
+        description,
         attempts,
         savedQuestions,
         editingQuestion,
@@ -78,19 +88,18 @@ export function useTestForm(testId: Ref<number | null>) {
         savedCountLabel,
         currentTestId,
         listClass,
-        submitLabel,
+        footer,
         isLoading,
         isLoadError,
-        isSaving,
         isError,
         errorMessage,
-        isSubmitDisabled,
         addQuestion,
         editQuestion,
         saveQuestion,
         cancelQuestion,
         removeQuestion,
         handleTitle,
+        handleDescription,
         handleAttempts,
         handleSaveTest,
         loadTest,

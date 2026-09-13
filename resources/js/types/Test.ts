@@ -69,6 +69,12 @@ export interface TestDetail {
     questions: TestDetailQuestion[];
 }
 
+export interface TestFormFooterState {
+    label: string;
+    isSaving: boolean;
+    isDisabled: boolean;
+}
+
 export interface ValidationResult {
     valid: boolean;
     message?: string;

@@ -57,7 +57,7 @@
 <script setup lang="ts">
 import { toRefs } from 'vue';
 import { CheckOutlined } from '@ant-design/icons-vue';
-import TestAnswersEditor from '@/components/tests/TestAnswersEditor.vue';
+import TestAnswersEditor from '@/components/tests/question/TestAnswersEditor.vue';
 import { useQuestionEditor } from '@/composables/tests/useQuestionEditor';
 import type { TestQuestion } from '@/types/Test';
 

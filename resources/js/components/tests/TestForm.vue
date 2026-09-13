@@ -5,6 +5,8 @@
 
             <TestTitleField :title="title" @update:title="handleTitle" />
 
+            <TestDescriptionField :description="description" @update:description="handleDescription" />
+
             <TestToolbar :attempts="attempts" :test-id="currentTestId" @update:attempts="handleAttempts" />
 
             <a-empty v-if="isEmpty" class="test-form__empty" description="Пока ни одного вопроса — начните с плюсика ниже" />
@@ -32,33 +34,21 @@
                 </template>
             </a-alert>
 
-            <a-button
-                class="test-form__submit"
-                type="primary"
-                size="large"
-                block
-                :loading="isSaving"
-                :disabled="isSubmitDisabled"
-                @click="handleSaveTest"
-            >
-                <template #icon>
-                    <SaveOutlined />
-                </template>
-                {{ submitLabel }}
-            </a-button>
+            <TestFormFooter :footer="footer" @save="handleSaveTest" />
         </a-flex>
     </a-spin>
 </template>
 
 <script setup lang="ts">
 import { toRefs } from 'vue';
-import { SaveOutlined } from '@ant-design/icons-vue';
-import TestAddQuestion from '@/components/tests/TestAddQuestion.vue';
-import TestFormHead from '@/components/tests/TestFormHead.vue';
-import TestQuestionEditor from '@/components/tests/TestQuestionEditor.vue';
-import TestQuestionItem from '@/components/tests/TestQuestionItem.vue';
-import TestTitleField from '@/components/tests/TestTitleField.vue';
-import TestToolbar from '@/components/tests/TestToolbar.vue';
+import TestAddQuestion from '@/components/tests/question/TestAddQuestion.vue';
+import TestDescriptionField from '@/components/tests/form/TestDescriptionField.vue';
+import TestFormFooter from '@/components/tests/form/TestFormFooter.vue';
+import TestFormHead from '@/components/tests/form/TestFormHead.vue';
+import TestQuestionEditor from '@/components/tests/question/TestQuestionEditor.vue';
+import TestQuestionItem from '@/components/tests/question/TestQuestionItem.vue';
+import TestTitleField from '@/components/tests/form/TestTitleField.vue';
+import TestToolbar from '@/components/tests/form/TestToolbar.vue';
 import { useTestForm } from '@/composables/tests/useTestForm';
 
 interface TestFormProps {
@@ -70,6 +60,7 @@ const { testId } = toRefs(props);
 
 const {
     title,
+    description,
     attempts,
     savedQuestions,
     editingQuestion,
@@ -78,19 +69,18 @@ const {
     savedCountLabel,
     currentTestId,
     listClass,
-    submitLabel,
+    footer,
     isLoading,
     isLoadError,
-    isSaving,
     isError,
     errorMessage,
-    isSubmitDisabled,
     addQuestion,
     editQuestion,
     saveQuestion,
     cancelQuestion,
     removeQuestion,
     handleTitle,
+    handleDescription,
     handleAttempts,
     handleSaveTest,
     loadTest,

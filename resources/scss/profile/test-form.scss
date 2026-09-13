@@ -2,7 +2,7 @@
 // базовые стили — телефон, расширения — через min-width брейкпоинты.
 
 .test-form {
-    padding-bottom: 8px;
+    padding-bottom: 0;
 
     &__head {
         margin: 0;
@@ -72,9 +72,44 @@
         animation: test-form-shake 0.4s ease both;
     }
 
-    &__submit {
+    // Прилипший к низу экрана футер с кнопкой сохранения.
+    &__footer {
         position: sticky;
-        bottom: 12px;
+        bottom: 0;
+        z-index: 5;
+        margin-top: 4px;
+        padding: 12px 16px calc(12px + env(safe-area-inset-bottom, 0px));
+
+        // Белая подложка вынесена в ::before, чтобы плавно гаснуть по opacity,
+        // когда кнопка перестаёт «висеть» и упирается в футер сайта.
+        &::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: rgba(255, 255, 255, 0.94);
+            backdrop-filter: blur(10px);
+            border: 1px solid $border-color;
+            border-bottom: none;
+            border-radius: $radius-lg $radius-lg 0 0;
+            box-shadow: 0 -8px 24px rgba(0, 0, 0, 0.08);
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.25s ease;
+        }
+
+        &--floating::before {
+            opacity: 1;
+        }
+
+        @media (min-width: $screen-md) {
+            padding: 14px 24px calc(14px + env(safe-area-inset-bottom, 0px));
+        }
+    }
+
+    &__submit {
+        position: relative;
+        z-index: 1;
+        width: 100%;
         height: 48px;
         border-radius: $radius-md;
         font-weight: 600;
@@ -90,12 +125,6 @@
 
         &:active {
             transform: translateY(0);
-        }
-
-        @media (min-width: $screen-md) {
-            align-self: flex-end;
-            width: auto;
-            min-width: 220px;
         }
     }
 }
@@ -121,6 +150,30 @@
     &__input {
         border-radius: $radius-sm;
         font-weight: 500;
+    }
+}
+
+.test-description {
+    border-radius: $radius-lg;
+    box-shadow: $card-shadow;
+    animation: test-form-fade 0.4s ease both;
+
+    .ant-card-body {
+        padding: 16px;
+
+        @media (min-width: $screen-md) {
+            padding: 20px 24px;
+        }
+    }
+
+    &__label {
+        font-size: 13px;
+        color: $text-secondary;
+    }
+
+    &__input {
+        border-radius: $radius-sm;
+        resize: vertical;
     }
 }
 
@@ -461,6 +514,7 @@
 
 @media (prefers-reduced-motion: reduce) {
     .test-form *,
+    .test-description,
     .test-toolbar,
     .question-item,
     .question-editor,
