@@ -358,13 +358,36 @@
         gap: 24px;
     }
 
+    &__loader {
+        display: block;
+        width: 100%;
+        min-height: 60vh;
+
+        .ant-spin-container {
+            min-height: 60vh;
+        }
+    }
+
+    &__error {
+        border-radius: $radius-md;
+    }
+
     &__item {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
         box-shadow: $card-shadow;
         transition: box-shadow 0.2s ease, transform 0.2s ease;
 
         &:hover {
             transform: translateY(-2px);
             box-shadow: $card-shadow-hover;
+        }
+
+        .ant-card-body {
+            display: flex;
+            flex-direction: column;
+            flex: 1;
         }
 
         &-title {
@@ -380,6 +403,22 @@
         &-meta {
             display: flex;
             gap: 24px;
+            margin-top: auto;
+            padding-top: 16px;
+            border-top: 1px solid $divider-color;
+        }
+
+        &-edit {
+            border-radius: $radius-sm;
+            color: $green;
+            border-color: $green;
+
+            &:hover,
+            &:focus {
+                color: $green;
+                border-color: $green;
+                opacity: 0.85;
+            }
         }
     }
 }

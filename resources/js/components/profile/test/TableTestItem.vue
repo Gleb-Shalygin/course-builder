@@ -4,13 +4,12 @@
             <span class="profile-tests__item-title">{{ title }}</span>
         </template>
         <template #extra>
-            <a-tooltip title="Редактировать тест">
-                <a-button type="text" shape="circle" @click="handleEdit">
-                    <template #icon>
-                        <EditOutlined />
-                    </template>
-                </a-button>
-            </a-tooltip>
+            <a-button class="profile-tests__item-edit" @click="handleEdit">
+                <template #icon>
+                    <EditOutlined />
+                </template>
+                Изменить
+            </a-button>
         </template>
 
         <p class="profile-tests__item-desc">{{ description }}</p>

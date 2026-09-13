@@ -1,8 +1,7 @@
 <template>
     <ProfileLayout>
         <a-flex class="test-create" vertical :gap="16">
-            <a-flex class="test-create__head" align="center" justify="space-between" wrap="wrap" :gap="8">
-                <h2 class="test-create__title">Новый тест</h2>
+            <a-flex class="test-create__head" align="center" justify="end" :gap="8">
                 <a-tag class="test-create__counter" color="blue">{{ savedCountLabel }}</a-tag>
             </a-flex>
 
