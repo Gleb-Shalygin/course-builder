@@ -26,6 +26,13 @@
                 </template>
             </a-statistic>
         </div>
+
+        <a-button class="profile-tests__item-edit-mobile" block @click="handleEdit">
+            <template #icon>
+                <EditOutlined />
+            </template>
+            Изменить
+        </a-button>
     </a-card>
 </template>
 

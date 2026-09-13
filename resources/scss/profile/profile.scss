@@ -417,7 +417,10 @@
             border-top: 1px solid $divider-color;
         }
 
+        // На мобильных кнопка редактирования уходит вниз карточки на всю ширину,
+        // а место в шапке рядом с заголовком остаётся только с $screen-md.
         &-edit {
+            display: none;
             border-radius: $radius-sm;
             color: $green;
             border-color: $green;
@@ -427,6 +430,28 @@
                 color: $green;
                 border-color: $green;
                 opacity: 0.85;
+            }
+
+            @media (min-width: $screen-md) {
+                display: inline-flex;
+            }
+        }
+
+        &-edit-mobile {
+            margin-top: 16px;
+            border-radius: $radius-sm;
+            color: $green;
+            border-color: $green;
+
+            &:hover,
+            &:focus {
+                color: $green;
+                border-color: $green;
+                opacity: 0.85;
+            }
+
+            @media (min-width: $screen-md) {
+                display: none;
             }
         }
     }

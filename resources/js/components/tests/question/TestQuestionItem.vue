@@ -26,7 +26,7 @@
         </a-flex>
 
         <a-flex class="question-item__actions" :gap="4" wrap="wrap">
-            <a-button class="question-item__action" type="link" @click="handleEdit">
+            <a-button class="question-item__action question-item__action--edit" type="link" @click="handleEdit">
                 <template #icon>
                     <EditOutlined />
                 </template>
@@ -39,7 +39,7 @@
                 cancel-text="Отмена"
                 @confirm="handleRemove"
             >
-                <a-button class="question-item__action" type="link" danger>
+                <a-button class="question-item__action question-item__action--danger" type="link" danger>
                     <template #icon>
                         <DeleteOutlined />
                     </template>

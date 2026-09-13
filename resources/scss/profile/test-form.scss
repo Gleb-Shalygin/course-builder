@@ -285,12 +285,53 @@
         }
     }
 
+    // На мобильных кнопки действий — полноценные цветные плашки на всю ширину
+    // карточки для удобного тапа, с $screen-md возвращаются к обычным
+    // ссылкам по контенту, как было на десктопе.
     &__actions {
         margin-top: 2px;
     }
 
     &__action {
-        padding-inline: 4px;
+        flex: 1 1 0;
+        height: 40px;
+        padding-inline: 12px;
+        border-radius: $radius-sm;
+        border: 1px solid transparent;
+        font-weight: 600;
+        transition: opacity 0.2s ease;
+
+        &:active {
+            opacity: 0.8;
+        }
+
+        @media (min-width: $screen-md) {
+            flex: 0 0 auto;
+            height: auto;
+            padding-inline: 4px;
+            border-color: transparent !important;
+            background: transparent !important;
+            font-weight: 400;
+        }
+    }
+
+    // Цвет и заливка — только на мобильных: там нет наведения, поэтому ссылку
+    // окрашиваем в заметную плашку для тапа. С $screen-md override снимается
+    // и цвет отдаётся обратно дефолтным стилям antd (обычная ссылка), поэтому
+    // здесь единственное осознанное исключение из mobile-first — иначе пришлось
+    // бы дублировать вычисляемый antd-токен colorLink, чтобы не изменить вид на десктопе.
+    @media (max-width: $screen-md - 1px) {
+        &__action--edit {
+            color: $green !important;
+            background: $green-soft;
+            border-color: rgba(0, 181, 0, 0.24);
+        }
+
+        &__action--danger {
+            color: $danger !important;
+            background: $danger-soft;
+            border-color: rgba(255, 77, 79, 0.24);
+        }
     }
 }
 
