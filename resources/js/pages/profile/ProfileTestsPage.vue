@@ -2,7 +2,7 @@
     <ProfileLayout>
         <div class="profile-page">
             <div class="profile-page__toolbar">
-                <a-button type="primary" size="large" @click="goToCreateTest">
+                <a-button type="primary" size="large" @click="goToTestCreate">
                     <template #icon>
                         <PlusOutlined />
                     </template>
@@ -17,18 +17,14 @@
 
 <script lang="ts" setup>
 import { defineOptions } from 'vue';
-import { useRouter } from 'vue-router';
 import { PlusOutlined } from '@ant-design/icons-vue';
 import ProfileLayout from '@/layout/profile/ProfileLayout.vue';
 import TableTests from '@/components/profile/test/TableTests.vue';
+import { useTestsNavigation } from '@/composables/tests/useTestsNavigation';
 
 defineOptions({
     layout: ProfileLayout
 });
 
-const router = useRouter();
-
-const goToCreateTest = () => {
-    router.push({ name: 'test-create' });
-};
+const { goToTestCreate } = useTestsNavigation();
 </script>

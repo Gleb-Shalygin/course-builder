@@ -15,6 +15,8 @@ Route::middleware('web')->name('web.')->group(function () {
         Route::prefix('tests')->name('tests.')->group(function () {
             Route::get('/', [TestController::class, 'tests'])->name('index');
             Route::post('/', [TestController::class, 'create'])->name('create');
+            Route::get('/{test}', [TestController::class, 'test'])->whereNumber('test')->name('show');
+            Route::put('/{test}', [TestController::class, 'update'])->whereNumber('test')->name('update');
         });
     });
 });

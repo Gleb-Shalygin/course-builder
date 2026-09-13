@@ -1,11 +1,26 @@
-// Страница создания теста построена mobile-first:
+// Форма создания и редактирования теста построена mobile-first:
 // базовые стили — телефон, расширения — через min-width брейкпоинты.
 
-.test-create {
+.test-form {
     padding-bottom: 8px;
 
     &__head {
         margin: 0;
+    }
+
+    &__back {
+        height: 36px;
+        padding: 0 12px;
+        border-radius: $radius-sm;
+        border-color: $divider-color;
+        color: $text-secondary;
+        font-weight: 500;
+        transition: color 0.2s ease, border-color 0.2s ease;
+
+        &:hover {
+            color: $main-color;
+            border-color: $main-color;
+        }
     }
 
     &__title {
@@ -31,7 +46,7 @@
         background: $surface-color;
         border: 1px dashed $divider-color;
         border-radius: $radius-lg;
-        animation: test-create-fade 0.4s ease both;
+        animation: test-form-fade 0.4s ease both;
     }
 
     &__list {
@@ -54,7 +69,7 @@
 
     &__error {
         border-radius: $radius-md;
-        animation: test-create-shake 0.4s ease both;
+        animation: test-form-shake 0.4s ease both;
     }
 
     &__submit {
@@ -88,7 +103,7 @@
 .test-title {
     border-radius: $radius-lg;
     box-shadow: $card-shadow;
-    animation: test-create-fade 0.4s ease both;
+    animation: test-form-fade 0.4s ease both;
 
     .ant-card-body {
         padding: 16px;
@@ -112,7 +127,7 @@
 .test-toolbar {
     border-radius: $radius-lg;
     box-shadow: $card-shadow;
-    animation: test-create-fade 0.4s ease both;
+    animation: test-form-fade 0.4s ease both;
 
     .ant-card-body {
         padding: 16px;
@@ -269,7 +284,7 @@
 
     &__error {
         border-radius: $radius-sm;
-        animation: test-create-shake 0.4s ease both;
+        animation: test-form-shake 0.4s ease both;
     }
 
     &__save {
@@ -303,7 +318,7 @@
         border: 1px solid transparent;
         border-radius: $radius-sm;
         transition: border-color 0.25s ease, background-color 0.25s ease;
-        animation: test-create-rise 0.3s ease both;
+        animation: test-form-rise 0.3s ease both;
 
         &:hover {
             border-color: $main-color-soft;
@@ -368,7 +383,7 @@
 
     &__hint {
         font-size: 12px;
-        animation: test-create-fade 0.3s ease both;
+        animation: test-form-fade 0.3s ease both;
     }
 }
 
@@ -405,7 +420,7 @@
     transform: translateY(-10px) scale(0.99);
 }
 
-@keyframes test-create-fade {
+@keyframes test-form-fade {
     from {
         opacity: 0;
         transform: translateY(8px);
@@ -417,7 +432,7 @@
     }
 }
 
-@keyframes test-create-rise {
+@keyframes test-form-rise {
     from {
         opacity: 0;
         transform: translateY(6px);
@@ -429,7 +444,7 @@
     }
 }
 
-@keyframes test-create-shake {
+@keyframes test-form-shake {
     0%,
     100% {
         transform: translateX(0);
@@ -445,7 +460,7 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-    .test-create *,
+    .test-form *,
     .test-toolbar,
     .question-item,
     .question-editor,

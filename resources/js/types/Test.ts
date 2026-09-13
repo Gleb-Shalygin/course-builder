@@ -24,6 +24,7 @@ export interface QuestionTypeOption {
 
 export interface TestPayload {
     title: string;
+    description: string | null;
     attempts: number;
     questions: TestQuestion[];
 }
@@ -41,8 +42,31 @@ export interface TestQuestionRequest {
 
 export interface TestCreateRequest {
     title: string;
+    description: string | null;
     attempts: number;
     questions: TestQuestionRequest[];
+}
+
+export interface TestDetailAnswer {
+    id: number;
+    text: string;
+    is_correct: boolean;
+}
+
+export interface TestDetailQuestion {
+    id: number;
+    type: QuestionType;
+    text: string;
+    answers: TestDetailAnswer[];
+}
+
+export interface TestDetail {
+    id: number;
+    title: string;
+    description: string | null;
+    attempts: number;
+    is_public: boolean;
+    questions: TestDetailQuestion[];
 }
 
 export interface ValidationResult {

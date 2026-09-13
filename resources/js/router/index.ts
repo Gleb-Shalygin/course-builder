@@ -7,6 +7,7 @@ import RegisterPage from '@/pages/RegisterPage.vue';
 import Welcome from '@/pages/Welcome.vue';
 import TestCreatePage from '@/pages/tests/TestCreatePage.vue';
 import ProfileTestsPage from '@/pages/profile/ProfileTestsPage.vue';
+import TestEditPage from '@/pages/tests/TestEditPage.vue';
 
 const routes: RouteRecordRaw[] = [
     {
@@ -43,6 +44,12 @@ const routes: RouteRecordRaw[] = [
         name: 'test-create',
         component: TestCreatePage,
         meta: { requiresAuth: true, title: 'Создание теста' },
+    },
+    {
+        path: '/profile/tests/:id/edit',
+        name: 'test-edit',
+        component: TestEditPage,
+        meta: { requiresAuth: true, title: 'Редактирование теста' },
     },
 ];
 

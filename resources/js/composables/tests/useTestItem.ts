@@ -1,17 +1,18 @@
-import { computed, Ref } from 'vue';
-import { useRouter } from 'vue-router';
-import { TestTableItem } from '@/types/TestTableItem';
+import { computed } from 'vue';
+import type { Ref } from 'vue';
+import { useTestsNavigation } from '@/composables/tests/useTestsNavigation';
+import type { TestTableItem } from '@/types/TestTableItem';
 
 export function useTestItem(test: Ref<TestTableItem>) {
-    const router = useRouter();
+    const { goToTestEdit } = useTestsNavigation();
 
-    const title = computed(() => test.value.title);
-    const description = computed(() => test.value.description);
-    const attempts = computed(() => test.value.attempts);
-    const countFinished = computed(() => test.value.count_finished);
+    const title = computed((): string => test.value.title);
+    const description = computed((): string => test.value.description);
+    const attempts = computed((): number => test.value.attempts);
+    const countFinished = computed((): number => test.value.count_finished);
 
-    function handleEdit() {
-        router.push({ name: 'test-edit', params: { id: test.value.id } });
+    async function handleEdit(): Promise<void> {
+        await goToTestEdit(test.value.id);
     }
 
     return {

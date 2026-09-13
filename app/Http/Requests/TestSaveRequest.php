@@ -8,7 +8,11 @@ use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 use Illuminate\Validation\Validator;
 
-class TestCreateRequest extends FormRequest
+/**
+ * Правила сохранения теста — общие для создания и редактирования:
+ * тест всегда приходит целиком, вместе со всеми вопросами и вариантами ответов.
+ */
+class TestSaveRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.

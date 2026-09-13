@@ -21,6 +21,7 @@ export function useTestBuilder() {
     const { createQuestion, cloneQuestion } = useQuestionFactory();
 
     const title = ref('');
+    const description: Ref<string | null> = ref(null);
     const attempts = ref(DEFAULT_ATTEMPTS);
     const questions: Ref<TestQuestion[]> = ref([]);
     const editingSnapshot: Ref<TestQuestion | null> = ref(null);
@@ -79,13 +80,22 @@ export function useTestBuilder() {
     function buildTestPayload(): TestPayload {
         return {
             title: title.value,
+            description: description.value,
             attempts: attempts.value,
             questions: savedQuestions.value.map((question) => cloneQuestion(question)),
         };
     }
+    function applyTestPayload(payload: TestPayload): void {
+        title.value = payload.title;
+        description.value = payload.description;
+        attempts.value = payload.attempts;
+        questions.value = payload.questions.map((question) => ({ ...cloneQuestion(question), isSaved: true }));
+        editingSnapshot.value = null;
+    }
 
     return {
         title,
+        description,
         attempts,
         savedQuestions,
         editingQuestion,
@@ -99,5 +109,6 @@ export function useTestBuilder() {
         cancelQuestion,
         removeQuestion,
         buildTestPayload,
+        applyTestPayload,
     };
 }
