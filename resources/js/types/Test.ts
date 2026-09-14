@@ -1,10 +1,5 @@
-export type TestAccessType = 'private' | 'link' | 'cabinet';
-
 export enum QuestionType {
     Single = 'single',
-    Multiple = 'multiple',
-    Open = 'open',
-    Match = 'match',
     TrueFalse = 'true_false',
 }
 
@@ -12,7 +7,6 @@ export interface AnswerOption {
     id: string;
     text: string;
     isCorrect: boolean;
-    matchText?: string;
 }
 
 export interface TestQuestion {
@@ -20,29 +14,72 @@ export interface TestQuestion {
     type: QuestionType;
     text: string;
     answers: AnswerOption[];
-    correctText?: string;
-    imageUrl?: string;
-    imageFile?: File | null;
-    isDraftSaved?: boolean;
+    isSaved: boolean;
 }
 
-export interface TestSettings {
-    accessType: TestAccessType;
-    email: string;
-    sendResultsToEmail: boolean;
-    teacherReviewed: boolean;
-    individualChecking: boolean;
-    attempts: number;
+export interface QuestionTypeOption {
+    value: QuestionType;
+    label: string;
 }
 
 export interface TestPayload {
-    settings: TestSettings;
+    title: string;
+    description: string | null;
+    attempts: number;
     questions: TestQuestion[];
 }
 
-export interface TestDraft extends TestPayload {
-    id: string;
-    createdAt: string;
-    updatedAt: string;
+export interface TestAnswerRequest {
+    text: string;
+    is_correct: boolean;
 }
 
+export interface TestQuestionRequest {
+    type: QuestionType;
+    text: string;
+    answers: TestAnswerRequest[];
+}
+
+export interface TestCreateRequest {
+    title: string;
+    description: string | null;
+    attempts: number;
+    questions: TestQuestionRequest[];
+}
+
+export interface TestDetailAnswer {
+    id: number;
+    text: string;
+    is_correct: boolean;
+}
+
+export interface TestDetailQuestion {
+    id: number;
+    type: QuestionType;
+    text: string;
+    answers: TestDetailAnswer[];
+}
+
+export interface TestDetail {
+    id: number;
+    title: string;
+    description: string | null;
+    attempts: number;
+    is_public: boolean;
+    questions: TestDetailQuestion[];
+}
+
+export interface TestFormFooterState {
+    label: string;
+    isSaving: boolean;
+    isDisabled: boolean;
+}
+
+export interface ValidationResult {
+    valid: boolean;
+    message?: string;
+}
+
+export interface CreatedTest {
+    id: number;
+}

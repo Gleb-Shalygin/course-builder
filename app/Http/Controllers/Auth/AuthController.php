@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
-    public function register(UserRegisterRequest $request): JsonResponse
+    public static function register(UserRegisterRequest $request): JsonResponse
     {
         $data = UserAuthData::from([
             'name' => $request->validated('name'),
@@ -32,7 +32,7 @@ class AuthController extends Controller
     /**
      * @throws InvalidCredentialsException
      */
-    public function login(UserLoginRequest $request)
+    public static function login(UserLoginRequest $request): JsonResponse
     {
         $data = UserAuthData::from([
             'email' => $request->validated('email'),
@@ -45,7 +45,7 @@ class AuthController extends Controller
 
         return response()->json(UserResource::make($user));
     }
-    public function logout(Request $request)
+    public static function logout(Request $request): JsonResponse
     {
         Auth::guard('web')->logout(); // guard = web
         $request->session()->invalidate();
@@ -54,7 +54,7 @@ class AuthController extends Controller
         return response()->json(['message' => 'Вы вышли из аккаунта']);
     }
 
-    public function user(Request $request)
+    public static function user(Request $request): JsonResponse
     {
         return response()->json(UserResource::make($request->user()));
     }

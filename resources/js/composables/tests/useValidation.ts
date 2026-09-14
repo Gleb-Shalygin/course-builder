@@ -1,88 +1,54 @@
-import type { TestPayload, TestQuestion } from '@/types/Test';
+import { QuestionType } from '@/types/Test';
+import type { TestPayload, TestQuestion, ValidationResult } from '@/types/Test';
 
-const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const MIN_ANSWERS = 2;
+const MIN_ATTEMPTS = 1;
 
-export interface ValidationResult {
-    valid: boolean;
-    message?: string;
+function filledAnswers(question: TestQuestion) {
+    return question.answers.filter((answer) => answer.text.trim() !== '');
 }
 
-export const useValidation = () => {
-    const validateEmail = (email: string): ValidationResult => {
-        if (!email || !email.trim()) {
-            return { valid: false, message: 'Email обязателен для заполнения.' };
+export function useValidation() {
+    function validateQuestion(question: TestQuestion): ValidationResult {
+        if (question.text.trim() === '') {
+            return { valid: false, message: 'Введите текст вопроса.' };
         }
 
-        if (!EMAIL_REGEX.test(email)) {
-            return { valid: false, message: 'Введите корректный email.' };
+        const answers = filledAnswers(question);
+        const isNotEnoughAnswers = question.type === QuestionType.Single && answers.length < MIN_ANSWERS;
+
+        if (isNotEnoughAnswers) {
+            return { valid: false, message: `Заполните минимум ${MIN_ANSWERS} варианта ответа.` };
         }
 
-        return { valid: true };
-    };
-
-    const validateQuestion = (question: TestQuestion, requireCorrectAnswers: boolean): ValidationResult => {
-        if (!question.text || !question.text.trim()) {
-            return { valid: false, message: 'Текст вопроса обязателен.' };
-        }
-
-        // Для открытого вопроса достаточно текста вопроса (и опционального правильного ответа)
-        if (question.type === 'open') {
-            if (requireCorrectAnswers && (!question.correctText || !question.correctText.trim())) {
-                return {
-                    valid: false,
-                    message: 'Для индивидуальной проверки необходимо указать правильный ответ.',
-                };
-            }
-            return { valid: true };
-        }
-
-        if (!question.answers || question.answers.length === 0) {
-            return { valid: false, message: 'Добавьте хотя бы один вариант ответа.' };
-        }
-
-        if (requireCorrectAnswers) {
-            const hasCorrect = question.answers.some((answer) => answer.isCorrect);
-            if (!hasCorrect) {
-                return {
-                    valid: false,
-                    message: 'Для индивидуальной проверки необходимо отметить правильные ответы.',
-                };
-            }
+        if (!answers.some((answer) => answer.isCorrect)) {
+            return { valid: false, message: 'Отметьте правильный вариант ответа.' };
         }
 
         return { valid: true };
-    };
-
-    const validateTestBeforeSave = (payload: TestPayload): ValidationResult => {
-        const emailResult = validateEmail(payload.settings.email);
-        if (!emailResult.valid) {
-            return emailResult;
+    }
+    function validateTest(payload: TestPayload): ValidationResult {
+        if (payload.title.trim() === '') {
+            return { valid: false, message: 'Введите название теста.' };
         }
 
-        if (!payload.questions || payload.questions.length === 0) {
+        if (payload.questions.length === 0) {
             return { valid: false, message: 'Добавьте минимум один вопрос в тест.' };
         }
 
-        if (payload.settings.individualChecking) {
-            for (const question of payload.questions) {
-                const result = validateQuestion(question, true);
-                if (!result.valid) {
-                    return result;
-                }
-            }
+        if (payload.attempts < MIN_ATTEMPTS) {
+            return { valid: false, message: `Количество попыток не может быть меньше ${MIN_ATTEMPTS}.` };
         }
 
-        if (!payload.settings.attempts || payload.settings.attempts < 1) {
-            return { valid: false, message: 'Количество попыток не может быть меньше 1.' };
-        }
+        const invalidQuestion = payload.questions
+            .map((question) => validateQuestion(question))
+            .find((result) => !result.valid);
 
-        return { valid: true };
-    };
+        return invalidQuestion ?? { valid: true };
+    }
 
     return {
-        validateEmail,
         validateQuestion,
-        validateTestBeforeSave,
+        validateTest,
     };
-};
-
+}

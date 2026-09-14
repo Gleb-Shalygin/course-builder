@@ -7,6 +7,8 @@ import RegisterPage from '@/pages/RegisterPage.vue';
 import Welcome from '@/pages/Welcome.vue';
 import TestCreatePage from '@/pages/tests/TestCreatePage.vue';
 import ProfileTestsPage from '@/pages/profile/ProfileTestsPage.vue';
+import TestEditPage from '@/pages/tests/TestEditPage.vue';
+import TestRunnerPage from '@/pages/tests/TestRunnerPage.vue';
 
 const routes: RouteRecordRaw[] = [
     {
@@ -30,19 +32,31 @@ const routes: RouteRecordRaw[] = [
         path: '/profile',
         name: 'profile',
         component: ProfilePage,
-        meta: { requiresAuth: true },
+        meta: { requiresAuth: true, title: 'Профиль' },
     },
     {
         path: '/profile/tests',
         name: 'profile-tests',
         component: ProfileTestsPage,
-        meta: { requiresAuth: true },
+        meta: { requiresAuth: true, title: 'Тесты' },
     },
     {
         path: '/profile/test-create',
         name: 'test-create',
         component: TestCreatePage,
-        meta: { requiresAuth: true },
+        meta: { requiresAuth: true, title: 'Создание теста' },
+    },
+    {
+        path: '/profile/tests/:id/edit',
+        name: 'test-edit',
+        component: TestEditPage,
+        meta: { requiresAuth: true, title: 'Редактирование теста' },
+    },
+    {
+        path: '/tests/:id',
+        name: 'test-run',
+        component: TestRunnerPage,
+        meta: { title: 'Прохождение теста' },
     },
 ];
 

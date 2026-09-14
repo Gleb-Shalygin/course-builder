@@ -1,9 +1,11 @@
 @import 'tailwindcss';
 @import 'variables';
+@import "antd-overrides";
 @import "profile/profile";
 @import "auth";
 @import "home";
-@import "profile/test-create";
+@import "profile/test-form";
+@import "tests/test-runner";
 
 
 

@@ -20,13 +20,14 @@ return Application::configure(basePath: dirname(__DIR__))
 //            );
 //        });
 
-        $middleware->statefulApi();
-
         $middleware->web(append: [
             AddLinkHeadersForPreloadedAssets::class,
         ]);
+
+        // Маршруты api.php сами подключают группу web (сессия + CSRF),
+        // поэтому EnsureFrontendRequestsAreStateful здесь не нужен:
+        // вместе с web он запускал StartSession дважды и сессия жила один запрос.
         $middleware->api([
-            \Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful::class,
             \Illuminate\Routing\Middleware\ThrottleRequests::class.':api',
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
         ]);

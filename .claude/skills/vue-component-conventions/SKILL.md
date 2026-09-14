@@ -24,6 +24,27 @@ description: MUST be used when creating or editing any Vue component in resource
 - Все иконки, которые расположены в `resources/icons` — отображаются через компонент `<svg-icon>`.
 - Компонент не должен доходить до 100 строк, если больше — стоит задуматься о разделении на подкомпоненты.
 
+## Форматирование верстки
+
+- Если у тега больше двух атрибутов (пропсы, директивы, события, `key`, `class` — считаются все), каждый атрибут переносим на отдельную строку, закрывающая скобка — на своей строке.
+
+Как делать не надо:
+
+```vue
+<TestRunnerResult v-else-if="isResult" :key="'result'" :result="result" @restart="restartTest" />
+```
+
+Как делать надо:
+
+```vue
+<TestRunnerResult
+    v-else-if="isResult"
+    :key="'result'"
+    :result="result"
+    @restart="restartTest"
+/>
+```
+
 ## Именование
 
 - Компоненты: PascalCase (`UserProfile`, `OrderList`).
