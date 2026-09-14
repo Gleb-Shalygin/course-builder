@@ -19,6 +19,23 @@ description: MUST be used when creating or editing any composable in resources/j
 - `computed`, `watch` и функции определять каждые своими списками, например: сначала идут все `computed`, потом все `watch`, потом функции.
 - `onMounted`, `onCreated` и тому подобные объявлять в конце composable функции.
 - Делать пробелы между блоками (например, между блоком `computed` и блоком функций).
+- Внутренние функции composable объявлять стрелочными через `const`, а не через `function`.
+
+Как делать не надо:
+
+```ts
+function selectAnswer(questionId: string, answerId: string): void {
+    selectedAnswers.value = { ...selectedAnswers.value, [questionId]: answerId };
+}
+```
+
+Как делать надо:
+
+```ts
+const selectAnswer = (questionId: string, answerId: string): void => {
+    selectedAnswers.value = { ...selectedAnswers.value, [questionId]: answerId };
+};
+```
 
 ## Именование
 

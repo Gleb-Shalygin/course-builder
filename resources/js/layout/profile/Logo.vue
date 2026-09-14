@@ -1,5 +1,5 @@
 <template>
-    <router-link class="app-logo" :to="{ name: 'profile' }">
+    <router-link class="app-logo" :to="{ name: routeName }">
         <svg viewBox="0 0 369.96969696969694 64.66881307758295" xmlns="http://www.w3.org/2000/svg">
                     <defs id="SvgjsDefs1011"></defs>
                     <g
@@ -42,5 +42,13 @@
     </router-link>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+interface LogoProps {
+    routeName?: string;
+}
+
+withDefaults(defineProps<LogoProps>(), {
+    routeName: 'profile',
+});
+</script>
 
