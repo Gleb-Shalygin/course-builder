@@ -38,14 +38,10 @@
 </template>
 
 <script setup lang="ts">
-import { computed, toRefs } from 'vue';
+import { toRefs } from 'vue';
 import { CheckOutlined, LinkOutlined, ShareAltOutlined } from '@ant-design/icons-vue';
-import { useTestLink } from '@/composables/tests/useTestLink';
-
-interface TestToolbarProps {
-    attempts: number;
-    link: string | null;
-}
+import { useTestToolbar } from '@/composables/tests/useTestToolbar';
+import type { TestToolbarProps } from '@/types/Test.ts';
 
 const props = defineProps<TestToolbarProps>();
 const { link } = toRefs(props);
@@ -60,19 +56,8 @@ const {
     isLinkAvailable,
     label,
     copyHint,
-    shareLink,
-} = useTestLink(link);
-
-const copyClass = computed((): string => (isCopied.value ? 'test-toolbar__copy--copied' : ''));
-
-const handleAttempts = (value: string | number): void => {
-    const attempts = Number(value);
-
-    if (!Number.isFinite(attempts)) return;
-
-    emit('update:attempts', attempts);
-};
-const handleShare = async (): Promise<void> => {
-    await shareLink();
-};
+    copyClass,
+    handleAttempts,
+    handleShare,
+} = useTestToolbar(link, emit);
 </script>

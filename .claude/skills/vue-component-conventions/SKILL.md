@@ -68,11 +68,32 @@ const {
 } = useTestLink(link);
 ```
 
+## Пропсы
+
+- Для `defineProps` не заводим персональный именованный интерфейс — тип объекта описываем прямо внутри `defineProps<{ ... }>()`. Если проп — это доменный тип, импортируем его из `resources/js/types` и используем как тип поля, но не оборачиваем в отдельный `ИмяКомпонентаProps`.
+
+Как делать не надо:
+
+```ts
+interface TestDescriptionFieldProps {
+    description: string | null;
+}
+
+const props = defineProps<TestDescriptionFieldProps>();
+```
+
+Как делать надо:
+
+```ts
+const props = defineProps<{
+    description: string | null;
+}>();
+```
+
 ## Именование
 
 - Компоненты: PascalCase (`UserProfile`, `OrderList`).
-- Пропсы: camelCase, типизированы интерфейсом.
-- Интерфейс пропсов: `ИмяКомпонентаProps` (`UserProfileProps`).
+- Пропсы: camelCase.
 - Бизнес-логика — функции с глаголом: `handleSubmit`, `formatPrice`.
 
 ## Данные

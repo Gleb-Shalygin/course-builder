@@ -76,6 +76,11 @@ export interface TestFormFooterState {
     isDisabled: boolean;
 }
 
+export interface TestToolbarProps {
+    attempts: number;
+    link: string | null;
+}
+
 export interface ValidationResult {
     valid: boolean;
     message?: string;

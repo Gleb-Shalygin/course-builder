@@ -51,11 +51,9 @@ import TestTitleField from '@/components/tests/form/TestTitleField.vue';
 import TestToolbar from '@/components/tests/form/TestToolbar.vue';
 import { useTestForm } from '@/composables/tests/useTestForm';
 
-interface TestFormProps {
+const props = defineProps<{
     testId: number | null;
-}
-
-const props = defineProps<TestFormProps>();
+}>();
 const { testId } = toRefs(props);
 
 const {
