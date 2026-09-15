@@ -1,19 +1,15 @@
-// Админка построена mobile-first: базовые стили — телефон,
-// расширения — через min-width брейкпоинты $screen-md / $screen-lg.
-
 .app-logo {
     display: flex;
     align-items: center;
     width: 100%;
 
-    svg {
+    .svg-icon {
         width: 100%;
         max-width: 190px;
-        height: auto;
+    }
 
-        path {
-            fill: $main-color;
-        }
+    svg path {
+        fill: $main-color;
     }
 }
 

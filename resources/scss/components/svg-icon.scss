@@ -1,0 +1,13 @@
+.svg-icon {
+    display: inline-block;
+    flex-shrink: 0;
+    width: 1em;
+    line-height: 0;
+    color: inherit;
+
+    svg {
+        display: block;
+        width: 100%;
+        height: auto;
+    }
+}
