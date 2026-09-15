@@ -27,6 +27,7 @@ export function useTestForm(testId: Ref<number | null>) {
     } = useTestBuilder();
     const {
         loadedTest,
+        testLink,
         isLoading,
         isError: isLoadError,
         errorMessage: loadErrorMessage,
@@ -37,12 +38,10 @@ export function useTestForm(testId: Ref<number | null>) {
         isSaved,
         isError: isSaveError,
         errorMessage: saveErrorMessage,
-        savedTestId,
         saveTest,
     } = useTestSaving(testId);
 
     const isEdit = computed((): boolean => testId.value !== null);
-    const currentTestId = computed((): number | null => testId.value ?? savedTestId.value);
     const listClass = computed((): string => (isEditing.value ? 'test-form__list--locked' : ''));
     const submitLabel = computed((): string => (isEdit.value ? 'Сохранить' : 'Сохранить тест'));
     const isError = computed((): boolean => isLoadError.value || isSaveError.value);
@@ -86,7 +85,7 @@ export function useTestForm(testId: Ref<number | null>) {
         isEditing,
         isEmpty,
         savedCountLabel,
-        currentTestId,
+        testLink,
         listClass,
         footer,
         isLoading,

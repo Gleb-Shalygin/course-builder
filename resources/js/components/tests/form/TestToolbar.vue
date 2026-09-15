@@ -14,53 +14,54 @@
                 />
             </a-flex>
 
-            <a-button
-                class="test-toolbar__copy"
-                :class="copyClass"
-                size="large"
-                :disabled="isCopyDisabled"
-                @click="copyLink"
-            >
-                <template #icon>
-                    <CheckOutlined v-if="isCopied" />
-                    <LinkOutlined v-else />
-                </template>
-                {{ copyLabel }}
-            </a-button>
+            <template v-if="isLinkAvailable">
+                <a-button
+                    class="test-toolbar__copy"
+                    :class="copyClass"
+                    size="large"
+                    @click="handleShare"
+                >
+                    <template #icon>
+                        <CheckOutlined v-if="isCopied" />
+                        <ShareAltOutlined v-else-if="isTouch" />
+                        <LinkOutlined v-else />
+                    </template>
+                    {{ label }}
+                </a-button>
 
-            <a-typography-text class="test-toolbar__hint" type="secondary">
-                {{ copyHint }}
-            </a-typography-text>
+                <a-typography-text class="test-toolbar__hint" type="secondary">
+                    {{ copyHint }}
+                </a-typography-text>
+            </template>
         </a-flex>
-
-        <a-alert
-            v-if="isError"
-            class="test-toolbar__error"
-            type="error"
-            :message="errorMessage"
-            show-icon
-        />
     </a-card>
 </template>
 
 <script setup lang="ts">
 import { computed, toRefs } from 'vue';
-import { CheckOutlined, LinkOutlined } from '@ant-design/icons-vue';
+import { CheckOutlined, LinkOutlined, ShareAltOutlined } from '@ant-design/icons-vue';
 import { useTestLink } from '@/composables/tests/useTestLink';
 
 interface TestToolbarProps {
     attempts: number;
-    testId: number | null;
+    link: string | null;
 }
 
 const props = defineProps<TestToolbarProps>();
-const { testId } = toRefs(props);
+const { link } = toRefs(props);
 
 const emit = defineEmits<{
     (e: 'update:attempts', attempts: number): void;
 }>();
 
-const { isCopied, isCopyDisabled, isError, errorMessage, copyLabel, copyHint, copyLink } = useTestLink(testId);
+const {
+    isCopied,
+    isTouch,
+    isLinkAvailable,
+    label,
+    copyHint,
+    shareLink,
+} = useTestLink(link);
 
 const copyClass = computed((): string => (isCopied.value ? 'test-toolbar__copy--copied' : ''));
 
@@ -70,5 +71,8 @@ const handleAttempts = (value: string | number): void => {
     if (!Number.isFinite(attempts)) return;
 
     emit('update:attempts', attempts);
+};
+const handleShare = async (): Promise<void> => {
+    await shareLink();
 };
 </script>

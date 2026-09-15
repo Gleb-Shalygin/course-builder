@@ -438,7 +438,7 @@
         }
 
         &-edit-mobile {
-            margin-top: 16px;
+            flex: 1;
             border-radius: $radius-sm;
             color: $green;
             border-color: $green;
@@ -449,6 +449,32 @@
                 border-color: $green;
                 opacity: 0.85;
             }
+
+            @media (min-width: $screen-md) {
+                display: none;
+            }
+        }
+
+        &-share,
+        &-share-mobile {
+            border-radius: $radius-sm;
+            color: $text-secondary;
+            border-color: $text-secondary;
+        }
+
+        &-actions {
+            display: none;
+
+            @media (min-width: $screen-md) {
+                display: flex;
+                align-items: center;
+            }
+        }
+
+        &-actions-mobile {
+            width: 100%;
+            align-items: center;
+            margin-top: 16px;
 
             @media (min-width: $screen-md) {
                 display: none;

@@ -10,7 +10,6 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\TestSaveRequest;
 use App\Http\Resources\TestDetailResource;
 use App\Http\Resources\TestResource;
-use App\Http\Resources\TestsResource;
 use App\Service\TestService;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Support\Collection;
@@ -19,7 +18,7 @@ class TestController extends Controller
 {
     public static function tests(): AnonymousResourceCollection|Collection
     {
-       return TestsResource::collection(TestService::tests());
+        return TestResource::collection(TestService::tests());
     }
 
     /**

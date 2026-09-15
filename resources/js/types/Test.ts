@@ -62,6 +62,7 @@ export interface TestDetailQuestion {
 
 export interface TestDetail {
     id: number;
+    link: string | null;
     title: string;
     description: string | null;
     attempts: number;
@@ -82,4 +83,5 @@ export interface ValidationResult {
 
 export interface CreatedTest {
     id: number;
+    link: string | null;
 }

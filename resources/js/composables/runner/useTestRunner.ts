@@ -6,8 +6,8 @@ import { useRunnerTest } from '@/composables/runner/useRunnerTest.ts';
 import { RunnerStage } from '@/types/TestRunner.ts';
 import type { RunnerFinishState, RunnerNavState, RunnerPaginationItem, RunnerQuestion, RunnerSlide } from '@/types/TestRunner.ts';
 
-export function useTestRunner(testId: Ref<number | null>) {
-    const { test, isLoading, isError, errorMessage, loadTest } = useRunnerTest(testId);
+export function useTestRunner(testLink: Ref<string | null>) {
+    const { test, isLoading, isError, errorMessage, loadTest } = useRunnerTest(testLink);
     const { selectedAnswers, answeredCount, selectedAnswerId, selectAnswer, resetAnswers } = useRunnerAnswers();
     const { result } = useRunnerResult(test, selectedAnswers);
     const stage = ref<RunnerStage>(RunnerStage.Intro);

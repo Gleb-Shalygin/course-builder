@@ -21,7 +21,7 @@ export interface RunnerQuestion {
 }
 
 export interface RunnerTest {
-    id: number;
+    id: string;
     title: string;
     description: string | null;
     questions: RunnerQuestion[];

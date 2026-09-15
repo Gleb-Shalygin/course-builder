@@ -23,17 +23,19 @@ class ProfileTestListTest extends TestCase
                 $query->whereNotNull('finished_at');
             }])
             ->orderByDesc('id')
-            ->get(['id', 'title', 'description', 'is_public']);
+            ->get(['id', 'link', 'title', 'description', 'is_public']);
 
         $testFakeResponse = ['data' => []];
 
         foreach ($tests as $test) {
             $testFakeResponse['data'][] = [
                 'id' => $test->id,
+                'link' => $test->link === null ? null : url("/tests/{$test->link}"),
                 'title' => $test->title,
                 'description' => $test->description,
                 'is_public' => $test->is_public,
-                'count_finished' => $test->count_finished
+                'questions_count' => null,
+                'count_finished' => $test->count_finished,
             ];
         }
 
