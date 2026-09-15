@@ -1,45 +1,61 @@
 import { computed, ref } from 'vue';
 import type { Ref } from 'vue';
+import { message } from 'ant-design-vue';
 
 const COPIED_RESET_TIMEOUT = 2000;
+const COPY_HINT = 'Ссылка на прохождение теста';
 
-export function useTestLink(testId: Ref<number | null>) {
+function isTouchDevice(): boolean {
+    return window.matchMedia('(pointer: coarse)').matches;
+}
+
+export function useTestLink(link: Ref<string | null>) {
     const isCopied = ref(false);
-    const errorMessage = ref('');
+    const isTouch = ref(isTouchDevice());
 
-    const testLink = computed((): string | null => (testId.value === null ? null : `${window.location.origin}/tests/${testId.value}`));
-    const isCopyDisabled = computed((): boolean => testLink.value === null);
-    const isError = computed((): boolean => errorMessage.value !== '');
-    const copyLabel = computed((): string => (isCopied.value ? 'Ссылка скопирована' : 'Скопировать ссылку'));
-    const copyHint = computed((): string => (isCopyDisabled.value
-        ? 'Ссылка появится после сохранения теста'
-        : 'Ссылка на прохождение теста'));
+    const isLinkAvailable = computed((): boolean => link.value !== null);
+    const label = computed((): string => {
+        if (isTouch.value) return 'Поделиться';
 
-    async function copyLink(): Promise<void> {
-        const link = testLink.value;
-        if (link === null) return;
+        return isCopied.value ? 'Ссылка скопирована' : 'Скопировать ссылку';
+    });
 
-        errorMessage.value = '';
-
+    async function copyToClipboard(value: string): Promise<void> {
         try {
-            await navigator.clipboard.writeText(link);
+            await navigator.clipboard.writeText(value);
             isCopied.value = true;
+            message.success('Ссылка скопирована');
             window.setTimeout(() => {
                 isCopied.value = false;
             }, COPIED_RESET_TIMEOUT);
         } catch {
-            errorMessage.value = 'Не удалось скопировать ссылку';
+            message.error('Не удалось скопировать ссылку');
         }
+    }
+    async function shareLink(shareTitle?: string): Promise<void> {
+        const value = link.value;
+        if (value === null) return;
+
+        if (isTouch.value && navigator.share) {
+            try {
+                await navigator.share({ title: shareTitle, url: value });
+            } catch (error) {
+                if (error instanceof Error && error.name === 'AbortError') return;
+
+                message.error('Не удалось поделиться ссылкой');
+            }
+            return;
+        }
+
+        await copyToClipboard(value);
     }
 
     return {
-        testLink,
+        isLinkAvailable,
+        isTouch,
         isCopied,
-        isCopyDisabled,
-        isError,
-        errorMessage,
-        copyLabel,
-        copyHint,
-        copyLink,
+        label,
+        copyHint: COPY_HINT,
+        shareLink,
     };
 }

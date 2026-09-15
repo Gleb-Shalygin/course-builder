@@ -30,6 +30,7 @@ class TestFactory extends Factory
     {
         return [
             'user_id' => User::query()->where('name', 'gleb_shalygin')->first()->id,
+            'link' => fake()->uuid(),
             'title' => fake()->title(),
             'description' => fake()->text(),
             'is_public' => random_int(0, 1)

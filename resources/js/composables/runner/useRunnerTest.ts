@@ -3,13 +3,13 @@ import type { Ref } from 'vue';
 import { getRunnerTestMock } from '@/mocks/testRunnerMock.ts';
 import type { RunnerTest } from '@/types/TestRunner.ts';
 
-export function useRunnerTest(testId: Ref<number | null>) {
+export function useRunnerTest(testLink: Ref<string | null>) {
     const test = ref<RunnerTest | null>(null);
     const isLoading = ref(false);
     const isError = ref(false);
     const errorMessage = ref('');
 
-    watch(testId, (): void => {
+    watch(testLink, (): void => {
         void loadTest();
     });
 
@@ -19,7 +19,7 @@ export function useRunnerTest(testId: Ref<number | null>) {
         errorMessage.value = message;
     };
     const loadTest = async (): Promise<void> => {
-        if (testId.value === null) {
+        if (testLink.value === null) {
             setLoadError('Ссылка на тест некорректна');
             return;
         }
@@ -27,7 +27,7 @@ export function useRunnerTest(testId: Ref<number | null>) {
         isError.value = false;
         errorMessage.value = '';
         try {
-            test.value = await getRunnerTestMock(testId.value);
+            test.value = await getRunnerTestMock(testLink.value);
         } catch {
             setLoadError('Не удалось загрузить тест');
         } finally {

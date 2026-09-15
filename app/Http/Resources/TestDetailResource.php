@@ -13,6 +13,7 @@ class TestDetailResource extends JsonResource
     {
         return [
             'id' => $this['id'],
+            'link' => $this['link'],
             'title' => $this['title'],
             'description' => $this['description'],
             'attempts' => $this['attempts'],

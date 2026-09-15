@@ -16,17 +16,15 @@
 </template>
 
 <script setup lang="ts">
-interface TestTitleFieldProps {
-    title: string;
-}
+import { useTestTitleField } from '@/composables/tests/useTestTitleField';
 
-defineProps<TestTitleFieldProps>();
+defineProps<{
+    title: string;
+}>();
 
 const emit = defineEmits<{
     (e: 'update:title', title: string): void;
 }>();
 
-const handleTitle = (value: string): void => {
-    emit('update:title', value);
-};
+const { handleTitle } = useTestTitleField(emit);
 </script>

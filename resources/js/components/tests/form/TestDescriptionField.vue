@@ -17,22 +17,17 @@
 </template>
 
 <script setup lang="ts">
-import { computed, toRefs } from 'vue';
+import { toRefs } from 'vue';
+import { useTestDescriptionField } from '@/composables/tests/useTestDescriptionField';
 
-interface TestDescriptionFieldProps {
+const props = defineProps<{
     description: string | null;
-}
-
-const props = defineProps<TestDescriptionFieldProps>();
+}>();
 const { description } = toRefs(props);
 
 const emit = defineEmits<{
     (e: 'update:description', description: string): void;
 }>();
 
-const descriptionValue = computed((): string => description.value ?? '');
-
-const handleDescription = (value: string): void => {
-    emit('update:description', value);
-};
+const { descriptionValue, handleDescription } = useTestDescriptionField(description, emit);
 </script>

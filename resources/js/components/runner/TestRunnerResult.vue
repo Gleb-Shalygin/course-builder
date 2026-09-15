@@ -52,25 +52,20 @@
 </template>
 
 <script setup lang="ts">
-import { computed, toRefs } from 'vue';
+import { toRefs } from 'vue';
 import { ReloadOutlined } from '@ant-design/icons-vue';
 import TestRunnerResultItem from '@/components/runner/TestRunnerResultItem.vue';
+import { useTestRunnerResult } from '@/composables/runner/useTestRunnerResult';
 import type { RunnerResult } from '@/types/TestRunner.ts';
 
-interface TestRunnerResultProps {
+const props = defineProps<{
     result: RunnerResult;
-}
-
-const props = defineProps<TestRunnerResultProps>();
+}>();
 const { result } = toRefs(props);
 
 const emit = defineEmits<{
     (e: 'restart'): void;
 }>();
 
-const counterLabel = computed((): string => `Правильных ответов: ${result.value.correctCount} из ${result.value.totalCount}`);
-
-const handleRestart = (): void => {
-    emit('restart');
-};
+const { counterLabel, handleRestart } = useTestRunnerResult(result, emit);
 </script>

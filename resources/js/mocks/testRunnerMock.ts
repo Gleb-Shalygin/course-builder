@@ -6,7 +6,7 @@ import type { RunnerTest } from '@/types/TestRunner.ts';
 const MOCK_DELAY = 600;
 
 const mockTest: RunnerTest = {
-    id: 1,
+    id: 'mock-test',
     title: 'Основы вёрстки и Vue 3',
     description:
         'Небольшой тест из шести вопросов: проверим базовые знания HTML, CSS и Composition API. Отвечать можно в любом порядке, вернуться к прошлому вопросу — тоже.',
@@ -80,10 +80,10 @@ const mockTest: RunnerTest = {
     ],
 };
 
-export function getRunnerTestMock(testId: number): Promise<RunnerTest> {
+export function getRunnerTestMock(testLink: string): Promise<RunnerTest> {
     return new Promise((resolve) => {
         window.setTimeout(() => {
-            resolve({ ...mockTest, id: testId });
+            resolve({ ...mockTest, id: testLink });
         }, MOCK_DELAY);
     });
 }

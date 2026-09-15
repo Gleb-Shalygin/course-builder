@@ -83,11 +83,11 @@ import TestRunnerResult from '@/components/runner/TestRunnerResult.vue';
 import { useTestRunner } from '@/composables/runner/useTestRunner.ts';
 
 interface TestRunnerProps {
-    testId: number | null;
+    testLink: string | null;
 }
 
 const props = defineProps<TestRunnerProps>();
-const { testId } = toRefs(props);
+const { testLink } = toRefs(props);
 
 const {
     test,
@@ -116,5 +116,5 @@ const {
     goToQuestion,
     finishTest,
     restartTest,
-} = useTestRunner(testId);
+} = useTestRunner(testLink);
 </script>

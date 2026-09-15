@@ -11,6 +11,7 @@ use App\Models\Test\Test;
 use App\Models\Test\TestAnswer;
 use App\Models\Test\TestQuestion;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 
 class TestService
 {
@@ -23,10 +24,11 @@ class TestService
                 $query->whereNotNull('finished_at');
             }])
             ->orderByDesc('id')
-            ->get(['id', 'title', 'description', 'is_public', 'attempts']);
+            ->get(['id', 'link', 'title', 'description', 'is_public', 'attempts']);
 
-        return $tests->map(fn ($test) => [
+        return $tests->map(static fn ($test) => [
             'id' => $test->id,
+            'link' => self::testLink($test->link),
             'title' => $test->title,
             'description' => $test->description,
             'is_public' => $test->is_public,
@@ -45,6 +47,7 @@ class TestService
 
         return [
             'id' => $test->id,
+            'link' => self::testLink($test->link),
             'title' => $test->title,
             'description' => $test->description,
             'attempts' => $test->attempts,
@@ -69,6 +72,7 @@ class TestService
         return DB::transaction(static function () use ($data, $userId): array {
             $test = Test::query()->create([
                 'user_id' => $userId,
+                'link' => (string) Str::uuid(),
                 'title' => $data->title,
                 'description' => $data->description,
                 'attempts' => $data->attempts,
@@ -137,12 +141,22 @@ class TestService
     {
         return [
             'id' => $test->id,
+            'link' => self::testLink($test->link),
             'title' => $test->title,
             'description' => $test->description,
             'attempts' => $test->attempts,
             'is_public' => $test->is_public,
             'questions_count' => $questionsCount,
         ];
+    }
+
+    private static function testLink(?string $token): ?string
+    {
+        if ($token === null) {
+            return null;
+        }
+
+        return url("/tests/{$token}");
     }
 
     private static function questionPayload(TestQuestion $question): array

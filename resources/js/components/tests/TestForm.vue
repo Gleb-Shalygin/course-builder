@@ -7,7 +7,7 @@
 
             <TestDescriptionField :description="description" @update:description="handleDescription" />
 
-            <TestToolbar :attempts="attempts" :test-id="currentTestId" @update:attempts="handleAttempts" />
+            <TestToolbar :attempts="attempts" :link="testLink" @update:attempts="handleAttempts" />
 
             <a-empty v-if="isEmpty" class="test-form__empty" description="Пока ни одного вопроса — начните с плюсика ниже" />
 
@@ -51,11 +51,9 @@ import TestTitleField from '@/components/tests/form/TestTitleField.vue';
 import TestToolbar from '@/components/tests/form/TestToolbar.vue';
 import { useTestForm } from '@/composables/tests/useTestForm';
 
-interface TestFormProps {
+const props = defineProps<{
     testId: number | null;
-}
-
-const props = defineProps<TestFormProps>();
+}>();
 const { testId } = toRefs(props);
 
 const {
@@ -67,7 +65,7 @@ const {
     isEditing,
     isEmpty,
     savedCountLabel,
-    currentTestId,
+    testLink,
     listClass,
     footer,
     isLoading,

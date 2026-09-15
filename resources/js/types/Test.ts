@@ -62,6 +62,7 @@ export interface TestDetailQuestion {
 
 export interface TestDetail {
     id: number;
+    link: string | null;
     title: string;
     description: string | null;
     attempts: number;
@@ -75,6 +76,11 @@ export interface TestFormFooterState {
     isDisabled: boolean;
 }
 
+export interface TestToolbarProps {
+    attempts: number;
+    link: string | null;
+}
+
 export interface ValidationResult {
     valid: boolean;
     message?: string;
@@ -82,4 +88,5 @@ export interface ValidationResult {
 
 export interface CreatedTest {
     id: number;
+    link: string | null;
 }

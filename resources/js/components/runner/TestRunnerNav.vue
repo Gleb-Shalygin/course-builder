@@ -20,13 +20,7 @@
                     @click="handlePrev"
                 >
                     <template #icon>
-                        <svg
-                            class="runner-nav__icon runner-nav__icon--prev"
-                            xmlns="http://www.w3.org/2000/svg"
-                            viewBox="0 0 24 24"
-                        >
-                            <path d="M10.02 6L8.61 7.41L13.19 12l-4.58 4.59L10.02 18l6-6l-6-6z" fill="currentColor" />
-                        </svg>
+                        <svg-icon class="runner-nav__icon runner-nav__icon--prev" name="chevron-right" />
                     </template>
                 </a-button>
             </a-tooltip>
@@ -44,14 +38,11 @@
                 >
                     <template #icon>
                         <CheckOutlined v-if="nav.isLast" />
-                        <svg
+                        <svg-icon
                             v-else
                             class="runner-nav__icon"
-                            xmlns="http://www.w3.org/2000/svg"
-                            viewBox="0 0 24 24"
-                        >
-                            <path d="M10.02 6L8.61 7.41L13.19 12l-4.58 4.59L10.02 18l6-6l-6-6z" fill="currentColor" />
-                        </svg>
+                            name="chevron-right"
+                        />
                     </template>
                 </a-button>
             </a-tooltip>

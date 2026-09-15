@@ -7,7 +7,7 @@
         </header>
 
         <div class="runner-page__container">
-            <TestRunner :key="testKey" :test-id="testId" />
+            <TestRunner :key="testKey" :test-link="testLink" />
         </div>
     </div>
 </template>
@@ -15,7 +15,7 @@
 <script setup lang="ts">
 import Logo from '@/layout/profile/Logo.vue';
 import TestRunner from '@/components/runner/TestRunner.vue';
-import { useTestRouteId } from '@/composables/tests/useTestRouteId.ts';
+import { useRunnerRouteLink } from '@/composables/runner/useRunnerRouteLink.ts';
 
-const { testId, testKey } = useTestRouteId();
+const { testLink, testKey } = useRunnerRouteLink();
 </script>

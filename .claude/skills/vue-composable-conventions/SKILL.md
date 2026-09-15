@@ -37,6 +37,29 @@ const selectAnswer = (questionId: string, answerId: string): void => {
 };
 ```
 
+## Форматирование деструктуризации
+
+- Если деструктурируем объект (например, результат другой composable-функции) больше чем на 2 свойства — каждое свойство на отдельной строке, закрывающая скобка на своей строке, с висячей запятой.
+
+Как делать не надо:
+
+```ts
+const { isCopied, isTouch, isLinkAvailable, label, copyHint, shareLink } = useTestLink(link);
+```
+
+Как делать надо:
+
+```ts
+const {
+    isCopied,
+    isTouch,
+    isLinkAvailable,
+    label,
+    copyHint,
+    shareLink,
+} = useTestLink(link);
+```
+
 ## Именование
 
 - Файлы: camelCase (`useProduct`, `useGifts`).

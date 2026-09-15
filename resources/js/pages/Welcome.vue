@@ -50,21 +50,7 @@
             <div class="welcome-features">
                 <div class="welcome-features__item">
                     <div class="welcome-features__icon">
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="48"
-                            height="48"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="#1677ff"
-                            stroke-width="2"
-                        >
-                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
-                            <polyline points="14 2 14 8 20 8"></polyline>
-                            <line x1="16" y1="13" x2="8" y2="13"></line>
-                            <line x1="16" y1="17" x2="8" y2="17"></line>
-                            <polyline points="10 9 9 9 8 9"></polyline>
-                        </svg>
+                        <svg-icon name="document-text" />
                     </div>
                     <h3 class="welcome-features__title">Создание курсов</h3>
                     <p class="welcome-features__description">
@@ -74,18 +60,7 @@
 
                 <div class="welcome-features__item">
                     <div class="welcome-features__icon">
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="48"
-                            height="48"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="#1677ff"
-                            stroke-width="2"
-                        >
-                            <circle cx="12" cy="12" r="10"></circle>
-                            <polyline points="12 6 12 12 16 14"></polyline>
-                        </svg>
+                        <svg-icon name="clock" />
                     </div>
                     <h3 class="welcome-features__title">Тестирование</h3>
                     <p class="welcome-features__description">
@@ -95,18 +70,7 @@
 
                 <div class="welcome-features__item">
                     <div class="welcome-features__icon">
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="48"
-                            height="48"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="#1677ff"
-                            stroke-width="2"
-                        >
-                            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
-                            <polyline points="22 4 12 14.01 9 11.01"></polyline>
-                        </svg>
+                        <svg-icon name="check-circle" />
                     </div>
                     <h3 class="welcome-features__title">Простое управление</h3>
                     <p class="welcome-features__description">
