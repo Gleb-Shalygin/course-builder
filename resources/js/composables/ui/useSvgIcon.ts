@@ -1,5 +1,5 @@
 import { computed, watch, type Ref } from 'vue';
-import type { SvgIconsMap } from '@/types/SvgIcon.ts';
+import type { SvgIconsMap } from '@/types/ui/SvgIcon.ts';
 
 const ICONS_DIR = '../../../icons/';
 

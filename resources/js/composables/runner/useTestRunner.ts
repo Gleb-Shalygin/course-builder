@@ -3,8 +3,8 @@ import type { Ref } from 'vue';
 import { useRunnerAnswers } from '@/composables/runner/useRunnerAnswers.ts';
 import { useRunnerResult } from '@/composables/runner/useRunnerResult.ts';
 import { useRunnerTest } from '@/composables/runner/useRunnerTest.ts';
-import { RunnerStage } from '@/types/TestRunner.ts';
-import type { RunnerFinishState, RunnerNavState, RunnerPaginationItem, RunnerQuestion, RunnerSlide } from '@/types/TestRunner.ts';
+import { RunnerStage } from '@/types/runner/TestRunner.ts';
+import type { RunnerFinishState, RunnerNavState, RunnerPaginationItem, RunnerQuestion, RunnerSlide } from '@/types/runner/TestRunner.ts';
 
 export function useTestRunner(testLink: Ref<string | null>) {
     const { test, isLoading, isError, errorMessage, loadTest } = useRunnerTest(testLink);

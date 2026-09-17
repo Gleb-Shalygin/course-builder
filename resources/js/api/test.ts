@@ -1,5 +1,5 @@
 import api from '@/api/api';
-import type { CreatedTest, TestCreateRequest, TestDetail, TestPayload, TestQuestionRequest } from '@/types/Test';
+import type { CreatedTest, TestCreateRequest, TestDetail, TestPayload, TestQuestionRequest } from '@/types/tests/Test';
 
 function toQuestionsRequest(payload: TestPayload): TestQuestionRequest[] {
     return payload.questions.map((question) => ({

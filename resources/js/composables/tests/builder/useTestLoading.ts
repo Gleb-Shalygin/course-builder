@@ -1,8 +1,8 @@
 import { computed, onMounted, ref } from 'vue';
 import type { Ref } from 'vue';
 import { getTestRequest } from '@/api/test';
-import { useTestMapper } from '@/composables/tests/useTestMapper';
-import type { TestPayload } from '@/types/Test';
+import { useTestMapper } from '@/composables/tests/builder/useTestMapper';
+import type { TestPayload } from '@/types/tests/Test';
 
 export function useTestLoading(testId: Ref<number | null>) {
     const { toTestPayload } = useTestMapper();

@@ -21,7 +21,7 @@
 import { toRefs } from 'vue';
 import { CheckCircleFilled, CloseCircleFilled } from '@ant-design/icons-vue';
 import { useTestRunnerResultItem } from '@/composables/runner/useTestRunnerResultItem';
-import type { RunnerResultItem } from '@/types/TestRunner.ts';
+import type { RunnerResultItem } from '@/types/runner/TestRunner.ts';
 
 const props = defineProps<{
     item: RunnerResultItem;

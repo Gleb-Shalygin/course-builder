@@ -23,8 +23,8 @@
 </template>
 
 <script setup lang="ts">
-import TableTestItem from '@/components/profile/test/TableTestItem.vue';
-import { useTableTests } from '@/composables/tests/useTableTests';
+import TableTestItem from '@/components/tests/list/TableTestItem.vue';
+import { useTableTests } from '@/composables/tests/list/useTableTests';
 
 const { tests, isLoading, isError, errorMessage } = useTableTests();
 </script>

@@ -1,5 +1,5 @@
-import { QuestionType } from '@/types/Test';
-import type { AnswerOption, TestQuestion } from '@/types/Test';
+import { QuestionType } from '@/types/tests/Test';
+import type { AnswerOption, TestQuestion } from '@/types/tests/Test';
 
 const DEFAULT_ANSWERS_COUNT = 2;
 

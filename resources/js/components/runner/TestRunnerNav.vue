@@ -54,7 +54,7 @@
 import { toRefs } from 'vue';
 import { CheckOutlined } from '@ant-design/icons-vue';
 import TestRunnerPagination from '@/components/runner/TestRunnerPagination.vue';
-import type { RunnerNavState, RunnerPaginationItem } from '@/types/TestRunner.ts';
+import type { RunnerNavState, RunnerPaginationItem } from '@/types/runner/TestRunner.ts';
 
 interface TestRunnerNavProps {
     nav: RunnerNavState;

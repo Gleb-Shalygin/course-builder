@@ -18,8 +18,8 @@
 
 <script setup lang="ts">
 import { SaveOutlined } from '@ant-design/icons-vue';
-import { useTestFormFooter } from '@/composables/tests/useTestFormFooter';
-import type { TestFormFooterState } from '@/types/Test.ts';
+import { useTestFormFooter } from '@/composables/tests/builder/useTestFormFooter';
+import type { TestFormFooterState } from '@/types/tests/Test.ts';
 
 interface TestFormFooterProps {
     footer: TestFormFooterState;

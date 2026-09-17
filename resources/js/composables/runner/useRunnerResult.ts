@@ -1,6 +1,6 @@
 import { computed } from 'vue';
 import type { Ref } from 'vue';
-import type { RunnerQuestion, RunnerResult, RunnerResultItem, RunnerTest } from '@/types/TestRunner.ts';
+import type { RunnerQuestion, RunnerResult, RunnerResultItem, RunnerTest } from '@/types/runner/TestRunner.ts';
 
 const SUCCESS_PERCENT = 80;
 const NORMAL_PERCENT = 50;

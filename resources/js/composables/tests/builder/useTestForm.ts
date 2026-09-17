@@ -1,10 +1,10 @@
 import { computed, watch } from 'vue';
 import type { Ref } from 'vue';
-import { useTestBuilder } from '@/composables/tests/useTestBuilder';
-import { useTestLoading } from '@/composables/tests/useTestLoading';
-import { useTestSaving } from '@/composables/tests/useTestSaving';
+import { useTestBuilder } from '@/composables/tests/builder/useTestBuilder';
+import { useTestLoading } from '@/composables/tests/builder/useTestLoading';
+import { useTestSaving } from '@/composables/tests/builder/useTestSaving';
 import { useTestsNavigation } from '@/composables/tests/useTestsNavigation';
-import type { TestFormFooterState, TestPayload } from '@/types/Test.ts';
+import type { TestFormFooterState, TestPayload } from '@/types/tests/Test.ts';
 
 export function useTestForm(testId: Ref<number | null>) {
     const { goToTests } = useTestsNavigation();

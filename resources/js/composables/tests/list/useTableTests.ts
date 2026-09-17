@@ -1,7 +1,7 @@
 import { computed, onMounted, ref } from 'vue';
 import type { Ref } from 'vue';
 import { getTestsRequest } from '@/api/test';
-import type { TestTableItem } from '@/types/TestTableItem';
+import type { TestTableItem } from '@/types/tests/TestTableItem';
 
 export function useTableTests() {
     const tests: Ref<TestTableItem[]> = ref([]);

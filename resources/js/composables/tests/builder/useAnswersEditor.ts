@@ -1,7 +1,7 @@
 import { computed } from 'vue';
 import type { Ref } from 'vue';
-import { useQuestionFactory } from '@/composables/tests/useQuestionFactory';
-import type { AnswerOption } from '@/types/Test';
+import { useQuestionFactory } from '@/composables/tests/builder/useQuestionFactory';
+import type { AnswerOption } from '@/types/tests/Test';
 
 const MIN_ANSWERS = 2;
 const MAX_ANSWERS = 8;

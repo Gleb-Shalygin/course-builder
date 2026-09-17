@@ -1,6 +1,6 @@
 import { computed } from 'vue';
 import type { Ref } from 'vue';
-import type { RunnerAnswerOption, RunnerSlide } from '@/types/TestRunner.ts';
+import type { RunnerAnswerOption, RunnerSlide } from '@/types/runner/TestRunner.ts';
 
 export function useRunnerSlide(slide: Ref<RunnerSlide>) {
     const questionNumber = computed((): number => slide.value.number);

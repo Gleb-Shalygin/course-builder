@@ -1,8 +1,8 @@
 import api, { type ApiError } from './api';
 import { csrfCookie } from '@/routes/sanctum';
-import { LoginCredentials } from '@/types/LoginCredentials';
-import { RegisterData } from '@/types/RegisterData';
-import { User } from '@/types/User';
+import { LoginCredentials } from '@/types/auth/LoginCredentials';
+import { RegisterData } from '@/types/auth/RegisterData';
+import { User } from '@/types/auth/User';
 
 
 export const authService = {

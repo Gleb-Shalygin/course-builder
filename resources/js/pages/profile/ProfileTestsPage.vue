@@ -16,7 +16,7 @@
 <script lang="ts" setup>
 import { PlusOutlined } from '@ant-design/icons-vue';
 import ProfileLayout from '@/layout/profile/ProfileLayout.vue';
-import TableTests from '@/components/profile/test/TableTests.vue';
+import TableTests from '@/components/tests/list/TableTests.vue';
 import { useTestsNavigation } from '@/composables/tests/useTestsNavigation';
 
 defineOptions({

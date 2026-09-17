@@ -1,7 +1,7 @@
 import { computed } from 'vue';
 import { router, usePage } from '@inertiajs/vue3';
 import { AppstoreOutlined, UserOutlined } from '@ant-design/icons-vue';
-import type { ProfileMenuItem } from '@/types/ProfileMenuItem';
+import type { ProfileMenuItem } from '@/types/profile/ProfileMenuItem';
 import { useProfileLayout } from '@/composables/profile/useProfileLayout';
 
 const items: ProfileMenuItem[] = [

@@ -56,7 +56,7 @@ import { toRefs } from 'vue';
 import { ReloadOutlined } from '@ant-design/icons-vue';
 import TestRunnerResultItem from '@/components/runner/TestRunnerResultItem.vue';
 import { useTestRunnerResult } from '@/composables/runner/useTestRunnerResult';
-import type { RunnerResult } from '@/types/TestRunner.ts';
+import type { RunnerResult } from '@/types/runner/TestRunner.ts';
 
 const props = defineProps<{
     result: RunnerResult;

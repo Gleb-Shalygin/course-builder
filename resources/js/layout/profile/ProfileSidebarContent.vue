@@ -23,7 +23,7 @@
 </template>
 
 <script setup lang="ts">
-import Logo from '@/layout/profile/Logo.vue';
+import Logo from '@/components/ui/Logo.vue';
 import { useProfileNavigation } from '@/composables/profile/useProfileNavigation';
 
 const { menuItems, selectedKeys, handleSelect } = useProfileNavigation();

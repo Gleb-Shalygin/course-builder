@@ -22,7 +22,7 @@
 <script setup lang="ts">
 import { toRefs } from 'vue';
 import { useRunnerPagination } from '@/composables/runner/useRunnerPagination.ts';
-import type { RunnerPaginationItem } from '@/types/TestRunner.ts';
+import type { RunnerPaginationItem } from '@/types/runner/TestRunner.ts';
 
 interface TestRunnerPaginationProps {
     items: RunnerPaginationItem[];

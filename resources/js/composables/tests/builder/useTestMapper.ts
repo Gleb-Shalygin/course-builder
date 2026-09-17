@@ -1,5 +1,5 @@
-import { QuestionType } from '@/types/Test';
-import type { AnswerOption, TestDetail, TestDetailAnswer, TestDetailQuestion, TestPayload, TestQuestion } from '@/types/Test';
+import { QuestionType } from '@/types/tests/Test';
+import type { AnswerOption, TestDetail, TestDetailAnswer, TestDetailQuestion, TestPayload, TestQuestion } from '@/types/tests/Test';
 
 const QUESTION_TYPES: string[] = Object.values(QuestionType);
 

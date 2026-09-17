@@ -2,8 +2,8 @@ import { computed, ref } from 'vue';
 import type { Ref } from 'vue';
 import { message } from 'ant-design-vue';
 import { createTestRequest, updateTestRequest } from '@/api/test';
-import { useValidation } from '@/composables/tests/useValidation';
-import type { TestPayload } from '@/types/Test';
+import { useValidation } from '@/composables/tests/builder/useValidation';
+import type { TestPayload } from '@/types/tests/Test';
 
 export function useTestSaving(testId: Ref<number | null>) {
     const { validateTest } = useValidation();

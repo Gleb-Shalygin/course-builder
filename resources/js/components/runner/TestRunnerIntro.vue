@@ -24,7 +24,7 @@
 
 <script setup lang="ts">
 import { computed, toRefs } from 'vue';
-import type { RunnerTest } from '@/types/TestRunner.ts';
+import type { RunnerTest } from '@/types/runner/TestRunner.ts';
 
 interface TestRunnerIntroProps {
     test: RunnerTest;

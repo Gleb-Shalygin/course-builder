@@ -1,7 +1,7 @@
 // Временные данные для вёрстки прохождения теста: заменяются на запрос к API,
 // когда появится backend-эндпоинт выдачи теста по ссылке.
-import { QuestionType } from '@/types/Test.ts';
-import type { RunnerTest } from '@/types/TestRunner.ts';
+import { QuestionType } from '@/types/tests/Test.ts';
+import type { RunnerTest } from '@/types/runner/TestRunner.ts';
 
 const MOCK_DELAY = 600;
 

@@ -13,7 +13,7 @@
 </template>
 
 <script setup lang="ts">
-import Logo from '@/layout/profile/Logo.vue';
+import Logo from '@/components/ui/Logo.vue';
 import TestRunner from '@/components/runner/TestRunner.vue';
 
 defineProps<{

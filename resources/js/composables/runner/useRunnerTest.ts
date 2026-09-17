@@ -1,7 +1,7 @@
 import { onMounted, ref, watch } from 'vue';
 import type { Ref } from 'vue';
 import { getRunnerTestMock } from '@/mocks/testRunnerMock.ts';
-import type { RunnerTest } from '@/types/TestRunner.ts';
+import type { RunnerTest } from '@/types/runner/TestRunner.ts';
 
 export function useRunnerTest(testLink: Ref<string | null>) {
     const test = ref<RunnerTest | null>(null);

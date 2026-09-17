@@ -41,15 +41,15 @@
 
 <script setup lang="ts">
 import { toRefs } from 'vue';
-import TestAddQuestion from '@/components/tests/question/TestAddQuestion.vue';
-import TestDescriptionField from '@/components/tests/form/TestDescriptionField.vue';
-import TestFormFooter from '@/components/tests/form/TestFormFooter.vue';
-import TestFormHead from '@/components/tests/form/TestFormHead.vue';
-import TestQuestionEditor from '@/components/tests/question/TestQuestionEditor.vue';
-import TestQuestionItem from '@/components/tests/question/TestQuestionItem.vue';
-import TestTitleField from '@/components/tests/form/TestTitleField.vue';
-import TestToolbar from '@/components/tests/form/TestToolbar.vue';
-import { useTestForm } from '@/composables/tests/useTestForm';
+import TestAddQuestion from '@/components/tests/builder/question/TestAddQuestion.vue';
+import TestDescriptionField from '@/components/tests/builder/form/TestDescriptionField.vue';
+import TestFormFooter from '@/components/tests/builder/form/TestFormFooter.vue';
+import TestFormHead from '@/components/tests/builder/form/TestFormHead.vue';
+import TestQuestionEditor from '@/components/tests/builder/question/TestQuestionEditor.vue';
+import TestQuestionItem from '@/components/tests/builder/question/TestQuestionItem.vue';
+import TestTitleField from '@/components/tests/builder/form/TestTitleField.vue';
+import TestToolbar from '@/components/tests/builder/form/TestToolbar.vue';
+import { useTestForm } from '@/composables/tests/builder/useTestForm';
 
 const props = defineProps<{
     testId: number | null;

@@ -1,6 +1,6 @@
 import { computed } from 'vue';
 import type { Ref } from 'vue';
-import type { RunnerResult } from '@/types/TestRunner.ts';
+import type { RunnerResult } from '@/types/runner/TestRunner.ts';
 
 type RestartEmit = (event: 'restart') => void;
 

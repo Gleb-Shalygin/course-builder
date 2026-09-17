@@ -1,10 +1,10 @@
 import { computed, ref } from 'vue';
 import { router, usePage } from '@inertiajs/vue3';
-import type { User } from '@/types/User';
+import type { User } from '@/types/auth/User';
 import type { AppPageProps } from '@/types/PageProps';
-import type { LoginCredentials } from '@/types/LoginCredentials';
-import type { RegisterData } from '@/types/RegisterData';
-import type { AuthResult } from '@/types/AuthResult';
+import type { LoginCredentials } from '@/types/auth/LoginCredentials';
+import type { RegisterData } from '@/types/auth/RegisterData';
+import type { AuthResult } from '@/types/auth/AuthResult';
 import { authService, extractValidationErrors, extractErrorMessage, type ApiError } from '@/api/auth';
 
 const loading = ref(false);

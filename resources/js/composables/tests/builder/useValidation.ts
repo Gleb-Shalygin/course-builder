@@ -1,5 +1,5 @@
-import { QuestionType } from '@/types/Test';
-import type { TestPayload, TestQuestion, ValidationResult } from '@/types/Test';
+import { QuestionType } from '@/types/tests/Test';
+import type { TestPayload, TestQuestion, ValidationResult } from '@/types/tests/Test';
 
 const MIN_ANSWERS = 2;
 const MIN_ATTEMPTS = 1;

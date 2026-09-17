@@ -61,8 +61,8 @@
 <script setup lang="ts">
 import { toRefs } from 'vue';
 import { EditOutlined, LinkOutlined, RedoOutlined, ShareAltOutlined, TeamOutlined } from '@ant-design/icons-vue';
-import { useTestItem } from '@/composables/tests/useTestItem';
-import type { TestTableItem } from '@/types/TestTableItem';
+import { useTestItem } from '@/composables/tests/list/useTestItem';
+import type { TestTableItem } from '@/types/tests/TestTableItem';
 
 const props = defineProps<{
     test: TestTableItem;

@@ -48,8 +48,8 @@
 import { toRefs } from 'vue';
 import { DeleteOutlined, PlusOutlined } from '@ant-design/icons-vue';
 import type { RadioChangeEvent } from 'ant-design-vue';
-import { useAnswersEditor } from '@/composables/tests/useAnswersEditor';
-import type { AnswerOption } from '@/types/Test';
+import { useAnswersEditor } from '@/composables/tests/builder/useAnswersEditor';
+import type { AnswerOption } from '@/types/tests/Test';
 
 interface TestAnswersEditorProps {
     answers: AnswerOption[];

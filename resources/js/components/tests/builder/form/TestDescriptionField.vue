@@ -18,7 +18,7 @@
 
 <script setup lang="ts">
 import { toRefs } from 'vue';
-import { useTestDescriptionField } from '@/composables/tests/useTestDescriptionField';
+import { useTestDescriptionField } from '@/composables/tests/builder/useTestDescriptionField';
 
 const props = defineProps<{
     description: string | null;

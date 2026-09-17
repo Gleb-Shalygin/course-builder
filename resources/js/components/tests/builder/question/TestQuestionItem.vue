@@ -58,8 +58,8 @@ import {
     EditOutlined,
     MinusCircleOutlined,
 } from '@ant-design/icons-vue';
-import { useQuestionView } from '@/composables/tests/useQuestionView';
-import type { TestQuestion } from '@/types/Test';
+import { useQuestionView } from '@/composables/tests/builder/useQuestionView';
+import type { TestQuestion } from '@/types/tests/Test';
 
 interface TestQuestionItemProps {
     question: TestQuestion;

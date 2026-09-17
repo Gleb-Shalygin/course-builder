@@ -1,9 +1,9 @@
 import { computed, ref, watch } from 'vue';
 import type { Ref } from 'vue';
-import { useQuestionFactory } from '@/composables/tests/useQuestionFactory';
-import { useValidation } from '@/composables/tests/useValidation';
-import { QuestionType } from '@/types/Test';
-import type { AnswerOption, QuestionTypeOption, TestQuestion } from '@/types/Test';
+import { useQuestionFactory } from '@/composables/tests/builder/useQuestionFactory';
+import { useValidation } from '@/composables/tests/builder/useValidation';
+import { QuestionType } from '@/types/tests/Test';
+import type { AnswerOption, QuestionTypeOption, TestQuestion } from '@/types/tests/Test';
 
 const TYPE_OPTIONS: QuestionTypeOption[] = [
     { value: QuestionType.Single, label: 'Одиночный выбор' },

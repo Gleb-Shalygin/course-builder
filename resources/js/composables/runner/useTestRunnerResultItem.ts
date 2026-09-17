@@ -1,6 +1,6 @@
 import { computed } from 'vue';
 import type { Ref } from 'vue';
-import type { RunnerResultItem } from '@/types/TestRunner.ts';
+import type { RunnerResultItem } from '@/types/runner/TestRunner.ts';
 
 export function useTestRunnerResultItem(item: Ref<RunnerResultItem>) {
     const rootClass = computed((): string => (item.value.isCorrect ? 'runner-answer--correct' : 'runner-answer--wrong'));

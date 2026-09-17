@@ -2,7 +2,7 @@ import { computed } from 'vue';
 import type { Ref } from 'vue';
 import { useTestLink } from '@/composables/tests/useTestLink';
 import { useTestsNavigation } from '@/composables/tests/useTestsNavigation';
-import type { TestTableItem } from '@/types/TestTableItem';
+import type { TestTableItem } from '@/types/tests/TestTableItem';
 
 export function useTestItem(test: Ref<TestTableItem>) {
     const { goToTestEdit } = useTestsNavigation();

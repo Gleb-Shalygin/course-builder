@@ -1,4 +1,4 @@
-import type { QuestionType } from '@/types/Test.ts';
+import type { QuestionType } from '@/types/tests/Test.ts';
 
 export enum RunnerStage {
     Intro = 'intro',

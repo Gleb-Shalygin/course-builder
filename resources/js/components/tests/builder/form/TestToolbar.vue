@@ -40,8 +40,8 @@
 <script setup lang="ts">
 import { toRefs } from 'vue';
 import { CheckOutlined, LinkOutlined, ShareAltOutlined } from '@ant-design/icons-vue';
-import { useTestToolbar } from '@/composables/tests/useTestToolbar';
-import type { TestToolbarProps } from '@/types/Test.ts';
+import { useTestToolbar } from '@/composables/tests/builder/useTestToolbar';
+import type { TestToolbarProps } from '@/types/tests/Test.ts';
 
 const props = defineProps<TestToolbarProps>();
 const { link } = toRefs(props);

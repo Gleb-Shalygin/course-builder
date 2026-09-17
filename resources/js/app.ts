@@ -8,7 +8,7 @@ import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
 import Antd from 'ant-design-vue';
 import axios from 'axios';
 
-import SvgIcon from '@/components/SvgIcon.vue';
+import SvgIcon from '@/components/ui/SvgIcon.vue';
 
 axios.defaults.withCredentials = true;
 

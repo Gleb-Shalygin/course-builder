@@ -16,7 +16,7 @@
 </template>
 
 <script setup lang="ts">
-import { useTestTitleField } from '@/composables/tests/useTestTitleField';
+import { useTestTitleField } from '@/composables/tests/builder/useTestTitleField';
 
 defineProps<{
     title: string;

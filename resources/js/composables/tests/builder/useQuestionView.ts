@@ -1,7 +1,7 @@
 import { computed } from 'vue';
 import type { Ref } from 'vue';
-import { QuestionType } from '@/types/Test';
-import type { AnswerOption, TestQuestion } from '@/types/Test';
+import { QuestionType } from '@/types/tests/Test';
+import type { AnswerOption, TestQuestion } from '@/types/tests/Test';
 
 export function useQuestionView(question: Ref<TestQuestion>) {
     const typeLabel = computed((): string => (question.value.type === QuestionType.TrueFalse ? 'Да / Нет' : 'Одиночный выбор'));

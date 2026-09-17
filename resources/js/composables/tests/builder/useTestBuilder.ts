@@ -1,7 +1,7 @@
 import { computed, ref } from 'vue';
 import type { Ref } from 'vue';
-import { useQuestionFactory } from '@/composables/tests/useQuestionFactory';
-import type { TestPayload, TestQuestion } from '@/types/Test';
+import { useQuestionFactory } from '@/composables/tests/builder/useQuestionFactory';
+import type { TestPayload, TestQuestion } from '@/types/tests/Test';
 
 const DEFAULT_ATTEMPTS = 1;
 const QUESTION_WORDS = ['вопрос', 'вопроса', 'вопросов'];
