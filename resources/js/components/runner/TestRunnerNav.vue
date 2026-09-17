@@ -67,7 +67,7 @@ const { nav } = toRefs(props);
 const emit = defineEmits<{
     (e: 'prev'): void;
     (e: 'next'): void;
-    (e: 'jump', index: number): void;
+    (e: 'jump', questionId: string): void;
 }>();
 
 const handlePrev = (): void => {
@@ -78,7 +78,7 @@ const handleNext = (): void => {
     emit('next');
 };
 
-const handleJump = (index: number): void => {
-    emit('jump', index);
+const handleJump = (questionId: string): void => {
+    emit('jump', questionId);
 };
 </script>

@@ -7,7 +7,7 @@
         </header>
 
         <div class="runner-page__container">
-            <TestRunner :key="link" :test-link="link" />
+            <TestRunner :key="intro.link" :intro="intro" />
         </div>
     </div>
 </template>
@@ -15,8 +15,9 @@
 <script setup lang="ts">
 import Logo from '@/components/ui/Logo.vue';
 import TestRunner from '@/components/runner/TestRunner.vue';
+import type { RunnerIntro } from '@/types/runner/TestRunner.ts';
 
 defineProps<{
-    link: string;
+    intro: RunnerIntro;
 }>();
 </script>

@@ -1,23 +1,17 @@
-import { computed, ref } from 'vue';
+import { computed } from 'vue';
+import type { Ref } from 'vue';
+import type { RunnerState } from '@/types/runner/TestRunner.ts';
 
-export function useRunnerAnswers() {
-    const selectedAnswers = ref<Record<string, string>>({});
+/** Ответы больше не копятся в браузере — читаем их из состояния, пришедшего с бэкенда. */
+export function useRunnerAnswers(state: Ref<RunnerState | null>) {
+    const answers = computed((): Record<string, string> => state.value?.answers ?? {});
+    const answeredCount = computed((): number => Object.keys(answers.value).length);
 
-    const answeredCount = computed((): number => Object.keys(selectedAnswers.value).length);
-
-    const selectedAnswerId = (questionId: string): string | null => selectedAnswers.value[questionId] ?? null;
-    const selectAnswer = (questionId: string, answerId: string): void => {
-        selectedAnswers.value = { ...selectedAnswers.value, [questionId]: answerId };
-    };
-    const resetAnswers = (): void => {
-        selectedAnswers.value = {};
-    };
+    const selectedAnswerId = (questionId: string): string | null => answers.value[questionId] ?? null;
 
     return {
-        selectedAnswers,
+        answers,
         answeredCount,
         selectedAnswerId,
-        selectAnswer,
-        resetAnswers,
     };
 }
