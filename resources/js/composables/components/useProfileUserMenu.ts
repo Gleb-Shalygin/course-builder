@@ -1,23 +1,20 @@
 import { computed } from 'vue';
-import { useRouter } from 'vue-router';
+import { router } from '@inertiajs/vue3';
 import { useAuth } from '@/composables/useAuth';
 
 export function useProfileUserMenu() {
-    const router = useRouter();
-
     const { user, logout } = useAuth();
 
-    const userName = computed((): string => user.value.name ?? 'Пользователь');
-    const userEmail = computed((): string => user.value.email ?? '');
+    const userName = computed((): string => user.value?.name ?? 'Пользователь');
+    const userEmail = computed((): string => user.value?.email ?? '');
     const userInitials = computed((): string => userName.value.trim().charAt(0).toUpperCase());
 
-    function goToProfile(): void {
-        router.push({ name: 'profile' });
-    }
-
-    async function handleLogout(): Promise<void> {
+    const goToProfile = (): void => {
+        router.visit('/profile');
+    };
+    const handleLogout = async (): Promise<void> => {
         await logout();
-    }
+    };
 
     return {
         userName,

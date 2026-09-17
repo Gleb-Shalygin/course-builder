@@ -1,13 +1,16 @@
 <template>
-    <ProfileLayout>
-        <TestForm :key="testKey" :test-id="testId" />
-    </ProfileLayout>
+    <TestForm :key="testId" :test-id="testId" />
 </template>
 
 <script setup lang="ts">
 import ProfileLayout from '@/layout/profile/ProfileLayout.vue';
 import TestForm from '@/components/tests/TestForm.vue';
-import { useTestRouteId } from '@/composables/tests/useTestRouteId';
 
-const { testId, testKey } = useTestRouteId();
+defineOptions({
+    layout: ProfileLayout,
+});
+
+defineProps<{
+    testId: number;
+}>();
 </script>

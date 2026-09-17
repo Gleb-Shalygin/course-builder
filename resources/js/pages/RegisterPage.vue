@@ -142,7 +142,7 @@
 
                 <div class="auth-register-link">
                     <span>Уже есть аккаунт?</span>
-                    <router-link to="/login">Войти</router-link>
+                    <Link href="/login">Войти</Link>
                 </div>
             </a-form>
         </div>
@@ -150,6 +150,7 @@
 </template>
 
 <script setup lang="ts">
+import { Link } from '@inertiajs/vue3';
 import { useRegisterForm } from '@/composables/components/useRegisterForm';
 
 const {

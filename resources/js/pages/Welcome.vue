@@ -7,17 +7,17 @@
                 </div>
                 <div class="welcome-header__actions">
                     <template v-if="!isAuthenticated">
-                        <router-link to="/login">
+                        <Link href="/login">
                             <a-button type="text" size="large">Войти</a-button>
-                        </router-link>
-                        <router-link to="/register">
+                        </Link>
+                        <Link href="/register">
                             <a-button type="primary" size="large">Регистрироваться</a-button>
-                        </router-link>
+                        </Link>
                     </template>
                     <template v-else>
-                        <router-link to="/profile">
+                        <Link href="/profile">
                             <a-button type="primary" size="large">Перейти в профиль</a-button>
-                        </router-link>
+                        </Link>
                     </template>
                 </div>
             </div>
@@ -32,17 +32,17 @@
                 </p>
                 <div class="welcome-hero__actions">
                     <template v-if="!isAuthenticated">
-                        <router-link to="/register">
+                        <Link href="/register">
                             <a-button type="primary" size="large" class="welcome-hero__cta"> Начать создавать </a-button>
-                        </router-link>
-                        <router-link to="/login">
+                        </Link>
+                        <Link href="/login">
                             <a-button size="large" class="welcome-hero__secondary"> Войти в аккаунт </a-button>
-                        </router-link>
+                        </Link>
                     </template>
                     <template v-else>
-                        <router-link to="/profile">
+                        <Link href="/profile">
                             <a-button type="primary" size="large" class="welcome-hero__cta"> Создать курс </a-button>
-                        </router-link>
+                        </Link>
                     </template>
                 </div>
             </div>
@@ -83,7 +83,8 @@
 </template>
 
 <script lang="ts" setup>
-import { useUserStore } from '@/store/userStore';
+import { Link } from '@inertiajs/vue3';
+import { useAuth } from '@/composables/useAuth';
 
-const { isAuthenticated  } = useUserStore();
+const { isAuthenticated } = useAuth();
 </script>

@@ -73,7 +73,7 @@ export function useTestForm(testId: Ref<number | null>) {
 
         if (!isSaved.value) return;
 
-        await goToTests();
+        goToTests();
     }
 
     return {

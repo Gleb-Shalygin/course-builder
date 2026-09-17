@@ -1,27 +1,29 @@
 import '../scss/app.scss';
 import 'ant-design-vue/dist/reset.css';
 
-import { createApp } from 'vue';
-import { createPinia } from 'pinia'
+import { createApp, h, type DefineComponent } from 'vue';
+import { createPinia } from 'pinia';
+import { createInertiaApp } from '@inertiajs/vue3';
+import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
 import Antd from 'ant-design-vue';
 import axios from 'axios';
 
-import App from './App.vue';
-import router from './router';
 import SvgIcon from '@/components/SvgIcon.vue';
-
-const pinia = createPinia();
-const app = createApp(App);
 
 axios.defaults.withCredentials = true;
 
-app.config.globalProperties.$axios = axios;
-
-app.use(pinia);
-app.use(Antd);
-app.use(router);
-
-app.component('SvgIcon', SvgIcon);
-
-app.mount('#app');
-
+void createInertiaApp({
+    resolve: (name: string) =>
+        resolvePageComponent(`./pages/${name}.vue`, import.meta.glob<DefineComponent>('./pages/**/*.vue')),
+    setup({ el, App, props, plugin }) {
+        createApp({ render: () => h(App, props) })
+            .use(plugin)
+            .use(createPinia())
+            .use(Antd)
+            .component('SvgIcon', SvgIcon)
+            .mount(el);
+    },
+    progress: {
+        color: '#1677ff',
+    },
+});

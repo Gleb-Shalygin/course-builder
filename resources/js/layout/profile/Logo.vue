@@ -1,15 +1,18 @@
 <template>
-    <router-link class="app-logo" :to="{ name: routeName }">
+    <Link class="app-logo" :href="href">
         <svg-icon name="logo" />
-    </router-link>
+    </Link>
 </template>
 
 <script setup lang="ts">
-interface LogoProps {
-    routeName?: string;
-}
+import { Link } from '@inertiajs/vue3';
 
-withDefaults(defineProps<LogoProps>(), {
-    routeName: 'profile',
-});
+withDefaults(
+    defineProps<{
+        href?: string;
+    }>(),
+    {
+        href: '/profile',
+    },
+);
 </script>

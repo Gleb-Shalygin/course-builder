@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Contracts\View\View;
+use Inertia\Inertia;
+use Inertia\Response;
 
 class HomeController extends Controller
 {
-    public static function index(): View
+    public static function index(): Response
     {
-        return view('app');
+        return Inertia::render('Welcome');
     }
 }

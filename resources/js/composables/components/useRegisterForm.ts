@@ -1,12 +1,10 @@
-import { ref, reactive, onMounted } from 'vue';
-import { useRouter } from 'vue-router';
+import { ref, reactive } from 'vue';
 import { useAuth } from '@/composables/useAuth';
 import type { Dayjs } from 'dayjs';
 import { useAuthRules } from '@/composables/useAuthRules';
 
 export function useRegisterForm() {
-    const router = useRouter();
-    const { register, isAuthenticated, loading } = useAuth();
+    const { register, loading } = useAuth();
 
     const form = reactive({
         email: '',
@@ -72,12 +70,6 @@ export function useRegisterForm() {
             if (result.message) errorMessage.value = result.message;
         }
     };
-
-    onMounted(async () => {
-        if (isAuthenticated.value) {
-            await router.push('/profile');
-        }
-    });
 
     return {
         form,

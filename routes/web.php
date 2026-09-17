@@ -1,15 +1,28 @@
 <?php
 
-use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\Auth\AuthPageController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\Profile\ProfileController;
+use App\Http\Controllers\Profile\TestPageController;
+use App\Http\Controllers\TestRunnerController;
 use Illuminate\Support\Facades\Route;
 
-// API routes для аутентификации
-//Route::post('/login', [AuthController::class, 'login']);
-//Route::post('/register', [AuthController::class, 'register']);
-//Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth:sanctum');
+Route::get('/', [HomeController::class, 'index'])->name('home');
 
-// SPA routes - должны быть последними
-Route::get('{any?}', function () {
-    return view('app');
-})->where('any', '.*');
+Route::get('/tests/{link}', [TestRunnerController::class, 'show'])
+    ->whereUuid('link')
+    ->name('tests.run');
 
+Route::middleware('guest')->group(function (): void {
+    Route::get('/login', [AuthPageController::class, 'login'])->name('login');
+    Route::get('/register', [AuthPageController::class, 'register'])->name('register');
+});
+
+Route::middleware('auth')->prefix('profile')->name('profile.')->group(function (): void {
+    Route::get('/', [ProfileController::class, 'index'])->name('index');
+    Route::get('/tests', [ProfileController::class, 'tests'])->name('tests');
+    Route::get('/test-create', [TestPageController::class, 'create'])->name('test-create');
+    Route::get('/tests/{test}/edit', [TestPageController::class, 'edit'])
+        ->whereNumber('test')
+        ->name('test-edit');
+});

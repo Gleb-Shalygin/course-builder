@@ -1,12 +1,9 @@
-// src/composables/useLoginForm.ts
-import { ref, reactive, onMounted } from 'vue';
-import { useRouter } from 'vue-router';
+import { ref, reactive } from 'vue';
 import { useAuth } from '@/composables/useAuth';
 import type { Rule } from 'ant-design-vue/es/form';
 
 export function useLoginForm() {
-    const router = useRouter();
-    const { login, isAuthenticated, loading } = useAuth();
+    const { login, loading } = useAuth();
 
     const form = reactive({
         email: '',
@@ -42,12 +39,6 @@ export function useLoginForm() {
             if (result.message) errorMessage.value = result.message;
         }
     };
-
-    onMounted(async () => {
-        if (isAuthenticated.value) {
-            await router.push('/profile');
-        }
-    });
 
     return {
         form,

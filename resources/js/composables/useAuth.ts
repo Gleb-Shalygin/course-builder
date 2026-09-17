@@ -1,104 +1,76 @@
-import { computed } from 'vue';
-import { useRouter } from 'vue-router';
-import User from './../types/User';
-import LoginCredentials from './../types/LoginCredentials';
-import RegisterData from './../types/RegisterData';
+import { computed, ref } from 'vue';
+import { router, usePage } from '@inertiajs/vue3';
+import type { User } from '@/types/User';
+import type { AppPageProps } from '@/types/PageProps';
+import type { LoginCredentials } from '@/types/LoginCredentials';
+import type { RegisterData } from '@/types/RegisterData';
+import type { AuthResult } from '@/types/AuthResult';
 import { authService, extractValidationErrors, extractErrorMessage, type ApiError } from '@/api/auth';
-import { useUserStore } from '@/store/userStore';
 
+const loading = ref(false);
 
 export function useAuth() {
-    const router = useRouter();
+    const page = usePage<AppPageProps>();
 
-    const userStore = useUserStore();
+    const user = computed((): User | null => page.props.auth.user);
+    const isAuthenticated = computed((): boolean => user.value !== null);
 
-    const initialized = computed(() => userStore.initialized);
-    const loading = computed(() => userStore.loading);
-    const isAuthenticated = computed(() => userStore.isAuthenticated);
-    const user = computed(() => userStore.user);
+    const toFailure = (error: unknown): AuthResult => {
+        const apiError = error as ApiError;
 
-    async function login(credentials: LoginCredentials): Promise<{
-        success: boolean;
-        errors?: Record<string, string[]>;
-        message?: string;
-    }> {
-        userStore.loading = true;
+        return {
+            success: false,
+            errors: extractValidationErrors(apiError),
+            message: extractErrorMessage(apiError),
+        };
+    };
+
+    const login = async (credentials: LoginCredentials): Promise<AuthResult> => {
+        loading.value = true;
         try {
             await authService.login(credentials);
-            const currentUser = await authService.getUser();
+            router.visit('/profile');
 
-            if (currentUser) {
-                userStore.user = currentUser;
-            } else {
-                userStore.setEmptyUser();
-            }
-
-            await router.push('/profile');
             return { success: true };
         } catch (error) {
-            const apiError = error as ApiError;
-            return {
-                success: false,
-                errors: extractValidationErrors(apiError),
-                message: extractErrorMessage(apiError),
-            };
+            return toFailure(error);
         } finally {
-            userStore.loading = false;
+            loading.value = false;
         }
-    }
+    };
 
-    async function register(data: RegisterData): Promise<{
-        success: boolean;
-        errors?: Record<string, string[]>;
-        message?: string;
-    }> {
-        userStore.loading = true;
+    const register = async (data: RegisterData): Promise<AuthResult> => {
+        loading.value = true;
         try {
             await authService.register(data);
-            // После регистрации автоматически авторизуем
-            const currentUser = await authService.getUser();
+            router.visit('/profile');
 
-            if (currentUser) {
-                userStore.user = currentUser;
-            } else {
-                userStore.setEmptyUser();
-            }
-
-            await router.push('/profile');
             return { success: true };
         } catch (error) {
-            const apiError = error as ApiError;
-            return {
-                success: false,
-                errors: extractValidationErrors(apiError),
-                message: extractErrorMessage(apiError),
-            };
+            return toFailure(error);
         } finally {
-            userStore.loading = false;
+            loading.value = false;
         }
-    }
+    };
 
-    async function logout(): Promise<void> {
-        userStore.loading = true;
+    const logout = async (): Promise<void> => {
+        loading.value = true;
         try {
             await authService.logout();
         } catch (error) {
             console.error('Logout error:', error);
         } finally {
-            userStore.setEmptyUser();
-            userStore.loading = false;
-            await router.push('/login');
+            loading.value = false;
+            router.visit('/login');
         }
-    }
+    };
 
     return {
         user,
         isAuthenticated,
         loading,
-        initialized,
         login,
         register,
         logout,
     };
 }
-

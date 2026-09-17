@@ -17,8 +17,8 @@ export function useTestItem(test: Ref<TestTableItem>) {
 
     const isShareDisabled = computed((): boolean => !isLinkAvailable.value);
 
-    const handleEdit = async (): Promise<void> => {
-        await goToTestEdit(test.value.id);
+    const handleEdit = (): void => {
+        goToTestEdit(test.value.id);
     };
     const handleShare = async (): Promise<void> => {
         await shareLink(title.value);

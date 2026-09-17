@@ -1,26 +1,26 @@
 import { computed } from 'vue';
-import { useRoute, useRouter } from 'vue-router';
+import { router, usePage } from '@inertiajs/vue3';
 import { AppstoreOutlined, UserOutlined } from '@ant-design/icons-vue';
 import type { ProfileMenuItem } from '@/types/ProfileMenuItem';
 import { useProfileLayout } from '@/composables/components/useProfileLayout';
 
 const items: ProfileMenuItem[] = [
-    { key: 'profile', label: 'Профиль', icon: UserOutlined },
-    { key: 'profile-tests', label: 'Тесты', icon: AppstoreOutlined },
+    { key: '/profile', label: 'Профиль', icon: UserOutlined },
+    { key: '/profile/tests', label: 'Тесты', icon: AppstoreOutlined },
 ];
 
 export function useProfileNavigation() {
-    const route = useRoute();
-    const router = useRouter();
+    const page = usePage();
     const { closeMobileMenu } = useProfileLayout();
 
     const menuItems = computed((): ProfileMenuItem[] => items);
-    const selectedKeys = computed((): string[] => [String(route.name ?? '')]);
+    const currentPath = computed((): string => page.url.split('?')[0]);
+    const selectedKeys = computed((): string[] => [currentPath.value]);
 
-    function handleSelect(key: string): void {
+    const handleSelect = (key: string): void => {
         closeMobileMenu();
-        router.push({ name: key });
-    }
+        router.visit(key);
+    };
 
     return {
         menuItems,

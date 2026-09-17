@@ -1,20 +1,20 @@
 import { computed, ref } from 'vue';
-import { useRoute } from 'vue-router';
+import { usePage } from '@inertiajs/vue3';
+import type { AppPageProps } from '@/types/PageProps';
 
 const isMobileMenuOpen = ref(false);
 
 export function useProfileLayout() {
-    const route = useRoute();
+    const page = usePage<AppPageProps>();
 
-    const pageTitle = computed((): string => (typeof route.meta.title === 'string' ? route.meta.title : 'Личный кабинет'));
+    const pageTitle = computed((): string => page.props.title ?? 'Личный кабинет');
 
-    function openMobileMenu(): void {
+    const openMobileMenu = (): void => {
         isMobileMenuOpen.value = true;
-    }
-
-    function closeMobileMenu(): void {
+    };
+    const closeMobileMenu = (): void => {
         isMobileMenuOpen.value = false;
-    }
+    };
 
     return {
         isMobileMenuOpen,
