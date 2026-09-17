@@ -8,7 +8,7 @@
 
 <script setup lang="ts">
 import { toRefs } from 'vue';
-import { useSvgIcon } from '@/composables/components/useSvgIcon.ts';
+import { useSvgIcon } from '@/composables/ui/useSvgIcon.ts';
 
 const props = defineProps<{
     name: string;

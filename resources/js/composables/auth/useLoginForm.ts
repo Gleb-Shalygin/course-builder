@@ -1,5 +1,5 @@
 import { ref, reactive } from 'vue';
-import { useAuth } from '@/composables/useAuth';
+import { useAuth } from '@/composables/auth/useAuth';
 import type { Rule } from 'ant-design-vue/es/form';
 
 export function useLoginForm() {

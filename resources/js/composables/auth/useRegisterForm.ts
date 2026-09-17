@@ -1,7 +1,7 @@
 import { ref, reactive } from 'vue';
-import { useAuth } from '@/composables/useAuth';
+import { useAuth } from '@/composables/auth/useAuth';
 import type { Dayjs } from 'dayjs';
-import { useAuthRules } from '@/composables/useAuthRules';
+import { useAuthRules } from '@/composables/auth/useAuthRules';
 
 export function useRegisterForm() {
     const { register, loading } = useAuth();

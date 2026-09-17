@@ -88,7 +88,7 @@
 
 <script setup lang="ts">
 import { Link } from '@inertiajs/vue3';
-import { useLoginForm } from '@/composables/components/useLoginForm';
+import { useLoginForm } from '@/composables/auth/useLoginForm';
 
 const {
     form,

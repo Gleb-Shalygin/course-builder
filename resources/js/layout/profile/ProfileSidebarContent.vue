@@ -24,7 +24,7 @@
 
 <script setup lang="ts">
 import Logo from '@/layout/profile/Logo.vue';
-import { useProfileNavigation } from '@/composables/components/useProfileNavigation';
+import { useProfileNavigation } from '@/composables/profile/useProfileNavigation';
 
 const { menuItems, selectedKeys, handleSelect } = useProfileNavigation();
 </script>

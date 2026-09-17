@@ -151,7 +151,7 @@
 
 <script setup lang="ts">
 import { Link } from '@inertiajs/vue3';
-import { useRegisterForm } from '@/composables/components/useRegisterForm';
+import { useRegisterForm } from '@/composables/auth/useRegisterForm';
 
 const {
     form,

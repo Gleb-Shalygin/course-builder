@@ -1,6 +1,6 @@
 import { computed } from 'vue';
 import { router } from '@inertiajs/vue3';
-import { useAuth } from '@/composables/useAuth';
+import { useAuth } from '@/composables/auth/useAuth';
 
 export function useProfileUserMenu() {
     const { user, logout } = useAuth();

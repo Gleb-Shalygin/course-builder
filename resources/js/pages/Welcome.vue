@@ -84,7 +84,7 @@
 
 <script lang="ts" setup>
 import { Link } from '@inertiajs/vue3';
-import { useAuth } from '@/composables/useAuth';
+import { useAuth } from '@/composables/auth/useAuth';
 
 const { isAuthenticated } = useAuth();
 </script>
