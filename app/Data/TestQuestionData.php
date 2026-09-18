@@ -14,5 +14,6 @@ class TestQuestionData extends Data
         /** @var array<int, TestAnswerData> */
         #[DataCollectionOf(TestAnswerData::class)]
         public array $answers,
+        public ?int $id = null,
     ) {}
 }

@@ -34,9 +34,11 @@ class TestSaveRequest extends FormRequest
             'description' => 'nullable|string|max:1000',
             'attempts' => 'required|integer|min:1|max:99',
             'questions' => 'required|array|min:1',
+            'questions.*.id' => 'nullable|integer',
             'questions.*.type' => ['required', Rule::enum(QuestionType::class)],
             'questions.*.text' => 'required|string|max:500',
             'questions.*.answers' => 'required|array|min:2|max:8',
+            'questions.*.answers.*.id' => 'nullable|integer',
             'questions.*.answers.*.text' => 'required|string|max:255',
             'questions.*.answers.*.is_correct' => 'required|boolean',
         ];

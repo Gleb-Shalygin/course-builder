@@ -11,5 +11,6 @@ class TestAnswerData extends Data
         public string $text,
         #[MapInputName('is_correct')]
         public bool $isCorrect,
+        public ?int $id = null,
     ) {}
 }

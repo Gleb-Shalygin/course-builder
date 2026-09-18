@@ -11,6 +11,7 @@ export function useQuestionFactory() {
     function createAnswer(text = ''): AnswerOption {
         return {
             id: createId(),
+            persistedId: null,
             text,
             isCorrect: false,
         };
@@ -27,6 +28,7 @@ export function useQuestionFactory() {
     function createQuestion(): TestQuestion {
         return {
             id: createId(),
+            persistedId: null,
             type: QuestionType.Single,
             text: '',
             answers: createEmptyAnswers(),

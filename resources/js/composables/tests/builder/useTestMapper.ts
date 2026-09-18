@@ -11,6 +11,7 @@ export function useTestMapper() {
     function toAnswer(answer: TestDetailAnswer): AnswerOption {
         return {
             id: String(answer.id),
+            persistedId: Number(answer.id),
             text: String(answer.text ?? ''),
             isCorrect: Boolean(answer.is_correct),
         };
@@ -20,6 +21,7 @@ export function useTestMapper() {
 
         return {
             id: String(question.id),
+            persistedId: Number(question.id),
             type: question.type,
             text: String(question.text ?? ''),
             answers: question.answers.map((answer) => toAnswer(answer)),

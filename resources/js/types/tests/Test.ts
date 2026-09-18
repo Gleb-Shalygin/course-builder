@@ -5,12 +5,14 @@ export enum QuestionType {
 
 export interface AnswerOption {
     id: string;
+    persistedId: number | null;
     text: string;
     isCorrect: boolean;
 }
 
 export interface TestQuestion {
     id: string;
+    persistedId: number | null;
     type: QuestionType;
     text: string;
     answers: AnswerOption[];
@@ -30,11 +32,13 @@ export interface TestPayload {
 }
 
 export interface TestAnswerRequest {
+    id: number | null;
     text: string;
     is_correct: boolean;
 }
 
 export interface TestQuestionRequest {
+    id: number | null;
     type: QuestionType;
     text: string;
     answers: TestAnswerRequest[];

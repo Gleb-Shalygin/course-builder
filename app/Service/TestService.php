@@ -2,6 +2,7 @@
 
 namespace App\Service;
 
+use App\Data\TestAnswerData;
 use App\Data\TestQuestionData;
 use App\Data\TestSaveData;
 use App\Exceptions\TestNotCreatedException;
@@ -79,9 +80,7 @@ class TestService
                 'is_public' => false,
             ]);
 
-            foreach ($data->questions as $position => $question) {
-                self::createQuestion($test, $question, (int) $position);
-            }
+            self::syncQuestions($test, $data->questions);
 
             return self::testPayload($test, count($data->questions));
         });
@@ -106,11 +105,7 @@ class TestService
                 throw new TestNotUpdatedException('Не удалось сохранить изменения теста');
             }
 
-            self::clearQuestions($test);
-
-            foreach ($data->questions as $position => $question) {
-                self::createQuestion($test, $question, (int) $position);
-            }
+            self::syncQuestions($test, $data->questions);
 
             return self::testPayload($test, count($data->questions));
         });
@@ -173,36 +168,104 @@ class TestService
         ];
     }
 
-    private static function clearQuestions(Test $test): void
+    /**
+     * Приводит вопросы теста к переданному составу, сохраняя идентификаторы
+     * уже существующих записей: на них ссылаются сохранённые попытки прохождения.
+     *
+     * @param array<int, TestQuestionData> $questions
+     */
+    private static function syncQuestions(Test $test, array $questions): void
     {
+        $keptQuestionIds = [];
+        $keptAnswerIds = [];
+
+        foreach ($questions as $position => $questionData) {
+            $question = self::saveQuestion($test, $questionData, (int) $position);
+            $keptQuestionIds[] = $question->id;
+
+            foreach (self::saveAnswers($test, $question, $questionData->answers) as $answerId) {
+                $keptAnswerIds[] = $answerId;
+            }
+        }
+
         TestQuestion::query()
             ->where('test_id', $test->id)
+            ->whereNotIn('id', $keptQuestionIds)
             ->delete();
 
         TestAnswer::query()
             ->where('test_id', $test->id)
+            ->whereNotIn('id', $keptAnswerIds)
             ->delete();
     }
 
-    private static function createQuestion(Test $test, TestQuestionData $data, int $position): void
+    private static function saveQuestion(Test $test, TestQuestionData $data, int $position): TestQuestion
     {
-        /** @var TestQuestion $question */
-        $question = $test->questions()->create([
+        $attributes = [
             'type' => $data->type->value,
             'text' => $data->text,
             'position' => $position,
-        ]);
+        ];
 
-        foreach ($data->answers as $answerPosition => $answerData) {
-            $answer = TestAnswer::query()->create([
-                'test_id' => $test->id,
-                'text' => $answerData->text,
-            ]);
+        $question = $data->id === null
+            ? null
+            : $test->questions()->whereKey($data->id)->first();
 
-            $question->answers()->attach($answer->id, [
-                'is_correct' => $answerData->isCorrect,
-                'position' => (int) $answerPosition,
-            ]);
+        if ($question === null) {
+            /** @var TestQuestion $created */
+            $created = $test->questions()->create($attributes);
+
+            return $created;
         }
+
+        $question->update($attributes);
+
+        return $question;
+    }
+
+    /**
+     * @param array<int, TestAnswerData> $answers
+     * @return array<int, int>
+     */
+    private static function saveAnswers(Test $test, TestQuestion $question, array $answers): array
+    {
+        $pivot = [];
+
+        foreach ($answers as $position => $answerData) {
+            $answer = self::saveAnswer($test, $answerData);
+
+            $pivot[$answer->id] = [
+                'is_correct' => $answerData->isCorrect,
+                'position' => (int) $position,
+            ];
+        }
+
+        $question->answers()->sync($pivot);
+
+        return array_keys($pivot);
+    }
+
+    private static function saveAnswer(Test $test, TestAnswerData $data): TestAnswer
+    {
+        $answer = $data->id === null
+            ? null
+            : TestAnswer::query()
+                ->where('test_id', $test->id)
+                ->whereKey($data->id)
+                ->first();
+
+        if ($answer === null) {
+            /** @var TestAnswer $created */
+            $created = TestAnswer::query()->create([
+                'test_id' => $test->id,
+                'text' => $data->text,
+            ]);
+
+            return $created;
+        }
+
+        $answer->update(['text' => $data->text]);
+
+        return $answer;
     }
 }
