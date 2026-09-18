@@ -1,0 +1,16 @@
+<?php
+
+namespace App\Data\Test;
+
+use Spatie\LaravelData\Attributes\MapInputName;
+use Spatie\LaravelData\Data;
+
+class TestAnswerData extends Data
+{
+    public function __construct(
+        public string $text,
+        #[MapInputName('is_correct')]
+        public bool $isCorrect,
+        public ?int $id = null,
+    ) {}
+}

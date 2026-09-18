@@ -31,7 +31,7 @@
 
 <script setup lang="ts">
 import { DownOutlined, LogoutOutlined, UserOutlined } from '@ant-design/icons-vue';
-import { useProfileUserMenu } from '@/composables/components/useProfileUserMenu';
+import { useProfileUserMenu } from '@/composables/profile/useProfileUserMenu';
 
 const { userName, userEmail, userInitials, goToProfile, handleLogout } = useProfileUserMenu();
 </script>

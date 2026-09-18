@@ -1,4 +1,4 @@
-import type { RunnerPaginationItem } from '@/types/TestRunner.ts';
+import type { RunnerPaginationItem } from '@/types/runner/TestRunner.ts';
 
 export function useRunnerPagination() {
     const itemClass = (item: RunnerPaginationItem): string[] => {

@@ -2,20 +2,22 @@
     <div class="runner-page">
         <header class="runner-page__header">
             <div class="runner-page__header-inner">
-                <Logo route-name="home" />
+                <Logo href="/" />
             </div>
         </header>
 
         <div class="runner-page__container">
-            <TestRunner :key="testKey" :test-id="testId" />
+            <TestRunner :key="intro.link" :intro="intro" />
         </div>
     </div>
 </template>
 
 <script setup lang="ts">
-import Logo from '@/layout/profile/Logo.vue';
+import Logo from '@/components/ui/Logo.vue';
 import TestRunner from '@/components/runner/TestRunner.vue';
-import { useTestRouteId } from '@/composables/tests/useTestRouteId.ts';
+import type { RunnerIntro } from '@/types/runner/TestRunner.ts';
 
-const { testId, testKey } = useTestRouteId();
+defineProps<{
+    intro: RunnerIntro;
+}>();
 </script>

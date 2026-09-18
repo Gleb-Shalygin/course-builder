@@ -37,6 +37,60 @@ const selectAnswer = (questionId: string, answerId: string): void => {
 };
 ```
 
+## Раскладка по папкам
+
+- Внутри `resources/js/composables` папки делим по доменам (`auth`, `profile`, `tests`, `runner`), а не по типу потребителя.
+- Одно исключение — `ui`: туда кладём composable для переиспользуемых примитивов интерфейса, не привязанных к домену (например, `useSvgIcon`).
+- Новую composable сразу кладём в папку своего домена. В корне `composables` файлов не держим.
+- Если домена ещё нет — заводим новую папку, а не складываем в ближайшую похожую.
+
+Как делать не надо:
+
+```
+composables/
+    useAuth.ts
+    components/
+        useLoginForm.ts
+        useProfileNavigation.ts
+        useSvgIcon.ts
+```
+
+Как делать надо:
+
+```
+composables/
+    auth/
+        useAuth.ts
+        useLoginForm.ts
+    profile/
+        useProfileNavigation.ts
+    ui/
+        useSvgIcon.ts
+```
+
+## Форматирование деструктуризации
+
+- Если деструктурируем объект (например, результат другой composable-функции) больше чем на 2 свойства — каждое свойство на отдельной строке, закрывающая скобка на своей строке, с висячей запятой.
+
+Как делать не надо:
+
+```ts
+const { isCopied, isTouch, isLinkAvailable, label, copyHint, shareLink } = useTestLink(link);
+```
+
+Как делать надо:
+
+```ts
+const {
+    isCopied,
+    isTouch,
+    isLinkAvailable,
+    label,
+    copyHint,
+    shareLink,
+} = useTestLink(link);
+```
+
 ## Именование
 
 - Файлы: camelCase (`useProduct`, `useGifts`).
@@ -55,5 +109,7 @@ const selectAnswer = (questionId: string, answerId: string): void => {
 - Не обращаться к геттерам store напрямую.
 - Не обращаться к state store напрямую.
 - Не создавать новые composable функции в JavaScript файлах.
+- Не создавать папки по типу потребителя (`components`, `pages`) и не складывать в них composable разных доменов.
+- Не оставлять composable в корне `resources/js/composables`.
 - Не использовать `toValue`.
 - Не делать пробелы между функциями, `computed`, `watch` внутри одного блока — только между блоками операций.

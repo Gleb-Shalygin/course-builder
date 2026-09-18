@@ -11,36 +11,29 @@
 
         <p v-if="isDescriptionVisible" class="runner-intro__description">{{ test.description }}</p>
 
-        <a-button
-            class="runner-intro__start"
-            type="primary"
-            size="large"
-            @click="handleStart"
-        >
-            Начать
-        </a-button>
+        <TestRunnerIntroForm :is-submitting="isSubmitting" @start="handleStart" />
     </a-flex>
 </template>
 
 <script setup lang="ts">
 import { computed, toRefs } from 'vue';
-import type { RunnerTest } from '@/types/TestRunner.ts';
+import TestRunnerIntroForm from '@/components/runner/TestRunnerIntroForm.vue';
+import type { RunnerParticipantForm, RunnerTest } from '@/types/runner/TestRunner.ts';
 
-interface TestRunnerIntroProps {
+const props = defineProps<{
     test: RunnerTest;
-}
-
-const props = defineProps<TestRunnerIntroProps>();
+    isSubmitting: boolean;
+}>();
 const { test } = toRefs(props);
 
 const emit = defineEmits<{
-    (e: 'start'): void;
+    (e: 'start', participant: RunnerParticipantForm): void;
 }>();
 
-const questionsLabel = computed((): string => `Вопросов: ${test.value.questions.length}`);
+const questionsLabel = computed((): string => `Вопросов: ${test.value.questionsCount}`);
 const isDescriptionVisible = computed((): boolean => test.value.description !== null && test.value.description.trim() !== '');
 
-const handleStart = (): void => {
-    emit('start');
+const handleStart = (participant: RunnerParticipantForm): void => {
+    emit('start', participant);
 };
 </script>

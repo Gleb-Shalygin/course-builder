@@ -15,10 +15,23 @@ class TestAttempt extends Model
     protected $fillable = [
         'test_id',
         'user_id',
+        'first_name',
+        'last_name',
+        'session_key',
         'score',
+        'answers',
         'started_at',
         'finished_at',
     ];
+
+    protected function casts(): array
+    {
+        return [
+            'answers' => 'array',
+            'started_at' => 'datetime',
+            'finished_at' => 'datetime',
+        ];
+    }
 
     public function test(): BelongsTo
     {

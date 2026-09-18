@@ -44,7 +44,7 @@
 <script setup lang="ts">
 import { computed, toRefs } from 'vue';
 import { CheckCircleOutlined } from '@ant-design/icons-vue';
-import type { RunnerFinishState } from '@/types/TestRunner.ts';
+import type { RunnerFinishState } from '@/types/runner/TestRunner.ts';
 
 interface TestRunnerFinishProps {
     finish: RunnerFinishState;

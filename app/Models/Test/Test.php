@@ -14,6 +14,7 @@ class Test extends Model
 
     protected $fillable = [
         'user_id',
+        'link',
         'title',
         'description',
         'attempts',

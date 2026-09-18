@@ -23,7 +23,7 @@
 </template>
 
 <script setup lang="ts">
-import { useProfileUserMenu } from '@/composables/components/useProfileUserMenu';
+import { useProfileUserMenu } from '@/composables/profile/useProfileUserMenu';
 
 const { userName, userEmail, userInitials } = useProfileUserMenu();
 </script>

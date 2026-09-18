@@ -8,11 +8,11 @@
     >
         <button
             v-for="item in items"
-            :key="item.number"
+            :key="item.id"
             class="runner-pages__item"
             :class="itemClass(item)"
             type="button"
-            @click="handleSelect(item.index)"
+            @click="handleSelect(item.id)"
         >
             {{ item.number }}
         </button>
@@ -22,7 +22,7 @@
 <script setup lang="ts">
 import { toRefs } from 'vue';
 import { useRunnerPagination } from '@/composables/runner/useRunnerPagination.ts';
-import type { RunnerPaginationItem } from '@/types/TestRunner.ts';
+import type { RunnerPaginationItem } from '@/types/runner/TestRunner.ts';
 
 interface TestRunnerPaginationProps {
     items: RunnerPaginationItem[];
@@ -32,12 +32,12 @@ const props = defineProps<TestRunnerPaginationProps>();
 const { items } = toRefs(props);
 
 const emit = defineEmits<{
-    (e: 'select', index: number): void;
+    (e: 'select', questionId: string): void;
 }>();
 
 const { itemClass } = useRunnerPagination();
 
-const handleSelect = (index: number): void => {
-    emit('select', index);
+const handleSelect = (questionId: string): void => {
+    emit('select', questionId);
 };
 </script>
