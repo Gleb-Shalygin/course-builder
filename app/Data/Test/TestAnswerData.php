@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Data;
+namespace App\Data\Test;
 
 use Spatie\LaravelData\Attributes\MapInputName;
 use Spatie\LaravelData\Data;

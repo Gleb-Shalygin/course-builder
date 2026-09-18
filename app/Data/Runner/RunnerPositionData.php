@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Data;
+namespace App\Data\Runner;
 
 use App\Enums\RunnerStage;
 use Spatie\LaravelData\Data;

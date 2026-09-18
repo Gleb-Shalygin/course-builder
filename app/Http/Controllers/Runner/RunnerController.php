@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Runner;
 
-use App\Data\RunnerAnswerData;
-use App\Data\RunnerPositionData;
-use App\Data\RunnerSessionData;
-use App\Data\RunnerStartData;
+use App\Data\Runner\RunnerAnswerData;
+use App\Data\Runner\RunnerPositionData;
+use App\Data\Runner\RunnerSessionData;
+use App\Data\Runner\RunnerStartData;
 use App\Exceptions\RunnerAttemptNotFoundException;
 use App\Exceptions\RunnerAttemptsExceededException;
 use App\Exceptions\RunnerInvalidAnswerException;
