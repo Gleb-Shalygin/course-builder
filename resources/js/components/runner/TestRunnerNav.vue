@@ -20,7 +20,10 @@
                     @click="handlePrev"
                 >
                     <template #icon>
-                        <svg-icon class="runner-nav__icon runner-nav__icon--prev" name="chevron-right" />
+                        <svg-icon
+                            class="runner-nav__icon"
+                            name="chevron-left"
+                        />
                     </template>
                 </a-button>
             </a-tooltip>

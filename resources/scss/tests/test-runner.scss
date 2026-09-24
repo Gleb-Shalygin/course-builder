@@ -164,9 +164,12 @@
         border-radius: $radius-md;
     }
 
-    &__alert {
-        border-radius: $radius-md;
-        text-align: left;
+    &__hint {
+        margin: 0;
+        font-size: 13px;
+        line-height: 1.5;
+        text-align: center;
+        color: $text-secondary;
     }
 
     &__submit {
@@ -189,6 +192,14 @@
 
         &:active {
             transform: translateY(0);
+        }
+
+        &:disabled,
+        &:disabled:hover {
+            background: $divider-color;
+            color: $text-secondary;
+            box-shadow: none;
+            transform: none;
         }
     }
 }
@@ -257,10 +268,6 @@
     &__icon {
         width: 22px;
         height: 22px;
-
-        &--prev {
-            transform: rotate(180deg);
-        }
     }
 
     &__button {

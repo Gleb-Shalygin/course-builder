@@ -20,23 +20,23 @@
             :disabled="isSubmitting"
         />
 
-        <a-alert
-            v-if="isValidationVisible"
-            class="runner-intro-form__alert"
-            type="warning"
-            :message="validationMessage"
-            show-icon
-        />
-
         <a-button
             class="runner-intro-form__submit"
             type="primary"
             size="large"
+            :disabled="!isFilled"
             :loading="isSubmitting"
             @click="handleStart"
         >
             Начать
         </a-button>
+
+        <p
+            v-if="isHintVisible"
+            class="runner-intro-form__hint"
+        >
+            Укажите имя и фамилию, чтобы начать тест — так мы поймём, чей это результат
+        </p>
     </a-flex>
 </template>
 
@@ -55,14 +55,12 @@ const emit = defineEmits<{
 const {
     firstName,
     lastName,
-    validationMessage,
-    isValidationVisible,
+    isFilled,
+    isHintVisible,
     participant,
-    validate,
 } = useRunnerIntroForm();
 
 const handleStart = (): void => {
-    if (!validate()) return;
     emit('start', participant.value);
 };
 </script>

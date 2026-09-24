@@ -5,8 +5,6 @@
         align="center"
         :gap="16"
     >
-        <a-tag class="runner-intro__badge" color="blue">{{ questionsLabel }}</a-tag>
-
         <h1 class="runner-intro__title">{{ test.title }}</h1>
 
         <p v-if="isDescriptionVisible" class="runner-intro__description">{{ test.description }}</p>
@@ -30,7 +28,6 @@ const emit = defineEmits<{
     (e: 'start', participant: RunnerParticipantForm): void;
 }>();
 
-const questionsLabel = computed((): string => `Вопросов: ${test.value.questionsCount}`);
 const isDescriptionVisible = computed((): boolean => test.value.description !== null && test.value.description.trim() !== '');
 
 const handleStart = (participant: RunnerParticipantForm): void => {
