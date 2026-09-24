@@ -1,13 +1,15 @@
 import api from '@/api/api';
-import type { CreatedTest, TestCreateRequest, TestDetail, TestPayload, TestQuestionRequest } from '@/types/Test';
+import type { CreatedTest, TestCreateRequest, TestDetail, TestPayload, TestQuestionRequest } from '@/types/tests/Test';
 
 function toQuestionsRequest(payload: TestPayload): TestQuestionRequest[] {
     return payload.questions.map((question) => ({
+        id: question.persistedId,
         type: question.type,
         text: question.text.trim(),
         answers: question.answers
             .filter((answer) => answer.text.trim() !== '')
             .map((answer) => ({
+                id: answer.persistedId,
                 text: answer.text.trim(),
                 is_correct: answer.isCorrect,
             })),

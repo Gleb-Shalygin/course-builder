@@ -100,6 +100,11 @@
         margin-bottom: 24px;
         display: flex;
         justify-content: center;
+        color: $main-color;
+
+        .svg-icon {
+            width: 48px;
+        }
     }
 
     &__title {

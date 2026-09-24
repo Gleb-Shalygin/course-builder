@@ -1,17 +1,15 @@
-import { useRouter } from 'vue-router';
+import { router } from '@inertiajs/vue3';
 
 export function useTestsNavigation() {
-    const router = useRouter();
-
-    async function goToTests(): Promise<void> {
-        await router.push({ name: 'profile-tests' });
-    }
-    async function goToTestCreate(): Promise<void> {
-        await router.push({ name: 'test-create' });
-    }
-    async function goToTestEdit(testId: number): Promise<void> {
-        await router.push({ name: 'test-edit', params: { id: testId } });
-    }
+    const goToTests = (): void => {
+        router.visit('/profile/tests');
+    };
+    const goToTestCreate = (): void => {
+        router.visit('/profile/test-create');
+    };
+    const goToTestEdit = (testId: number): void => {
+        router.visit(`/profile/tests/${testId}/edit`);
+    };
 
     return {
         goToTests,

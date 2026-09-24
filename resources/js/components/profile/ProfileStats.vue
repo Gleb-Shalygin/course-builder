@@ -44,7 +44,7 @@
 
 <script setup lang="ts">
 import { AppstoreOutlined, CheckCircleOutlined, GlobalOutlined } from '@ant-design/icons-vue';
-import { useProfileStats } from '@/composables/components/useProfileStats';
+import { useProfileStats } from '@/composables/profile/useProfileStats';
 
 const { loading, errorMessage, isError, testsCount, publicTestsCount, finishedCount } = useProfileStats();
 </script>

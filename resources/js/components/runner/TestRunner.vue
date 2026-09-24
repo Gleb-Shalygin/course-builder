@@ -13,9 +13,17 @@
                 show-icon
             >
                 <template #action>
-                    <a-button size="small" @click="loadTest">Повторить</a-button>
+                    <a-button size="small" @click="loadState">Повторить</a-button>
                 </template>
             </a-alert>
+
+            <a-alert
+                v-if="isSyncWarningVisible"
+                class="runner__warning"
+                type="warning"
+                :message="syncError"
+                show-icon
+            />
 
             <template v-if="isReady">
                 <a-flex
@@ -33,7 +41,8 @@
                         v-if="isIntro"
                         :key="'intro'"
                         :test="test"
-                        @start="startTest"
+                        :is-submitting="isSubmitting"
+                        @start="handleStart"
                     />
 
                     <a-flex
@@ -58,7 +67,7 @@
                         :key="'finish'"
                         :finish="finishState"
                         @back="goPrev"
-                        @finish="finishTest"
+                        @finish="handleFinish"
                     />
 
                     <TestRunnerResult
@@ -81,19 +90,21 @@ import TestRunnerNav from '@/components/runner/TestRunnerNav.vue';
 import TestRunnerQuestion from '@/components/runner/TestRunnerQuestion.vue';
 import TestRunnerResult from '@/components/runner/TestRunnerResult.vue';
 import { useTestRunner } from '@/composables/runner/useTestRunner.ts';
+import type { RunnerIntro } from '@/types/runner/TestRunner.ts';
 
-interface TestRunnerProps {
-    testId: number | null;
-}
-
-const props = defineProps<TestRunnerProps>();
-const { testId } = toRefs(props);
+const props = defineProps<{
+    intro: RunnerIntro;
+}>();
+const { intro } = toRefs(props);
 
 const {
     test,
     isLoading,
+    isSubmitting,
     isError,
     errorMessage,
+    syncError,
+    isSyncWarningVisible,
     isReady,
     isIntro,
     isQuestion,
@@ -108,13 +119,13 @@ const {
     pagination,
     finishState,
     result,
-    loadTest,
-    startTest,
+    loadState,
+    handleStart,
     handleSelect,
     goPrev,
     goNext,
     goToQuestion,
-    finishTest,
+    handleFinish,
     restartTest,
-} = useTestRunner(testId);
+} = useTestRunner(intro);
 </script>

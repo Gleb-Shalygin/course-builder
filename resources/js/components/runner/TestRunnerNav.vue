@@ -20,13 +20,10 @@
                     @click="handlePrev"
                 >
                     <template #icon>
-                        <svg
-                            class="runner-nav__icon runner-nav__icon--prev"
-                            xmlns="http://www.w3.org/2000/svg"
-                            viewBox="0 0 24 24"
-                        >
-                            <path d="M10.02 6L8.61 7.41L13.19 12l-4.58 4.59L10.02 18l6-6l-6-6z" fill="currentColor" />
-                        </svg>
+                        <svg-icon
+                            class="runner-nav__icon"
+                            name="chevron-left"
+                        />
                     </template>
                 </a-button>
             </a-tooltip>
@@ -44,14 +41,11 @@
                 >
                     <template #icon>
                         <CheckOutlined v-if="nav.isLast" />
-                        <svg
+                        <svg-icon
                             v-else
                             class="runner-nav__icon"
-                            xmlns="http://www.w3.org/2000/svg"
-                            viewBox="0 0 24 24"
-                        >
-                            <path d="M10.02 6L8.61 7.41L13.19 12l-4.58 4.59L10.02 18l6-6l-6-6z" fill="currentColor" />
-                        </svg>
+                            name="chevron-right"
+                        />
                     </template>
                 </a-button>
             </a-tooltip>
@@ -63,7 +57,7 @@
 import { toRefs } from 'vue';
 import { CheckOutlined } from '@ant-design/icons-vue';
 import TestRunnerPagination from '@/components/runner/TestRunnerPagination.vue';
-import type { RunnerNavState, RunnerPaginationItem } from '@/types/TestRunner.ts';
+import type { RunnerNavState, RunnerPaginationItem } from '@/types/runner/TestRunner.ts';
 
 interface TestRunnerNavProps {
     nav: RunnerNavState;
@@ -76,7 +70,7 @@ const { nav } = toRefs(props);
 const emit = defineEmits<{
     (e: 'prev'): void;
     (e: 'next'): void;
-    (e: 'jump', index: number): void;
+    (e: 'jump', questionId: string): void;
 }>();
 
 const handlePrev = (): void => {
@@ -87,7 +81,7 @@ const handleNext = (): void => {
     emit('next');
 };
 
-const handleJump = (index: number): void => {
-    emit('jump', index);
+const handleJump = (questionId: string): void => {
+    emit('jump', questionId);
 };
 </script>

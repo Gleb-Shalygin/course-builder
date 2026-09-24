@@ -32,7 +32,7 @@
 import { MenuOutlined } from '@ant-design/icons-vue';
 import ProfileUserMenu from '@/layout/profile/ProfileUserMenu.vue';
 import ProfileSidebarContent from '@/layout/profile/ProfileSidebarContent.vue';
-import { useProfileLayout } from '@/composables/components/useProfileLayout';
+import { useProfileLayout } from '@/composables/profile/useProfileLayout';
 
 const { isMobileMenuOpen, pageTitle, openMobileMenu, closeMobileMenu } = useProfileLayout();
 </script>

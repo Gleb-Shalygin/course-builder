@@ -2,24 +2,22 @@
 
 namespace App\Http\Controllers\Profile;
 
-use App\Data\TestSaveData;
+use App\Data\Test\TestSaveData;
 use App\Exceptions\TestNotCreatedException;
 use App\Exceptions\TestNotFoundException;
-use App\Exceptions\TestNotUpdatedException;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\TestSaveRequest;
 use App\Http\Resources\TestDetailResource;
 use App\Http\Resources\TestResource;
-use App\Http\Resources\TestsResource;
-use App\Service\TestService;
+use App\Service\Test\TestProviderService;
+use App\Service\Test\TestWriterService;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
-use Illuminate\Support\Collection;
 
 class TestController extends Controller
 {
-    public static function tests(): AnonymousResourceCollection|Collection
+    public static function tests(): AnonymousResourceCollection
     {
-       return TestsResource::collection(TestService::tests());
+        return TestResource::collection(TestProviderService::tests());
     }
 
     /**
@@ -27,7 +25,7 @@ class TestController extends Controller
      */
     public static function test(int $test): TestDetailResource
     {
-        return TestDetailResource::make(TestService::test($test));
+        return TestDetailResource::make(TestProviderService::test($test));
     }
 
     /**
@@ -42,12 +40,11 @@ class TestController extends Controller
             'questions' => $request->validated('questions'),
         ]);
 
-        return TestResource::make(TestService::create($data));
+        return TestResource::make(TestWriterService::create($data));
     }
 
     /**
      * @throws TestNotFoundException
-     * @throws TestNotUpdatedException
      */
     public static function update(TestSaveRequest $request, int $test): TestResource
     {
@@ -59,6 +56,6 @@ class TestController extends Controller
             'questions' => $request->validated('questions'),
         ]);
 
-        return TestResource::make(TestService::update($data));
+        return TestResource::make(TestWriterService::update($data));
     }
 }

@@ -31,7 +31,7 @@
 import { toRefs } from 'vue';
 import type { RadioChangeEvent } from 'ant-design-vue';
 import { useRunnerSlide } from '@/composables/runner/useRunnerSlide.ts';
-import type { RunnerSlide } from '@/types/TestRunner.ts';
+import type { RunnerSlide } from '@/types/runner/TestRunner.ts';
 
 interface TestRunnerQuestionProps {
     slide: RunnerSlide;
