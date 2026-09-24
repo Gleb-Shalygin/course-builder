@@ -3,12 +3,15 @@
 namespace App\Models\Test;
 
 use App\Enums\QuestionType;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class TestQuestion extends Model
 {
+    use HasFactory;
+
     protected $table = 'test_questions';
 
     protected $fillable = [

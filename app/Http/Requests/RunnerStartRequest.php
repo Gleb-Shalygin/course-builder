@@ -16,4 +16,15 @@ class RunnerStartRequest extends RunnerSessionRequest
             'last_name' => 'required|string|max:100',
         ]);
     }
+
+    /**
+     * @return array<string, string>
+     */
+    public function messages(): array
+    {
+        return [
+            'first_name.required' => 'Имя и фамилия обязательно для заполнения',
+            'last_name.required' => 'Имя и фамилия обязательно для заполнения',
+        ];
+    }
 }
