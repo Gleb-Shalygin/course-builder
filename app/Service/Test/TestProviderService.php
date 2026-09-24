@@ -43,15 +43,27 @@ class TestProviderService
             throw new TestNotFoundException('Тест не найден');
         }
 
-        $test = Test::query()
-            ->where('id', $testId)
-            ->where('user_id', auth()->id())
-            ->first();
+        $test = self::userTestQuery($testId)->first();
 
         if ($test === null) {
             throw new TestNotFoundException('Тест не найден');
         }
 
         return $test;
+    }
+
+    public static function userTestExists(int $testId): bool
+    {
+        return self::userTestQuery($testId)->exists();
+    }
+
+    /**
+     * @return Builder<Test>
+     */
+    private static function userTestQuery(int $testId): Builder
+    {
+        return Test::query()
+            ->where('id', $testId)
+            ->where('user_id', auth()->id());
     }
 }

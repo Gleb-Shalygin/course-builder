@@ -11,7 +11,9 @@ use App\Http\Resources\TestDetailResource;
 use App\Http\Resources\TestResource;
 use App\Service\Test\TestProviderService;
 use App\Service\Test\TestWriterService;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
+use Symfony\Component\HttpFoundation\Response;
 
 class TestController extends Controller
 {
@@ -31,7 +33,7 @@ class TestController extends Controller
     /**
      * @throws TestNotCreatedException
      */
-    public static function create(TestSaveRequest $request): TestResource
+    public static function create(TestSaveRequest $request): JsonResponse
     {
         $data = TestSaveData::from([
             'title' => $request->validated('title'),
@@ -40,7 +42,9 @@ class TestController extends Controller
             'questions' => $request->validated('questions'),
         ]);
 
-        return TestResource::make(TestWriterService::create($data));
+        return TestResource::make(TestWriterService::create($data))
+            ->response()
+            ->setStatusCode(Response::HTTP_CREATED);
     }
 
     /**
