@@ -27,7 +27,7 @@ export const authService = {
         try {
             const response = await api.get('/api/user');
             return response.data;
-        } catch (error) {
+        } catch {
             return null;
         }
     },

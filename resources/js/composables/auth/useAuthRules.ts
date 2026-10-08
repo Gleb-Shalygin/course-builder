@@ -1,7 +1,8 @@
 import type { Rule } from 'ant-design-vue/es/form';
 import { computed } from 'vue';
+import type { RegisterData } from '@/types/auth/RegisterData';
 
-export function useAuthRules(form) {
+export function useAuthRules(form: Pick<RegisterData, 'password' | 'password_confirmation'>) {
     const passwordRequirements = computed(() => {
         const password = form.password;
         return [
