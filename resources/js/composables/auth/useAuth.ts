@@ -5,7 +5,8 @@ import type { AppPageProps } from '@/types/PageProps';
 import type { LoginCredentials } from '@/types/auth/LoginCredentials';
 import type { RegisterData } from '@/types/auth/RegisterData';
 import type { AuthResult } from '@/types/auth/AuthResult';
-import { authService, extractValidationErrors, extractErrorMessage, type ApiError } from '@/api/auth';
+import type { ApiError } from '@/api/api';
+import { authService, extractValidationErrors, extractErrorMessage } from '@/api/auth';
 
 const loading = ref(false);
 

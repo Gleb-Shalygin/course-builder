@@ -3,7 +3,7 @@ export interface RegisterData {
     name: string;
     password: string;
     password_confirmation: string;
-    date_of_birth: string;
-    gender: 'male' | 'female';
+    date_of_birth: string | null;
+    gender: 'male' | 'female' | undefined;
 }
 

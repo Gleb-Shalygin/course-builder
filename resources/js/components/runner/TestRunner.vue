@@ -46,7 +46,7 @@
                     />
 
                     <a-flex
-                        v-else-if="isQuestion"
+                        v-else-if="isQuestion && slide"
                         :key="'question'"
                         class="runner__slide"
                         vertical
@@ -71,7 +71,7 @@
                     />
 
                     <TestRunnerResult
-                        v-else-if="isResult"
+                        v-else-if="isResult && result"
                         :key="'result'"
                         :result="result"
                         @restart="restartTest"

@@ -13,6 +13,7 @@ Laravel 12 (PHP 8.2) backend + Vue 3 SPA frontend (Composition API, `<script set
 - [`.claude/skills/vue-component-conventions/SKILL.md`](.claude/skills/vue-component-conventions/SKILL.md) — правила для файлов `resources/js/components/**/*.vue` (структура, порядок `template`/`script`, именование, пропсы, что нельзя делать).
 - [`.claude/skills/vue-composable-conventions/SKILL.md`](.claude/skills/vue-composable-conventions/SKILL.md) — правила для файлов `resources/js/composables/**/*.ts` (структура, порядок `computed`/`watch`/функций, работа со store).
 - [`.claude/skills/vue-core/SKILL.md`](.claude/skills/vue-core/SKILL.md) — общие best practices по Vue 3 (реактивность, SFC, composables, производительность). Применяется, когда вопрос не покрыт проектными конвенциями выше — они имеют приоритет при конфликте.
+- [`.claude/skills/vue-testing-conventions/SKILL.md`](.claude/skills/vue-testing-conventions/SKILL.md) — правила для фронтенд-тестов `resources/js/test/**/*.{test,spec}.ts`: раскладка, что тестировать в первую очередь, composables с хост-компонентом и без (`withSetup`), моки api/Inertia/ant-design-vue, компонентные тесты.
 - [`.claude/skills/laravel-controller-conventions/SKILL.md`](.claude/skills/laravel-controller-conventions/SKILL.md) — правила для контроллеров `app/Http/Controllers/**/*.php` и связанных слоёв (`app/Service`, `app/Data`, `app/Http/Requests`, `app/Http/Resources`, `app/Exceptions`): поток данных, типизация, именование.
 - [`.claude/skills/start-project/SKILL.md`](.claude/skills/start-project/SKILL.md) — как поднять локальное окружение (Docker Compose + Sail + Vite).
 
@@ -26,6 +27,7 @@ Laravel 12 (PHP 8.2) backend + Vue 3 SPA frontend (Composition API, `<script set
 - `resources/js/api/` — все запросы к API.
 - `resources/js/types/` — `type`/`interface`.
 - `resources/js/store/` — Pinia store.
+- `resources/js/test/` — фронтенд-тесты (Vitest), структура повторяет `resources/js`.
 - `resources/scss/` — стили.
 - `resources/icons/` — иконки (рендерятся через компонент `<svg-icon>`).
 

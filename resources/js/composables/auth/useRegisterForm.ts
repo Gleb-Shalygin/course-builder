@@ -1,18 +1,18 @@
 import { ref, reactive } from 'vue';
 import { useAuth } from '@/composables/auth/useAuth';
-import type { Dayjs } from 'dayjs';
+import type { RegisterData } from '@/types/auth/RegisterData';
 import { useAuthRules } from '@/composables/auth/useAuthRules';
 
 export function useRegisterForm() {
     const { register, loading } = useAuth();
 
-    const form = reactive({
+    const form = reactive<RegisterData>({
         email: '',
         name: '',
         password: '',
         password_confirmation: '',
-        date_of_birth: null as Dayjs | null,
-        gender: undefined as 'male' | 'female' | undefined,
+        date_of_birth: null,
+        gender: undefined,
     });
 
     const { rules, passwordRequirements } = useAuthRules(form);
@@ -62,7 +62,7 @@ export function useRegisterForm() {
             password: form.password,
             password_confirmation: form.password_confirmation,
             date_of_birth: form.date_of_birth,
-            gender: form.gender!,
+            gender: form.gender,
         });
 
         if (!result.success) {
