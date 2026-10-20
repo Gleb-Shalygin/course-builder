@@ -41,7 +41,7 @@ export function useRegisterForm() {
             passwordConfirmationError.value = 'Пароли не совпадают';
             passwordError.value = 'Пароли не совпадают';
         } else {
-            passwordError.value = '';
+            validatePassword();
         }
     };
 
